@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Faq;
 use App\Models\FaqCategory;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
 class WebsiteController extends Controller
@@ -13,7 +14,8 @@ class WebsiteController extends Controller
         return view('home');
     }
     public function testimonial(){
-        return view('testimonial');
+        $tesitmonials=Testimonial::all();
+        return view('testimonial',compact('tesitmonials'));
     }
 
     public function faq(){
