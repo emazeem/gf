@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FaqCategoryController;
 use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\SettingController;
 
 Route::middleware(['auth'])->group(function () {
     Route::name('a.')->prefix('admin')->group(function () {
@@ -29,6 +30,14 @@ Route::middleware(['auth'])->group(function () {
             Route::post('edit', [TestimonialController::class, 'edit'])->name('edit');
             Route::post('store', [TestimonialController::class, 'store'])->name('store');
             Route::post('destroy', [TestimonialController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::name('setting.')->prefix('setting')->group(function () {
+            Route::get('{slug}', [SettingController::class, 'index'])->name('index');
+            Route::post('fetch', [SettingController::class, 'fetch'])->name('fetch');
+            Route::post('edit', [SettingController::class, 'edit'])->name('edit');
+            Route::post('store', [SettingController::class, 'store'])->name('store');
+            Route::post('destroy', [SettingController::class, 'destroy'])->name('destroy');
         });
 
     });

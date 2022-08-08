@@ -14,8 +14,8 @@ class WebsiteController extends Controller
         return view('home');
     }
     public function testimonial(){
-        $tesitmonials=Testimonial::all();
-        return view('testimonial',compact('tesitmonials'));
+        $testimonials=Testimonial::all();
+        return view('testimonial',compact('testimonials'));
     }
 
     public function faq(){
