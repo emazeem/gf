@@ -9,6 +9,7 @@
                     <div class="col-md-3">
                         <h5>Get Started</h5>
                         <a href="{{route('w.home')}}">Home</a>
+                        <a href="{{route('w.contact')}}">Contact</a>
                         <a href="{{route('register')}}">Signup</a>
                         <a href="{{route('login')}}">Login</a>
                     </div>

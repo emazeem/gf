@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebsiteController;
 
 Route::get('/', [WebsiteController::class,'home'])->name('w.home');
-Route::get('/about', [WebsiteController::class,'about'])->name('w.about');
+Route::get('/about-us', [WebsiteController::class,'about'])->name('w.about');
+Route::get('/contact-us', [WebsiteController::class,'contact'])->name('w.contact');
 Route::get('/press', [WebsiteController::class,'press'])->name('w.press');
 Route::get('/careers', [WebsiteController::class,'careers'])->name('w.career');
 Route::get('/privacy-policy', [WebsiteController::class,'privacy'])->name('w.privacy');

@@ -69,6 +69,13 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a href="{{route('a.setting.index',['contact-us'])}}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span class="hide-menu">Contact us</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
                     <a href="{{route('a.setting.index',['press'])}}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
                         <i class="mdi mdi-view-dashboard"></i>
                         <span class="hide-menu">Press</span>

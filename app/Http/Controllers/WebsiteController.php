@@ -24,6 +24,24 @@ class WebsiteController extends Controller
         if (!$about){$about=new Setting();}
         return view('about',compact('about'));
     }
+    public function contact(){
+        $contact=Setting::where('slug','contact-us')->first();
+        if (!$contact){$contact=new Setting();}
+        return view('contact',compact('contact'));
+    }
+
+    public function press(){
+        $press=Setting::where('slug','press')->first();
+        if (!$press){$press=new Setting();}
+        return view('press',compact('press'));
+    }
+    public function careers(){
+        $career=Setting::where('slug','career')->first();
+        if (!$career){$career=new Setting();}
+        return view('career',compact('career'));
+    }
+
+
 
     public function safety(){
         $safety=Setting::where('slug','safety')->first();
