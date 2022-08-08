@@ -5,12 +5,12 @@
     <div class="page-breadcrumb">
         <div class="row align-items-center">
             <div class="col-5">
-                <h4 class="page-title">Sliders</h4>
+                <h4 class="page-title">Thumbnails</h4>
                 <div class="d-flex align-items-center">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('a.dashboard')}}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Sliders</li>
+                            <li class="breadcrumb-item active" aria-current="page">Thumbnails</li>
                         </ol>
                     </nav>
                 </div>
@@ -22,7 +22,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <button type="button" class="btn btn-sm btn-primary shadow-sm float-right add" ><i class="fa fa-plus-circle"></i> Sliders</button>
+                        <button type="button" class="btn btn-sm btn-primary shadow-sm float-right add" ><i class="fa fa-plus-circle"></i> Thumbnails</button>
                     </div>
                     <div class="card-body" style="overflow-x: scroll">
                         <table id="example" class="table table-bordered table-hover display nowrap bg-white" width="100%">
@@ -57,7 +57,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title"><i class="fa fa-plus-circle"></i> Slider</h4>
+                    <h4 class="modal-title"><i class="fa fa-plus-circle"></i> Thumbnail</h4>
                     <h4 style="cursor: pointer" class="float-right" onclick="$('#modal').modal('hide')">
                         <i class="fa fa-times-circle"></i>
                     </h4>
@@ -103,7 +103,7 @@
                     "order": [[0, 'asc']],
                     "pageLength": 25,
                     "ajax": {
-                        "url": '{{ route('a.sliders.fetch')}}',
+                        "url": '{{ route('a.thumbnails.fetch')}}',
                         "dataType": "json",
                         "type": "POST",
                         "data": {_token: '{{csrf_token()}}'}
@@ -122,7 +122,7 @@
 
                 var id = $(this).attr('data-id');
                 $.ajax({
-                    "url": "{{route('a.sliders.edit')}}",
+                    "url": "{{route('a.thumbnails.edit')}}",
                     type: "POST",
                     data: {'id': id, _token: '{{csrf_token()}}'},
                     dataType: "json",
@@ -140,7 +140,7 @@
                 var previous = $(button).html();
                 button.attr('disabled', 'disabled').html('Processing..');
                 $.ajax({
-                    url: "{{route('a.sliders.store')}}",
+                    url: "{{route('a.thumbnails.store')}}",
                     type: "POST",
                     data: new FormData(this),
                     contentType: false,
@@ -172,7 +172,7 @@
             $(document).on('click', '.delete', function (e) {
                 var id = $(this).attr('data-id');
                 var token = '{{csrf_token()}}';
-                var route="{{route('a.sliders.destroy')}}";
+                var route="{{route('a.thumbnails.destroy')}}";
                 deleted(id,token,route);
             });
         });

@@ -13,15 +13,11 @@ use Yajra\DataTables\DataTables;
 class SettingController extends Controller
 {
     public function index($slug){
-
         $setting=Setting::where('slug',$slug)->first();
         if (!$setting){
             $setting=new Setting();
         }
-        return view('admin.settings',compact('slug','setting'));
-    }
-    public function fetch(){
-        $data=Setting::all();
+        return view('admin.setting',compact('slug','setting'));
     }
     public function store(Request $request){
         $this->validate(\request(),[

@@ -5,14 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Faq;
 use App\Models\FaqCategory;
 use App\Models\Setting;
+use App\Models\Slider;
 use App\Models\Testimonial;
+use App\Models\Thumbnail;
 use Illuminate\Http\Request;
 
 class WebsiteController extends Controller
 {
     //
     public function home(){
-        return view('home');
+        $sliders = Slider::all();
+        $testimonials=Testimonial::all();
+        $thumbnails=Thumbnail::all();
+        $section1=Setting::where('slug','homepage-section-1')->first();
+        $section2=Setting::where('slug','homepage-section-2')->first();
+        $section3=Setting::where('slug','homepage-section-3')->first();
+        $section1=$section1?$section1:new Setting();
+        $section2=$section2?$section2:new Setting();
+        $section3=$section3?$section3:new Setting();
+        return view('home',compact('sliders','testimonials','thumbnails','section1','section2','section3'));
     }
     public function privacy(){
         $privacy=Setting::where('slug','privacy-policy')->first();

@@ -26,6 +26,26 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
+                    <a href="{{route('a.settings.index',['homepage'])}}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span class="hide-menu">Homepage</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{route('a.sliders.index')}}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span class="hide-menu">Sliders</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{route('a.thumbnails.index')}}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span class="hide-menu">Thumbnails</span>
+                    </a>
+                </li>
+
+
+                <li class="sidebar-item">
                     <a href="{{route('a.faq.index')}}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
                         <i class="mdi mdi-view-dashboard"></i>
                         <span class="hide-menu">FAQ</span>

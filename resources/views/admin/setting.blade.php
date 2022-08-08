@@ -5,12 +5,12 @@
     <div class="page-breadcrumb">
         <div class="row align-items-center">
             <div class="col-5">
-                <h4 class="page-title">{{ucfirst($type)}}</h4>
+                <h4 class="page-title">{{getTitleFromSlug($slug)}}</h4>
                 <div class="d-flex align-items-center">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('a.dashboard')}}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{{ucfirst($type)}}</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{getTitleFromSlug($slug)}}</li>
                         </ol>
                     </nav>
                 </div>
@@ -19,7 +19,6 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-            @foreach($slugs as $slug)
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -27,15 +26,18 @@
                                 data-slug="{{$slug}}"><i class="fa fa-plus-circle"></i> {{getTitleFromSlug($slug)}}
                         </button>
                     </div>
-                    @if($settings[$slug]->value)
+                    @if($setting->value)
                         <div class="card-body">
-                            {!! $settings[$slug]->value !!}
+                            {!! $setting->value !!}
                         </div>
                     @endif
-
+{{--                    @if($setting->image())
+                        <div class="card-footer">
+                            <img src="{{$setting->image()}}" class="img-thumbnail" width="150" alt="">
+                        </div>
+                    @endif--}}
                 </div>
             </div>
-            @endforeach
         </div>
     </div>
 
@@ -52,9 +54,22 @@
                 <div class="modal-body">
                     <form class="form" id="add_form" method="POST" enctype="multipart/form-data">
                         @csrf
-                    <div id="form-data"></div>
-                        <textarea rows="10" class="form-control" name="value" id="edit_value"></textarea>
-
+                        <div class="form-group">
+                            <label for="edit_name" class="control-label">Name</label>
+                            <input type="text" class="form-control" name="name" id="edit_name"
+                                   value="{{getTitleFromSlug($slug)}}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_value" class="control-label">Enter Details of {{getTitleFromSlug($slug)}}</label>
+                            <textarea rows="10" class="form-control" name="value" id="edit_value"></textarea>
+                        </div>
+{{--                        <div class="form-group">
+                            <label for="image" class="control-label">Select image for {{getTitleFromSlug($slug)}} (if
+                                any)</label>
+                            <input type="file" class="form-control" name="image" id="image">
+                        </div>--}}
+                        <input type="hidden" name="slug" id="edit_slug" value="{{$slug}}">
+                        <input type="hidden" name="id" id="edit_id" value="0">
                 </div>
                 <div class="modal-footer">
                     <input type="submit" class="btn btn-primary" id="add_form_btn" value="Save">
@@ -78,10 +93,19 @@
                     dataType: "json",
                     success: function (data) {
                         $('#modal').modal('toggle');
-                        $('#form-data').html(data);
+                        $('#edit_id').val(data.id);
+                        //$('#edit_slug').val(data.slug);
+                        //$('#edit_name').val(data.name);
+                        if (data.value) {
+                            $('.note-placeholder').hide();
+                            $('#edit_value').val(data.value);
+                            $('.note-editable').html(data.value);
+                        }
+
                     }
                 });
             });
+
             $("#add_form").on('submit', (function (e) {
                 e.preventDefault();
                 var button = $('#add_form_btn');
@@ -117,6 +141,7 @@
             });
         });
 
+
         $('#edit_value').summernote({
             placeholder: 'Hello stand alone ui',
             tabsize: 2,
@@ -132,4 +157,5 @@
             ]
         });
     </script>
+
 @endsection

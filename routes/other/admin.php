@@ -5,6 +5,10 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FaqCategoryController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\ThumbnailController;
+
 
 Route::middleware(['auth'])->group(function () {
     Route::name('a.')->prefix('admin')->group(function () {
@@ -39,6 +43,28 @@ Route::middleware(['auth'])->group(function () {
             Route::post('store', [SettingController::class, 'store'])->name('store');
             Route::post('destroy', [SettingController::class, 'destroy'])->name('destroy');
         });
-
+        Route::name('settings.')->prefix('settings')->group(function () {
+            Route::get('{type}', [SettingsController::class, 'index'])->name('index');
+            Route::post('fetch', [SettingsController::class, 'fetch'])->name('fetch');
+            Route::post('edit', [SettingsController::class, 'edit'])->name('edit');
+            Route::post('store', [SettingsController::class, 'store'])->name('store');
+            Route::post('destroy', [SettingsController::class, 'destroy'])->name('destroy');
+        });
+        Route::name('sliders.')->prefix( 'sliders')->group(function () {
+            Route::get('', [SliderController::class, 'index'])->name('index');
+            Route::post('', [SliderController::class, 'fetch'])->name('fetch');
+            Route::post('store', [SliderController::class, 'store'])->name('store');
+            Route::post('edit', [SliderController::class, 'edit'])->name('edit');
+            Route::post('update', [SliderController::class, 'update'])->name('update');
+            Route::post('delete', [SliderController::class, 'destroy'])->name('destroy');
+        });
+        Route::name('thumbnails.')->prefix( 'thumbnails')->group(function () {
+            Route::get('', [ThumbnailController::class, 'index'])->name('index');
+            Route::post('', [ThumbnailController::class, 'fetch'])->name('fetch');
+            Route::post('store', [ThumbnailController::class, 'store'])->name('store');
+            Route::post('edit', [ThumbnailController::class, 'edit'])->name('edit');
+            Route::post('update', [ThumbnailController::class, 'update'])->name('update');
+            Route::post('delete', [ThumbnailController::class, 'destroy'])->name('destroy');
+        });
     });
 });

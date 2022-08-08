@@ -31,13 +31,13 @@
                         <li><a href="#">Drop Down 4</a></li>
                     </ul>
                 </li>--}}
-                <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                <li><a class="nav-link scrollto" href="{{route('w.contact')}}">Contact</a></li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
 
         <a href="{{route('login')}}" class="book-a-table-btn scrollto">Login</a>
-        <a href="#book-a-table" class="book-a-table-btn scrollto">Sign Up</a>
+        <a href="{{route('register')}}" class="book-a-table-btn scrollto">Sign Up</a>
 
     </div>
 </header>
