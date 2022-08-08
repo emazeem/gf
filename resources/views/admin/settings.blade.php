@@ -22,11 +22,20 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <button type="button" class="btn btn-sm btn-success shadow-sm float-right edit" data-slug="{{$slug}}"><i class="fa fa-plus-circle"></i> {{getTitleFromSlug($slug)}}</button>
+                        <button type="button" class="btn btn-sm btn-success shadow-sm float-right edit"
+                                data-slug="{{$slug}}"><i class="fa fa-plus-circle"></i> {{getTitleFromSlug($slug)}}
+                        </button>
                     </div>
-                    <div class="card-body">
-                        {{$setting->value}}
-                    </div>
+                    @if($setting->value)
+                        <div class="card-body">
+                            {!! $setting->value !!}
+                        </div>
+                    @endif
+{{--                    @if($setting->image())
+                        <div class="card-footer">
+                            <img src="{{$setting->image()}}" class="img-thumbnail" width="150" alt="">
+                        </div>
+                    @endif--}}
                 </div>
             </div>
         </div>
@@ -47,15 +56,17 @@
                         @csrf
                         <div class="form-group">
                             <label for="edit_name" class="control-label">Name</label>
-                            <input type="text" class="form-control" name="name" id="edit_name" value="{{getTitleFromSlug($slug)}}" disabled>
+                            <input type="text" class="form-control" name="name" id="edit_name"
+                                   value="{{getTitleFromSlug($slug)}}" disabled>
                         </div>
                         <div class="form-group">
                             <label for="edit_value" class="control-label">Enter Details of {{getTitleFromSlug($slug)}}</label>
                             <textarea rows="10" class="form-control" name="value" id="edit_value"></textarea>
                         </div>
 {{--                        <div class="form-group">
-                            <label for="edit_profile" class="control-label">Profile</label>
-                            <input type="file" class="form-control" name="profile" id="edit_profile">
+                            <label for="image" class="control-label">Select image for {{getTitleFromSlug($slug)}} (if
+                                any)</label>
+                            <input type="file" class="form-control" name="image" id="image">
                         </div>--}}
                         <input type="hidden" name="slug" id="edit_slug" value="{{$slug}}">
                         <input type="hidden" name="id" id="edit_id" value="0">
@@ -67,9 +78,12 @@
             </form>
         </div>
     </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
-            InitTable();
             $(document).on('click', '.edit', function () {
                 var slug = $(this).attr('data-slug');
                 $.ajax({
@@ -82,7 +96,12 @@
                         $('#edit_id').val(data.id);
                         //$('#edit_slug').val(data.slug);
                         //$('#edit_name').val(data.name);
-                        $('#edit_value').val(data.value);
+                        if (data.value) {
+                            $('.note-placeholder').hide();
+                            $('#edit_value').val(data.value);
+                            $('.note-editable').html(data.value);
+                        }
+
                     }
                 });
             });
@@ -116,9 +135,25 @@
             $(document).on('click', '.delete', function (e) {
                 var id = $(this).attr('data-id');
                 var token = '{{csrf_token()}}';
-                var route="{{route($url.'destroy')}}";
-                deleted(id,token,route);
+                var route = "{{route($url.'destroy')}}";
+                deleted(id, token, route);
             });
+
+
+        });
+        $('#edit_value').summernote({
+            placeholder: 'Hello stand alone ui',
+            tabsize: 2,
+            height: 100,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
         });
     </script>
 @endsection

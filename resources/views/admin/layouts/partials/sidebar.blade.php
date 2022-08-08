@@ -50,6 +50,36 @@
                         <span class="hide-menu">Privacy Policy</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="{{route('a.setting.index',['terms-and-conditions'])}}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span class="hide-menu">Terms & Conditions</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{route('a.setting.index',['safety'])}}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span class="hide-menu">Safety</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{route('a.setting.index',['about-us'])}}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span class="hide-menu">About us</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{route('a.setting.index',['press'])}}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span class="hide-menu">Press</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{route('a.setting.index',['career'])}}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span class="hide-menu">Career</span>
+                    </a>
+                </li>
 
                 <li class="sidebar-item">
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">

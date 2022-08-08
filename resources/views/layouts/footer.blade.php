@@ -8,25 +8,24 @@
                 <div class="row">
                     <div class="col-md-3">
                         <h5>Get Started</h5>
-                        <a href="">Home</a>
-                        <a href="">Signup</a>
-                        <a href="">Login</a>
+                        <a href="{{route('w.home')}}">Home</a>
+                        <a href="{{route('register')}}">Signup</a>
+                        <a href="{{route('login')}}">Login</a>
                     </div>
                     <div class="col-md-3">
                         <h5>About us</h5>
-                        <a href="">Company Information</a>
+                        <a href="{{route('w.about')}}">Company Information</a>
                         <a href="">GFV Blog</a>
-                        <a href="">Press</a>
-                        <a href="">Volunteer</a>
-                        <a href="">GFV Social</a>
-                        <a href="{{route('w.testimonial')}}">Reviews</a>
+                        <a href="{{route('w.press')}}">Press</a>
+                        <a href="{{route('w.career')}}">Volunteer</a>
+                        <a href="{{route('w.testimonial')}}">GFV Social Reviews</a>
                     </div>
                     <div class="col-md-3">
                         <h5>Support</h5>
-                        <a href="">FAQ</a>
-                        <a href="">Terms</a>
-                        <a href="">Privacy</a>
-                        <a href="">Safety</a>
+                        <a href="{{route('w.faq')}}">FAQ</a>
+                        <a href="{{route('w.terms')}}">Terms</a>
+                        <a href="{{route('w.privacy')}}">Privacy</a>
+                        <a href="{{route('w.safety')}}">Safety</a>
                     </div>
                     <div class="col-md-3">
                         <h4>Contact us</h4>

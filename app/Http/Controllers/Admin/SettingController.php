@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Yajra\DataTables\DataTables;
 
@@ -23,7 +25,8 @@ class SettingController extends Controller
     }
     public function store(Request $request){
         $this->validate(\request(),[
-            'value' =>'required',
+            'value' =>'required_without:image',
+            'image' =>'required_without:value',
         ],[
             'value.required'=>'Value field is required * ',
         ]);
@@ -34,14 +37,13 @@ class SettingController extends Controller
             $data =Setting::find($request->id);
             $message='Updated successfully!';
         }
-        $data->type = 0;
         $data->slug = $request->slug;
         $data->title = getTitleFromSlug($request->slug);
         $data->value = $request->value;
-        if (isset($request->profile)) {
-            $attachment = time() . $request->profile->getClientOriginalName();
-            Storage::disk('local')->put('/public/testimonial/profile/' . $attachment, File::get($request->profile));
-            $data->profile = $attachment;
+        if (isset($request->image)) {
+            $attachment = time() . $request->image->getClientOriginalName();
+            Storage::disk('local')->put('/public/setting/' . $attachment, File::get($request->image));
+            $data->image = $attachment;
         }
         $data->save();
         return response()->json(['success'=>$message]);
