@@ -54,7 +54,6 @@
 <!-- ======= Footer ======= -->
 @include('layouts.footer')
 
-<a href="web/#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
 <script src="{{url('web/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -65,7 +64,5 @@
 
 <!-- Template Main JS File -->
 <script src="{{url('web/assets/js/main.js')}}"></script>
-
 </body>
-
 </html>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Faq;
 use App\Models\FaqCategory;
 use App\Models\Setting;
@@ -69,6 +70,24 @@ class WebsiteController extends Controller
     public function testimonial(){
         $testimonials=Testimonial::all();
         return view('testimonial',compact('testimonials'));
+    }
+    public function blog($t){
+        $blogs=Blog::all();
+        $tags=[];
+        $filter=[];
+        foreach ($blogs as $blog){
+            $tag=explode(',',$blog->tags);
+            if ($t){
+                if (in_array($t,$tag)){
+                    $filter[]=$blog->id;
+                }
+            }
+            foreach ($tag as $i){
+                $tags[]=$i;
+            }
+        }
+        $blogs=$t?Blog::whereIn('id',$filter)->get():$blogs;
+        return view('blog',compact('blogs','tags'));
     }
 
     public function faq(){

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\ThumbnailController;
+use App\Http\Controllers\Admin\BlogController;
 
 
 Route::middleware(['auth'])->group(function () {
@@ -66,5 +67,14 @@ Route::middleware(['auth'])->group(function () {
             Route::post('update', [ThumbnailController::class, 'update'])->name('update');
             Route::post('delete', [ThumbnailController::class, 'destroy'])->name('destroy');
         });
+        Route::name('blog.')->prefix( 'blog')->group(function () {
+            Route::get('', [BlogController::class, 'index'])->name('index');
+            Route::post('', [BlogController::class, 'fetch'])->name('fetch');
+            Route::post('store', [BlogController::class, 'store'])->name('store');
+            Route::post('edit', [BlogController::class, 'edit'])->name('edit');
+            Route::post('update', [BlogController::class, 'update'])->name('update');
+            Route::post('delete', [BlogController::class, 'destroy'])->name('destroy');
+        });
+
     });
 });

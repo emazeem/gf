@@ -12,7 +12,7 @@ Route::get('/privacy-policy', [WebsiteController::class,'privacy'])->name('w.pri
 Route::get('/terms-and-conditions', [WebsiteController::class,'terms'])->name('w.terms');
 Route::get('/safety', [WebsiteController::class,'safety'])->name('w.safety');
 Route::get('/testimonials', [WebsiteController::class,'testimonial'])->name('w.testimonial');
-Route::get('/blog', [WebsiteController::class,'blog'])->name('w.blog');
+Route::get('/blog/{tags?}', [WebsiteController::class,'blog'])->name('w.blog');
 Route::get('/press', [WebsiteController::class,'press'])->name('w.press');
 Route::get('/faq', [WebsiteController::class,'faq'])->name('w.faq');
 
