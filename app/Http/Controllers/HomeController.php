@@ -15,14 +15,11 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
+    public function home()
     {
-        return view('home');
+        if (auth()->user()->role=='admin'){
+            return redirect()->route('a.dashboard');
+        }
+        return redirect()->route('user.welcome');
     }
 }

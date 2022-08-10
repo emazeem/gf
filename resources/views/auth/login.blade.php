@@ -5,7 +5,11 @@
     <main id="main">
         <section id="book-a-table" class="book-a-table">
             <div class="container">
-
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <div class="text-danger">{{$error}}</div>
+                    @endforeach
+                @endif
                 <form method="POST" action="{{ route('login') }}" class="php-email-form" id="login">
                     @csrf
 

@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\ThumbnailController;
 use App\Http\Controllers\Admin\BlogController;
 
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','can:admin'])->group(function () {
     Route::name('a.')->prefix('admin')->group(function () {
         Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
         Route::name('faq.')->prefix('faq')->group(function () {

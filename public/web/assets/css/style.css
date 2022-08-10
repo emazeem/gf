@@ -1641,3 +1641,11 @@ main#main {
   margin-top: 100px;
   margin-bottom: 100px;
 }
+h6{
+  font-weight: bold;
+}
+.c-h{
+  color: #ec6d70;
+  font-size: 30px;
+  font-weight: 500;
+}

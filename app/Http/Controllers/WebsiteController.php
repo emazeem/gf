@@ -71,7 +71,7 @@ class WebsiteController extends Controller
         $testimonials=Testimonial::all();
         return view('testimonial',compact('testimonials'));
     }
-    public function blog($t){
+    public function blog($t=null){
         $blogs=Blog::all();
         $tags=[];
         $filter=[];
