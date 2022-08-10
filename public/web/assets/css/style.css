@@ -1649,3 +1649,14 @@ h6{
   font-size: 30px;
   font-weight: 500;
 }
+.c-color{
+  color: #ec6d70;
+}
+.c-bg{
+  background-color: #ec6d70;
+}
+
+.btn-gfv{
+  background: #ec6d70;
+  color: white;
+}

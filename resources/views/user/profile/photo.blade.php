@@ -1,7 +1,6 @@
 @extends('user.layouts.master')
 @section('content')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
     <main id="main" style="margin-top: 70px">
         <div class="container">
             <div class="card p-0" style="margin-top: 100px">
@@ -12,8 +11,9 @@
                                         class="bi bi-person-rolodex"></i> Edit Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link rounded-0 px-5 border" href="#"><i class="bi bi-camera"></i> Edit My
-                                Photo</a>
+                            <a class="nav-link rounded-0 px-5 border" href="#"><i class="bi bi-camera"></i>
+                                Edit My Photo
+                            </a>
                         </li>
                     </ul>
                 </div>
