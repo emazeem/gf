@@ -1660,3 +1660,25 @@ h6{
   background: #ec6d70;
   color: white;
 }
+
+.c-select-single li {
+  cursor: pointer;
+  display: inline-block;
+  padding: 8px 16px 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: #444444;
+  margin: 0 3px 10px 3px;
+  transition: all ease-in-out 0.3s;
+  background: #fff;
+  border: 2px solid #dedede;
+  border-radius: 50px;
+}
+
+.c-select-single li.active {
+  color: #ec6d70;
+  padding-top: 11px;
+  font-size: 17px;
+  border: 3px solid #ec6d70;
+}

@@ -63,10 +63,8 @@
                             <a class="nav-link border rounded-0" id="pills-interests-tab" data-toggle="pill"
                                href="#pills-interests" role="tab" aria-controls="pills-interests" aria-selected="false">Interests</a>
                         </li>
-
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
-
                         <div class="tab-pane fade show active" id="pills-basic" role="tabpanel"
                              aria-labelledby="pills-basic-tab">
                             @include('user.profile.components.basic_html')
@@ -88,29 +86,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
-    <style>
-        .c-select-single li {
-            cursor: pointer;
-            display: inline-block;
-            padding: 8px 16px 10px 16px;
-            font-size: 14px;
-            font-weight: 500;
-            line-height: 1;
-            color: #444444;
-            margin: 0 3px 10px 3px;
-            transition: all ease-in-out 0.3s;
-            background: #fff;
-            border: 2px solid #dedede;
-            border-radius: 50px;
-        }
-
-        .c-select-single li.active {
-            color: #ec6d70;
-            border: 2px solid #ec6d70;
-        }
-
-    </style>
 @endsection

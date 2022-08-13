@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -15,7 +17,8 @@ class ProfileController extends Controller
     }
     public function show($username){
         if ($username==auth()->user()->username){
-            return view('user.profile.show');
+            $user=User::find(auth()->user()->id);
+            return view('user.profile.show',compact('user'));
         }
         return abort(404);
     }
@@ -28,6 +31,18 @@ class ProfileController extends Controller
     }
     public function p_photo(){
         return view('user.profile.photo');
+    }
+    public function profile(Request $request){
+        $data=UserDetail::find(auth()->user()->details->id);
+        if (!$data){
+            $data=new UserDetail();
+            $data->user_id=auth()->user()->id;
+        }
+        $attachment = time() . $request->profile->getClientOriginalName();
+        Storage::disk('local')->put('/public/profile/' . $attachment, File::get($request->profile));
+        $data->profile = $attachment;
+        $data->save();
+        return response()->json(['success'=>true,'profile'=>$data->profile_image()]);
     }
     public function basic(Request $request){
         $this->validate($request,[
@@ -117,6 +132,7 @@ class ProfileController extends Controller
             'entertainment' => 'required',
             'music' => 'required',
             'books' => 'required',
+            'movies' => 'required',
             'fav_tv_shows' => 'required',
             'fav_movies' => 'required',
             'fav_hobbies' => 'required',
@@ -135,6 +151,7 @@ class ProfileController extends Controller
         $data->entertainment = str_replace(',', '@@@', $request->entertainment);
         $data->music = str_replace(',', '@@@', $request->music);
         $data->books = str_replace(',', '@@@', $request->books);
+        $data->movies = str_replace(',', '@@@', $request->movies);
 
         $data->fav_tv_shows = $request->fav_tv_shows;
         $data->fav_movies = $request->fav_movies;

@@ -20,6 +20,7 @@ Route::middleware(['auth', 'can:user', 'email-verification'])->group(function ()
         Route::post('personal/store', [ProfileController::class, 'personal'])->name('user.personal.store');
         Route::post('about-me/store', [ProfileController::class, 'about_me'])->name('user.about.store');
         Route::post('interest/store', [ProfileController::class, 'interest'])->name('user.interest.store');
+        Route::post('change-profile', [ProfileController::class, 'profile'])->name('user.profile');
 
         Route::name('blog.')->prefix('blog')->group(function () {
 

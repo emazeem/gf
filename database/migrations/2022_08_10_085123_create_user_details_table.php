@@ -26,9 +26,6 @@ return new class extends Migration
             $table->string('friends')->nullable();
             $table->string('education_level')->nullable();
             $table->string('location')->nullable();
-
-
-
             $table->string('dob')->nullable();
             $table->string('astrology')->nullable();
             $table->string('relationship')->nullable();
@@ -36,31 +33,27 @@ return new class extends Migration
             $table->string('smoke')->nullable();
             $table->string('pets')->nullable();
             $table->string('drink')->nullable();
-
-
-
             $table->string('job_title')->nullable();
             $table->string('why_you_are_on_gfv')->nullable();
             $table->string('personality_type')->nullable();
             $table->string('communication_style')->nullable();
             $table->string('contact_by_people_from')->nullable();
-            $table->string('availability')->nullable();
-
-
-            $table->string('hobbies')->nullable();
-            $table->string('sports')->nullable();
-            $table->string('fitness')->nullable();
-            $table->string('entertainment')->nullable();
-            $table->string('music')->nullable();
-            $table->string('books')->nullable();
-            $table->string('fav_tv_shows')->nullable();
-            $table->string('fav_movies')->nullable();
-            $table->string('fav_hobbies')->nullable();
-            $table->string('fav_teams')->nullable();
-            $table->string('fav_bands')->nullable();
-            $table->string('fav_books')->nullable();
-
-
+            $table->longText('availability')->nullable();
+            $table->longText('hobbies')->nullable();
+            $table->longText('sports')->nullable();
+            $table->longText('fitness')->nullable();
+            $table->longText('entertainment')->nullable();
+            $table->longText('music')->nullable();
+            $table->longText('movies')->nullable();
+            $table->longText('books')->nullable();
+            $table->longText('fav_tv_shows')->nullable();
+            $table->longText('fav_movies')->nullable();
+            $table->longText('fav_hobbies')->nullable();
+            $table->longText('fav_teams')->nullable();
+            $table->longText('fav_bands')->nullable();
+            $table->longText('fav_books')->nullable();
+            $table->string('profile')->nullable();
+            $table->string('cover')->nullable();
             $table->timestamps();
         });
     }

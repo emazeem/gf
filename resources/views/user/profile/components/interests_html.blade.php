@@ -259,6 +259,55 @@
 
     <div class="row justify-content-center">
         <div class="form-group mt-3">
+            <label for="books" class="h4 c-h">Movies Genres
+            </label><br>
+            <label for="books">
+                Select the different Movie Genres that you enjoy.
+            </label>
+            <div class="col-md-12 ">
+                <ul class="c-select-single books">
+                    @php $e_movies=explode('@@@',$de->movies); @endphp
+                    @php $movies='Action ,Cartoon/Disney/Pixar ,Comedy ,Crime ,Drama ,Fantasy ,Musicals ,Historical ,International/Subtitles ,Horror ,Romance/Chick Flicks ,Science Fiction ,War ,Westerns ,Dont Like Movies Much';
+                    $movies=explode(',',$movies);
+                    @endphp
+                    @foreach($movies as $movi)
+                        <li class="{{in_array($movi,$e_movies)?'active':''}}">{{$movi}}</li>
+                    @endforeach
+                </ul>
+                <input type="hidden" name="movies" id="movies" class="form-control">
+
+                <script>
+                    $('.c-select-single.movies li').click(function () {
+                        $(this).toggleClass('active');
+                        var pets=[];
+                        var i=0;
+                        $('.c-select-single.movies li').each(function () {
+                            if ($(this).hasClass('active')){
+                                pets[i]=$(this).text();
+                                i++;
+                            }
+                        });
+                        $('#movies').val(pets);
+                    });
+                    @if($de->movies)
+                    $(function () {
+                        var pets=[];
+                        var i=0;
+                        $('.c-select-single.movies li').each(function () {
+                            if ($(this).hasClass('active')){
+                                pets[i]=$(this).text();
+                                i++;
+                            }
+                        });
+                        $('#movies').val(pets);
+                    });
+                    @endif
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="form-group mt-3">
             <label for="books" class="h4 c-h">Book Genres
             </label><br>
             <label for="books">
@@ -276,7 +325,7 @@
                         <li class="{{in_array($book,$e_books)?'active':''}}">{{$book}}</li>
                     @endforeach
                 </ul>
-                <input type="hidden" name="books" id="books">
+                <input type="hidden" name="books" id="books" class="form-control">
 
                 <script>
                     $('.c-select-single.books li').click(function () {
@@ -308,7 +357,6 @@
             </div>
         </div>
     </div>
-
 
     <div class="row justify-content-center">
         <div class="form-group mt-3">
