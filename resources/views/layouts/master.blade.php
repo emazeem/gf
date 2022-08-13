@@ -64,5 +64,6 @@
 
 <!-- Template Main JS File -->
 <script src="{{url('web/assets/js/main.js')}}"></script>
+
 </body>
 </html>

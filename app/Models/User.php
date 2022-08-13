@@ -43,4 +43,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function details(){
+        return $this->belongsTo(UserDetail::class,'id','user_id')->withDefault();
+    }
 }

@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\ProfileController;
@@ -9,13 +10,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('register/verification-email/sent', [UserController::class, 'verification_email_sent'])->name('user.verification.email.sent');
     Route::get('verification-link/{username}/{token}', [UserController::class, 'verification_link'])->name('user.verification.link');
 });
-Route::middleware(['auth','can:user','email-verification'])->group(function () {
+Route::middleware(['auth', 'can:user', 'email-verification'])->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('welcome', [ProfileController::class, 'welcome'])->name('user.welcome');
         Route::get('profile/view/{username}', [ProfileController::class, 'show'])->name('user.profile.view');
         Route::get('profile/edit/{username}', [ProfileController::class, 'edit'])->name('user.profile.edit');
-        Route::name('blog.')->prefix( 'blog')->group(function () {
-        });
+        Route::get('profile/photo', [ProfileController::class, 'p_photo'])->name('user.profile.photo');
+        Route::post('basic/store', [ProfileController::class, 'basic'])->name('user.basic.store');
+        Route::post('personal/store', [ProfileController::class, 'personal'])->name('user.personal.store');
+        Route::post('about-me/store', [ProfileController::class, 'about_me'])->name('user.about.store');
 
+        Route::name('blog.')->prefix('blog')->group(function () {
+
+        });
     });
 });
