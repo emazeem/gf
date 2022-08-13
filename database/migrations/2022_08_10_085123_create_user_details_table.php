@@ -18,11 +18,11 @@ return new class extends Migration
             $table->integer('user_id');
             $table->string('headline')->nullable();
             $table->longText('about_me')->nullable();
-            $table->string('gender');
+            $table->string('gender')->nullable();
             $table->string('employment')->nullable();
             $table->string('income_range')->nullable();
             $table->string('employment_group')->nullable();
-            $table->string('hear_about_us');
+            $table->string('hear_about_us')->nullable();
             $table->string('friends')->nullable();
             $table->string('education_level')->nullable();
             $table->string('location')->nullable();
@@ -45,6 +45,20 @@ return new class extends Migration
             $table->string('communication_style')->nullable();
             $table->string('contact_by_people_from')->nullable();
             $table->string('availability')->nullable();
+
+
+            $table->string('hobbies')->nullable();
+            $table->string('sports')->nullable();
+            $table->string('fitness')->nullable();
+            $table->string('entertainment')->nullable();
+            $table->string('music')->nullable();
+            $table->string('books')->nullable();
+            $table->string('fav_tv_shows')->nullable();
+            $table->string('fav_movies')->nullable();
+            $table->string('fav_hobbies')->nullable();
+            $table->string('fav_teams')->nullable();
+            $table->string('fav_bands')->nullable();
+            $table->string('fav_books')->nullable();
 
 
             $table->timestamps();

@@ -108,4 +108,43 @@ class ProfileController extends Controller
         return response()->json(['success'=>'Your about me info is updated successfully!']);
     }
 
+    public function interest(Request $request)
+    {
+        $this->validate($request, [
+            'hobbies' => 'required',
+            'sports' => 'required',
+            'fitness' => 'required',
+            'entertainment' => 'required',
+            'music' => 'required',
+            'books' => 'required',
+            'fav_tv_shows' => 'required',
+            'fav_movies' => 'required',
+            'fav_hobbies' => 'required',
+            'fav_teams' => 'required',
+            'fav_bands' => 'required',
+            'fav_books' => 'required',
+        ]);
+        $data = UserDetail::find(auth()->user()->details->id);
+        if (!$data) {
+            $data = new UserDetail();
+            $data->user_id = auth()->user()->id;
+        }
+        $data->hobbies = str_replace(',', '@@@', $request->hobbies);
+        $data->sports = str_replace(',', '@@@', $request->sports);
+        $data->fitness = str_replace(',', '@@@', $request->fitness);
+        $data->entertainment = str_replace(',', '@@@', $request->entertainment);
+        $data->music = str_replace(',', '@@@', $request->music);
+        $data->books = str_replace(',', '@@@', $request->books);
+
+        $data->fav_tv_shows = $request->fav_tv_shows;
+        $data->fav_movies = $request->fav_movies;
+        $data->fav_hobbies = $request->fav_hobbies;
+        $data->fav_teams = $request->fav_teams;
+        $data->fav_bands = $request->fav_bands;
+        $data->fav_books = $request->fav_books;
+
+        $data->save();
+        return response()->json(['success' => 'Your interest info is updated successfully!']);
+
+    }
 }
