@@ -7,7 +7,7 @@
                 <div class="col-md-3">
                     <div class="card">
                         <div class="card-body text-center">
-                            <img style="width: 70%;" src="{{url('user/default_profile.png')}}" alt="" class="img-fluid rounded-3">
+                            <img style="width: 70%;" src="{{auth()->user()->details->profile_image()}}" alt="" class="img-fluid rounded-3">
                         </div>
                         <div class="card-footer">
                             <center>
@@ -17,9 +17,9 @@
                         <div class="card-footer">
 
                         <ul style="list-style-type: none;">
-                                <li><a href=""><i class="bi bi-card-list"></i> View My Profile</a></li>
-                                <li><a href=""><i class="bi bi-camera"></i> Edit My Photo</a></li>
-                                <li><a href=""><i class="bi bi-pencil"></i> Edit My Profile</a></li>
+                                <li><a href="{{route('user.profile.view',[auth()->user()->username])}}"><i class="bi bi-card-list"></i> View My Profile</a></li>
+                                <li><a href="{{route('user.profile.photo')}}"><i class="bi bi-camera"></i> Edit My Photo</a></li>
+                                <li><a href="{{route('user.profile.edit',[auth()->user()->username])}}"><i class="bi bi-pencil"></i> Edit My Profile</a></li>
                                 <li><a href=""><i class="bi bi-pin-map"></i> Edit My Location</a></li>
                             </ul>
                         </div>
@@ -71,9 +71,9 @@
 
 
                             <div class="p-5">
-                                Your Profile is 7% Complete
+                                Your Profile is {{auth()->user()->profileCompletePercentage()}}% Complete
                                 <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="0"  style="width: 25%" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="0"  style="width: {{auth()->user()->profileCompletePercentage()}}%" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <a href="">Click here to finish updating your profile now.</a>
 
@@ -108,8 +108,6 @@
                                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
                                 <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
                             </div>
-
-
 
                         </div>
                     </div>

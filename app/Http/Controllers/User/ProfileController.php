@@ -30,7 +30,16 @@ class ProfileController extends Controller
         return abort(404);
     }
     public function p_photo(){
-        return view('user.profile.photo');
+
+        $files = File::files(public_path('user\Def_Profile'));
+        $images=[];
+        foreach ($files as $image){
+            $checks=explode('/',str_replace('\\','/',$image));
+            $checks=array_reverse($checks);
+            $checks[0];
+            $images[]=['file'=>$image,'name'=>$checks[0]];
+        }
+        return view('user.profile.photo',compact('images'));
     }
     public function profile(Request $request){
         $data=UserDetail::find(auth()->user()->details->id);
@@ -44,6 +53,22 @@ class ProfileController extends Controller
         $data->save();
         return response()->json(['success'=>true,'profile'=>$data->profile_image()]);
     }
+    public function pre_profile(Request $request){
+
+        $dest = public_path('storage/profile/');
+        $fileName=time().$request->image;
+        File::copy(public_path('user/Def_Profile/'.$request->image),$dest.$fileName);
+
+        $data=UserDetail::find(auth()->user()->details->id);
+        if (!$data){
+            $data=new UserDetail();
+            $data->user_id=auth()->user()->id;
+        }
+        $data->profile = $fileName;
+        $data->save();
+        return response()->json(['success'=>true,'profile'=>$data->profile_image()]);
+    }
+
     public function basic(Request $request){
         $this->validate($request,[
            'headline'=>'required',
