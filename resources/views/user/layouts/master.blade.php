@@ -85,6 +85,13 @@
             alert(xhr.responseJSON.message);
         }
     }
+    $('.navbar .dropdown').click(function () {
+        $(this).removeClass('dropdown');
+        $('.navbar .dropdown').removeClass('show');
+        $(this).addClass('dropdown').toggleClass('show');
+
+    })
 </script>
+
 </body>
 </html>

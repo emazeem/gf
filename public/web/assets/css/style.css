@@ -222,7 +222,7 @@ h6 {
 .navbar .dropdown ul {
   display: block;
   position: absolute;
-  left: 24px;
+  right: 0;
   top: calc(100% + 30px);
   margin: 0;
   padding: 10px 0;
@@ -236,11 +236,11 @@ h6 {
 }
 
 .navbar .dropdown ul li {
-  min-width: 200px;
+  min-width: 300px;
 }
 
 .navbar .dropdown ul a {
-  padding: 10px 20px;
+  padding: 7px;
   font-size: 14px;
   font-weight: 400;
   color: #433f39;
@@ -256,7 +256,7 @@ h6 {
   color: #ec6d70;
 }
 
-.navbar .dropdown:hover>ul {
+.navbar .dropdown.show>ul {
   opacity: 1;
   top: 100%;
   visibility: visible;

@@ -16,6 +16,7 @@ Route::middleware(['auth', 'can:user', 'email-verification'])->group(function ()
         Route::get('profile/view/{username}', [ProfileController::class, 'show'])->name('user.profile.view');
         Route::get('profile/edit/{username}', [ProfileController::class, 'edit'])->name('user.profile.edit');
         Route::get('profile/photo', [ProfileController::class, 'p_photo'])->name('user.profile.photo');
+        Route::get('edit/location', [ProfileController::class, 'location'])->name('user.location.edit');
         Route::post('basic/store', [ProfileController::class, 'basic'])->name('user.basic.store');
         Route::post('personal/store', [ProfileController::class, 'personal'])->name('user.personal.store');
         Route::post('about-me/store', [ProfileController::class, 'about_me'])->name('user.about.store');

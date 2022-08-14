@@ -41,6 +41,10 @@ class ProfileController extends Controller
         }
         return view('user.profile.photo',compact('images'));
     }
+    public function location(){
+        return view('user.profile.location');
+    }
+
     public function profile(Request $request){
         $data=UserDetail::find(auth()->user()->details->id);
         if (!$data){
