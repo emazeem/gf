@@ -57,6 +57,20 @@ class ProfileController extends Controller
         $data->save();
         return response()->json(['success'=>true,'profile'=>$data->profile_image()]);
     }
+    public function location_update(Request $request){
+        $this->validate($request,[
+            'location'=>'required',
+        ]);
+        $data=UserDetail::find(auth()->user()->details->id);
+        if (!$data){
+            $data=new UserDetail();
+            $data->user_id=auth()->user()->id;
+        }
+        $data->location = $request->location;
+        $data->save();
+        return response()->json(['success'=>true]);
+    }
+
     public function pre_profile(Request $request){
 
         $dest = public_path('storage/profile/');

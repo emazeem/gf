@@ -74,10 +74,10 @@
                         <li><a href="{{route('user.profile.photo')}}">Edit My Photo</a></li>
                         <li><a href="{{route('user.location.edit')}}">Edit Location</a></li>
                         <li><a href="#">Subscription</a></li>
-                        <li><a href="#">Account Settings</a></li>
+                        <li><a href="{{route('settings.account.show')}}">Account Settings</a></li>
                         <li><a href="#">Blocked Members</a></li>
                         <li><a href="#">Email Notifications</a></li>
-                        <li><a href="#">Change password</a></li>
+                        <li><a href="{{route('settings.change.password.show')}}">Change password</a></li>
                         <li><a href="#">Delete Account</a></li>
                     </ul>
                 </li>

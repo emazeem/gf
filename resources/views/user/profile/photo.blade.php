@@ -49,7 +49,7 @@
                     <div class="alert alert-success alert-dismissible fade show justify-content-between" role="alert"
                          style="display: none;">
                         <strong>Success!</strong> <span class="message"></span>
-                        <span class="close" data-dismiss="alert" aria-label="Close"><i class="bi bi-x-circle"></i></span>
+                        <span onclick="$('.alert').css('display','none')"><i class="bi bi-x-circle"></i></span>
                     </div>
                 </div>
                 <div class="card-body">

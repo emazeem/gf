@@ -48,21 +48,26 @@
         </div>
     </main>
     <script>
-        $(document).on('submit', '#profile_form', function (e) {
+        $(document).on('submit', '#location_form', function (e) {
             e.preventDefault();
-            var alert=$('.alert');
-            alert.hide();
+            $(this).find('.form-control.is-invalid').removeClass('is-invalid');
+            $(this).find('.invalid-feedback.is-invalid').remove();
+
+            var button = $(this).find('button[type=submit]'), previous =$(this).find('button[type=submit]').html();
+            button.attr('disabled', 'disabled').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing ...');
+
             $.ajax({
                 type: "POST",
-                url: "{{route('user.profile')}}",
+                url: "{{route('user.location.update')}}",
                 data: new FormData(this),
                 dataType: 'JSON',
                 processData: false,
                 contentType: false,
                 cache: false,
                 success: function (data) {
-                    alert.find('.message').html("Profile picture is updated successfully!");
-                    alert.css('display','flex');
+                    button.attr('disabled', null).html(previous);
+                    $('#success-message').html('<h4 class="text-success">Location is updated successfully!</h4>');
+                    window.setTimeout(function(){location.reload()},3000)
                 },
                 error: function (xhr) {
                     erroralert(xhr);
@@ -70,45 +75,37 @@
             });
 
         });
-        $(document).on('submit', '.predefine-image', function (e) {
-            e.preventDefault();
-            var alert=$('.alert');
-            alert.hide();
-            $.ajax({
-                type: "POST",
-                url: "{{route('user.pre.profile')}}",
-                data: new FormData(this),
-                dataType: 'JSON',
-                processData: false,
-                contentType: false,
-                cache: false,
-                success: function (data) {
-                    $('.modal-close-btn').click();
-                    $('.profile-picture').attr('src',data.profile);
-                    alert.find('.message').html("Profile picture is updated successfully!");
-                    alert.css('display','flex');
-                },
-                error: function (xhr) {
-                    erroralert(xhr);
-                }
-            });
 
-        });
 
     </script>
 
     <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Choose a picture to set as your profile</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Location</h5>
                     <button type="button" class="close modal-close-btn btn" data-dismiss="modal" aria-label="Close">
                         <i class="bi bi-x-circle"></i>
                     </button>
                 </div>
                 <div class="modal-body">
+                    <p>
+                        Type your address below, select your correct location from the drop down box then click "Save Location". Only your City, State, Country will be shared publicly. Your address will NOT be shared with ANY other members but will be used to match you with other local members who are close to you. Your address will provide better results than entering a city here.
+                    </p>
                     <div class="row">
-                        
+                        <form id="location_form">
+                            @csrf
+                            <div id="success-message"></div>
+                            <div class="form-group">
+                                <label for="location">Your Location</label>
+                                <input type="text" value="{{auth()->user()->details->location}}" class="form-control" name="location" id="location">
+                            </div>
+                            <div class="d-flex mt-2 align-items-center justify-content-evenly">
+                                <button type="submit" class="btn btn-sm btn-danger c-bg">Save Location</button>
+                                <p class="mt-2">Or</p>
+                                <button type="button" class="btn btn-sm btn-light close border" data-dismiss="modal" aria-label="Close">Cancel</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
