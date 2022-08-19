@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
+use App\Models\Testimonial;
 use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
@@ -15,6 +17,14 @@ class ProfileController extends Controller
     public function welcome(){
         return view('user.welcome');
     }
+
+
+    public function home(){
+        $testimonials=Testimonial::all();
+        $blogs=Blog::all();
+        return view('user.home',compact('testimonials','blogs'));
+    }
+
     public function show($username){
         if ($username==auth()->user()->username){
             $user=User::find(auth()->user()->id);

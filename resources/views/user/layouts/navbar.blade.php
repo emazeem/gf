@@ -41,14 +41,17 @@
                     <a href="javascript:void(0)"><i class="bi bi-envelope" title="Inbox" style="font-size: 25px"></i></a>
                     <ul>
                         <li><h5 class="px-2 c-color border-bottom">Recent Messages</h5></li>
-                        <li class="border-bottom li-notification"><a href="#">
-                            <div class="d-flex">
-                                <img  src="{{auth()->user()->details->profile_image()}}"
-                                     width="40" height="40" style="" alt="">
-                                <p ><span class="c-color">Hi !</span> How are you? </p>
-                            </div>
+                        <li class="border-bottom li-notification">
+                            <a href="#">
+                                <div class="d-flex">
+                                    <img  src="{{auth()->user()->details->profile_image()}}" width="40" height="40" style="" alt="">
+                                    <p><span class="c-color">Hi !</span> How are you? </p>
+                                </div>
                             </a>
                         </li>
+                        <div class="dropdown-footer d-flex justify-content-center bg-light">
+                            <a href="{{route('user.chat')}}">See all</a>
+                        </div>
                     </ul>
                 </li>
                 <li class="dropdown">
