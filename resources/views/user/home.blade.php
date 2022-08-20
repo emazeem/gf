@@ -105,12 +105,12 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                @for($i=0;$i<=10;$i++)
-                                    <div class="col-md-2 col-lg-2 col-sm-6 col-xs-12">
-                                        <img src="{{url('user/default_profile.png')}}" alt="" class="img-fluid rounded-3 gf-members-thumbnail">
-                                        <p><i class="bi bi-calendar-date"></i> {{rand(20,40)}} Years Old</p>
+                                @foreach($users as $user)
+                                    <div class="col-md-2 col-lg-2 col-sm-6 col-xs-12" onclick="window.location.href='{{route('user.profile.other',[$user->username])}}'">
+                                        <img src="{{$user->details->profile_image()}}" alt="" class="img-fluid rounded-3 gf-members-thumbnail">
+                                        <p><i class="bi bi-calendar-date"></i> {{getUserAge($user->id)}} Years Old</p>
                                     </div>
-                                @endfor
+                                @endforeach
                             </div>
                             <p>
                                 You have sent 1 messages on Girlfriend Social.<br>

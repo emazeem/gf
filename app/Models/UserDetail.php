@@ -20,4 +20,15 @@ class UserDetail extends Model
         }
         return url('user/default_profile.png');
     }
+    public function cover_image()
+    {
+        if ($this->cover) {
+            if (!File::exists(public_path() . '/storage/cover/' .$this->cover)) {
+                return url('user/default_profile.png');
+            }
+            return Storage::disk('local')->url('/cover/'.$this->cover);
+        }
+        return url('user/default_profile.png');
+    }
+
 }

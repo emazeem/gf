@@ -16,7 +16,7 @@
                             </form>
                         </div>
                         <div class="card-body p-0">
-                            <ul class="list-unstyled components pt-0">
+                            <ul class="list-unstyled components pt-4">
                             </ul>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                     <div class="card">
                         <div class="card-header d-flex">
                             <img src="" id="header-to-img" class="mt-1 ml-2">
-                            <h6 class="font-weight-bold mt-3" id="header-to-h5"></h6>
+                            <h6 class="font-weight-bold mt-3" id="header-to-h5">Chat</h6>
                         </div>
                         <div class="card-body p-0 message-box-cover">
                             <div class="message-box nav-pills-bg">
@@ -54,6 +54,12 @@
         </div>
     </main>
     <script>
+        var onetimechatopen = true;
+        @if($id)
+            onetimechatopen = true;
+        @else
+            onetimechatopen = false;
+        @endif
         function search(search) {
             //event.preventDefault();
             $.ajax({
@@ -73,6 +79,11 @@
                         var online=v['online']==1?'text-success':'';
                         $('.list-unstyled').append('<li class="user-of-chat-list '+online+'" data-id="' + v['id'] + '"><a href="#" id="chat-list-items"><img src="'+v['src']+'" class="profile-chat" alt=""><span id="full-name">'+v['name']+'</span></a></li>');
                     });
+                    if (onetimechatopen) {
+                        var user_to_chat = $('.user-of-chat-list[data-id="{{$id}}"]');
+                        user_to_chat.trigger('click');
+                        onetimechatopen = false;
+                    }
                 },
                 error: function (xhr) {
                 }
@@ -81,6 +92,7 @@
         }
 
         $(document).ready(function () {
+
             search();
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebarCollapse').find("i").toggleClass("icon-arrow-left icon-arrow-right");

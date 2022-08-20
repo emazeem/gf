@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\SettingsController;
+use App\Http\Controllers\User\OtherController;
+use App\Http\Controllers\User\FriendController;
+use App\Http\Controllers\User\BlockController;
+use App\Http\Controllers\User\SearchController;
 use App\Http\Controllers\User\ChatController;
 
 Route::middleware(['auth'])->group(function () {
@@ -16,7 +20,7 @@ Route::middleware(['auth', 'can:user', 'email-verification'])->group(function ()
     Route::prefix('user')->group(function () {
         Route::get('welcome', [ProfileController::class, 'welcome'])->name('user.welcome');
         Route::get('home', [ProfileController::class, 'home'])->name('user.home');
-        Route::get('profile/view/{username}', [ProfileController::class, 'show'])->name('user.profile.view');
+        Route::get('profile/view/{username}', [ProfileController::class, 'view'])->name('user.profile.view');
         Route::get('profile/edit/{username}', [ProfileController::class, 'edit'])->name('user.profile.edit');
         Route::get('profile/photo', [ProfileController::class, 'p_photo'])->name('user.profile.photo');
         Route::get('edit/location', [ProfileController::class, 'location'])->name('user.location.edit');
@@ -26,6 +30,7 @@ Route::middleware(['auth', 'can:user', 'email-verification'])->group(function ()
         Route::post('about-me/store', [ProfileController::class, 'about_me'])->name('user.about.store');
         Route::post('interest/store', [ProfileController::class, 'interest'])->name('user.interest.store');
         Route::post('change-profile', [ProfileController::class, 'profile'])->name('user.profile');
+        Route::post('change-cover', [ProfileController::class, 'cover'])->name('user.cover');
         Route::post('change-pre-profile', [ProfileController::class, 'pre_profile'])->name('user.pre.profile');
         Route::prefix('settings')->group(function () {
             Route::get('change-password', [SettingsController::class, 'index'])->name('settings.change.password.show');
@@ -34,10 +39,28 @@ Route::middleware(['auth', 'can:user', 'email-verification'])->group(function ()
             Route::post('update-account', [SettingsController::class, 'account'])->name('settings.account.update');
         });
         Route::group(['prefix' => 'chat'], function () {
-            Route::get('', [ChatController::class, 'index'])->name('user.chat');
+            Route::get('{id?}', [ChatController::class, 'index'])->name('user.chat');
             Route::post('fetch_user_list', [ChatController::class, 'fetch_user_list'])->name('chat.fetch.user.list');
             Route::post('store', [ChatController::class, 'store'])->name('chat.store');
             Route::post('show', [ChatController::class, 'show'])->name('chat.fetch.user.messages');
         });
+        Route::group(['prefix' => 'other'], function () {
+            Route::get('member/profile/show/{username}', [OtherController::class, 'show'])->name('user.profile.other');
+        });
+        Route::group(['prefix' => 'friends'], function () {
+            Route::get('', [FriendController::class, 'show'])->name('friend.show');
+            Route::post('send-request', [FriendController::class, 'send_request'])->name('friend.send.request');
+            Route::post('show-control', [FriendController::class, 'show_control'])->name('friend.show.control');
+            Route::post('cancel-control', [FriendController::class, 'cancel_request'])->name('friend.cancel.request');
+            Route::post('request-action', [FriendController::class, 'action'])->name('friend.request.action');
+            Route::post('un-friend', [FriendController::class, 'un_friend'])->name('friend.remove.friend');
+        });
+        Route::group(['prefix' => 'search'], function () {
+            Route::get('', [SearchController::class, 'show'])->name('search.show');
+        });
+        Route::group(['prefix' => 'block'], function () {
+            Route::post('blocked', [BlockController::class, 'blocked'])->name('block.blocked');
+        });
+
     });
 });

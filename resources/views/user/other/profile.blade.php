@@ -4,25 +4,6 @@
 
     <main id="main" style="margin-top: 70px">
         <div class="cover-photo " style="background-image: url('{{$user->details->cover_image()}}');">
-            <div class="btn-group">
-                <button type="button" class="btn btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="bi bi-camera"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" onclick="changeCoverPhoto()"><i class="bi bi-camera"></i> <small>Change Cover Photo</small></a>
-                    <a class="dropdown-item" onclick="changeProfilePhoto()"><i class="bi bi-camera"></i> <small>Change Profile Photo</small></a>
-                    <a class="dropdown-item" onclick="deleteCoverPhoto()"><i class="bi bi-trash"></i> <small>Delete Cover Photo</small></a>
-                </div>
-                <form id="profile_form">
-                    @csrf
-                    <input type="file" name="profile" id="profile" style="visibility: hidden">
-                </form>
-                <form id="cover_form">
-                    @csrf
-                    <input type="file" name="cover" id="cover" style="visibility: hidden">
-                </form>
-
-            </div>
             <div class="col-md-12 d-flex justify-content-center">
                 <div class="col-md-5">
                     <div class="card text-light" style="background: rgba(6,6,6,0.56)">
@@ -38,28 +19,35 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-12">
+                <img class="profile-picture" src="{{$user->details->profile_image()}}" alt="profile-picture">
+                <span class="profile-action-btn">
+
+                </span>
+            </div>
         </div>
         <div class="profile-pic text-center">
-            <img class="profile-picture" src="{{$user->details->profile_image()}}" alt="profile-picture">
+
         </div>
         <div class="container mt-4">
             <div class="row">
                 <div class="col-md-9 col-12">
                     <div class="card">
                         <div class="card-body">
+                            <h5>SHARE !</h5>
                             <b>About Me -</b> {{$user->details->about_me}}
                             <br>
                             <?php
-                                if ($user->details->dob){
-                                    $fdate = $user->details->dob;
-                                    $tdate = date('Y-m-d');
-                                    $datetime1 = strtotime($fdate); // convert to timestamps
-                                    $datetime2 = strtotime($tdate); // convert to timestamps
-                                    $days = (int)(($datetime2 - $datetime1)/86400/365);
-                                }
-                                else{
-                                    $days=null;
-                                }
+                            if ($user->details->dob){
+                                $fdate = $user->details->dob;
+                                $tdate = date('Y-m-d');
+                                $datetime1 = strtotime($fdate); // convert to timestamps
+                                $datetime2 = strtotime($tdate); // convert to timestamps
+                                $days = (int)(($datetime2 - $datetime1)/86400/365);
+                            }
+                            else{
+                                $days=null;
+                            }
                             ?>
                             <b>Quick Stats -</b> {{$days}}, , live in {{$user->details->location}}
                         </div>
@@ -169,19 +157,6 @@
                             </table>
                         </div>
                     </div>
-                    <div class="card mt-2">
-                        <div class="card-body">
-                            <ul style="list-style-type: none">
-                                <li>
-                                    <a href=""><i class="bi bi-pencil"></i> Edit my Profile</a>
-                                </li>
-                                <li>
-                                    <a href=""><i class="bi bi-pin-map"></i> Edit Location</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -197,67 +172,135 @@
             border-radius: 50%;
             height: 150px;
             width: 150px;
-            margin-top: -75px;
+            margin-top: -30px;
         }
         td.c-bg{
             background-color: #ec6d70;
         }
     </style>
     <script>
-        function changeProfilePhoto() {
-            $('#profile').click();
-        }
-        function changeCoverPhoto() {
-            $('#cover').click();
-        }
-
         $(function () {
-           $(document).on('change','#profile',function (e) {
-              $('#profile_form').submit();
-              $('#profile').val('');
-           });
-           $(document).on('change','#cover',function (e) {
-              $('#cover_form').submit();
-              $('#cover').val('');
-           });
-
-           $(document).on('submit','#profile_form',function (e) {
-              e.preventDefault();
-               $.ajax({
-                   type: "POST",
-                   url: "{{route('user.profile')}}",
-                   data: new FormData(this),
-                   dataType: 'JSON',
-                   processData: false,
-                   contentType: false,
-                   cache: false,
-                   success: function (data) {
-                       $('.profile-picture').attr('src',data.profile);
-                   },
-                   error: function (xhr) {
-                       erroralert(xhr);
-                   }
-               });
-           });
-            $(document).on('submit','#cover_form',function (e) {
-              e.preventDefault();
-               $.ajax({
-                   type: "POST",
-                   url: "{{route('user.cover')}}",
-                   data: new FormData(this),
-                   dataType: 'JSON',
-                   processData: false,
-                   contentType: false,
-                   cache: false,
-                   success: function (data) {
-                       $('.cover-photo').css('background-image','url('+data.profile+')');
-                   },
-                   error: function (xhr) {
-                       erroralert(xhr);
-                   }
-               });
-           });
+            showControls('{{$user->id}}');
 
         });
+        $(document).on('click', '.add-as-friend', function () {
+            var button = $(this), previous =$(this).html();
+            button.attr('disabled', 'disabled').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing ...');
+            var to = $(this).attr('data-to');
+            $.ajax({
+                type: "POST",
+                url: "{{route('friend.send.request')}}",
+                dataType: "JSON",
+                data: {'to': to, _token: '{{csrf_token()}}'},
+                success: function (data) {
+                    button.attr('disabled', null).html(previous);
+                    showControls('{{$user->id}}');
+                },
+                error: function (xhr) {
+                    button.attr('disabled', null).html(previous);
+                    erroralert(xhr);
+                }
+            });
+        });
+        $(document).on('click', '.block', function () {
+            var button = $(this), previous =$(this).html();
+            button.attr('disabled', 'disabled').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing ...');
+            var to = $(this).attr('data-id');
+            $.ajax({
+                type: "POST",
+                url: "{{route('block.blocked')}}",
+                dataType: "JSON",
+                data: {'to': to, _token: '{{csrf_token()}}'},
+                success: function (data) {
+                    button.attr('disabled', null).html(previous);
+                    showControls('{{$user->id}}');
+                },
+                error: function (xhr) {
+                    button.attr('disabled', null).html(previous);
+                    erroralert(xhr);
+                }
+            });
+        });
+
+        $(document).on('click', '.cancel-friend-request', function () {
+            var button = $(this), previous =$(this).html();
+            button.attr('disabled', 'disabled').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing ...');
+            var id = $(this).attr('data-id');
+            $.ajax({
+                type: "POST",
+                url: "{{route('friend.cancel.request')}}",
+                dataType: "JSON",
+                data: {'id': id, _token: '{{csrf_token()}}'},
+                success: function (data) {
+                    button.attr('disabled', null).html(previous);
+                    showControls('{{$user->id}}');
+                },
+                error: function (xhr) {
+                    button.attr('disabled', null).html(previous);
+                    erroralert(xhr);
+                }
+            });
+        });
+        $(document).on('click', '.friend-request-sent', function () {
+            var id = $(this).attr('data-id');
+            var status = null;
+            if ($(this).hasClass('approve')) {
+                status = '{{Friends::STATUS_APPROVED}}'
+            }
+            if ($(this).hasClass('decline')) {
+                status = '{{Friends::STATUS_REJECTED}}'
+            }
+            var button = $(this), previous =$(this).html();
+            button.attr('disabled', 'disabled').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing ...');
+
+            $.ajax({
+                type: "POST",
+                url: "{{route('friend.request.action')}}",
+                dataType: "JSON",
+                data: {'id': id, 'status': status, _token: '{{csrf_token()}}'},
+                success: function (data) {
+                    button.attr('disabled', null).html(previous);
+                    showControls('{{$user->id}}');
+                },
+                error: function (xhr) {
+                    button.attr('disabled', null).html(previous);
+                    erroralert(xhr);
+                }
+            });
+        });
+        $(document).on('click', '.remove-friend', function () {
+            var button = $(this), previous =$(this).html();
+            button.attr('disabled', 'disabled').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing ...');
+            var id = $(this).attr('data-id');
+            $.ajax({
+                type: "POST",
+                url: "{{route('friend.remove.friend')}}",
+                dataType: "JSON",
+                data: {'id': id, _token: '{{csrf_token()}}'},
+                success: function (data) {
+                    button.attr('disabled', null).html(previous);
+                    showControls('{{$user->id}}');
+                },
+                error: function (xhr) {
+                    button.attr('disabled', null).html(previous);
+                    erroralert(xhr);
+                }
+            });
+        });
+        function showControls(id) {
+            $.ajax({
+                type: "POST",
+                url: "{{route('friend.show.control')}}",
+                dataType: "JSON",
+                data: {'id': id, _token: '{{csrf_token()}}'},
+                success: function (data) {
+                    $('.profile-action-btn').html(data);
+                },
+                error: function (xhr) {
+                    erroralert(xhr);
+                }
+            });
+        }
+
     </script>
 @endsection

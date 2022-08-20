@@ -7,6 +7,7 @@ use App\Models\Blog;
 use App\Models\Testimonial;
 use App\Models\User;
 use App\Models\UserDetail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -22,16 +23,18 @@ class ProfileController extends Controller
     public function home(){
         $testimonials=Testimonial::all();
         $blogs=Blog::all();
-        return view('user.home',compact('testimonials','blogs'));
+        $users=User::where('id','!=',auth()->user()->id)->where('role','user')->get();
+        return view('user.home',compact('testimonials','blogs','users'));
     }
 
-    public function show($username){
+    public function view($username){
         if ($username==auth()->user()->username){
             $user=User::find(auth()->user()->id);
             return view('user.profile.show',compact('user'));
         }
         return abort(404);
     }
+
     public function edit($username){
         if ($username==auth()->user()->username){
             $de=auth()->user()->details;
@@ -67,6 +70,19 @@ class ProfileController extends Controller
         $data->save();
         return response()->json(['success'=>true,'profile'=>$data->profile_image()]);
     }
+    public function cover(Request $request){
+        $data=UserDetail::find(auth()->user()->details->id);
+        if (!$data){
+            $data=new UserDetail();
+            $data->user_id=auth()->user()->id;
+        }
+        $attachment = time() . $request->cover->getClientOriginalName();
+        Storage::disk('local')->put('/public/cover/' . $attachment, File::get($request->cover));
+        $data->cover = $attachment;
+        $data->save();
+        return response()->json(['success'=>true,'profile'=>$data->cover_image()]);
+    }
+
     public function location_update(Request $request){
         $this->validate($request,[
             'location'=>'required',

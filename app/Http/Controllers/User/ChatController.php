@@ -10,8 +10,8 @@ use Illuminate\Http\Request;
 class ChatController extends Controller
 {
     //
-    public function index(){
-        return view('user.chat');
+    public function index($id=null){
+        return view('user.chat',compact('id'));
     }
     public function fetch_user_list(Request $request)
     {
