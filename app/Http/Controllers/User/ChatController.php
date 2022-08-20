@@ -22,11 +22,9 @@ class ChatController extends Controller
         }
         $users=[];
         foreach ($data as $datum){
-            $unread=Chat::all()->where('from',$datum->id)->where('to',auth()->user()->id)->where('read_at',null)->count();
             $users[]=[
                 'id'=>$datum->id,
                 'name'=>$datum->name,
-                'unread'=>$unread,
                 'online'=>1,
                 'src'=>$datum->details->profile_image(),
             ];

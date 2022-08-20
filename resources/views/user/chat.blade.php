@@ -5,51 +5,49 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <div class="card-header">
-                        <form id="search-form">
-                            @csrf
-                            <div class="input-group">
-                                <input type="text" class="form-control"
-                                       placeholder="&#xF002; Search or start chat here.." id="search">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="card-body">
-                        <ul class="list-unstyled components pt-0 border-bottom">
-                        </ul>
+                    <div class="card">
+                        <div class="card-header">
+                            <form id="search-form">
+                                @csrf
+                                <div class="input-group">
+                                    <input type="text" class="form-control"
+                                           placeholder="&#xF002; Search or start chat here.." id="search">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-body p-0">
+                            <ul class="list-unstyled components pt-0">
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-9">
-                    <div class="card p-3">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="chat-header col-12">
-                                    <button class="float-left btn mt-3 p-0 mr-2 btn-sm text-light btn-toggle" id="sidebarCollapse"><i
-                                                class="feather icon-arrow-left"></i></button>
-                                    <img src="" id="header-to-img" class="float-left mt-1 ml-2">
-                                    <h6 class="font-weight-bold float-left mt-3 text-light" id="header-to-h5"></h6>
+                    <div class="card">
+                        <div class="card-header d-flex">
+                            <img src="" id="header-to-img" class="mt-1 ml-2">
+                            <h6 class="font-weight-bold mt-3" id="header-to-h5"></h6>
+                        </div>
+                        <div class="card-body p-0 message-box-cover">
+                            <div class="message-box nav-pills-bg">
+                                <div class="d-flex justify-content-center align-items-center" style="height: 100%">
+                                    <div>
+                                        <h1>Welcome to Girlfriend Vibez Chat Box</h1>
+                                        <p>Get connected with your loved ones.</p>
+                                    </div>
+
                                 </div>
                             </div>
-                            <div class="row content bg-light">
-                                <div class="col-12 p-0 message-box-cover">
-                                    <div class="message-box nav-pills-bg">
-
-                                    </div>
-                                    <div class="input-group">
-                                        <input type="hidden" name="to" id="to">
-                                        <input type="text"
-                                               class="form-control border-radius-0 border-left-0 border-right-0 border-bottom"
-                                               name="message" id="message" placeholder="Type your message here..">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-danger c-bg btn-msg-send" id="btn-msg-send"
-                                                    type="button"><i class="bi bi-send"></i></button>
-                                        </div>
-                                    </div>
+                            <div class="input-group">
+                                <input type="hidden" name="to" id="to">
+                                <input type="text"
+                                       class="form-control border-radius-0 border-left-0 border-right-0 border-bottom"
+                                       name="message" id="message" placeholder="Type your message here..">
+                                <div class="input-group-append">
+                                    <button class="btn btn-danger c-bg btn-msg-send" id="btn-msg-send"
+                                            type="button"><i class="bi bi-send"></i></button>
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -65,16 +63,15 @@
                 dataType: "JSON",
                 beforeSend: function () {
                     $('.list-unstyled').empty();
-                    $('.list-unstyled').append('<i class="bi bi-balloon h1"></i>');
+                    $('.list-unstyled').append('<center><img src="{{url('user/lazy-loader.gif')}}" class="lazy-loader"/></center>');
                     $('.lazy-loader').show();
                 },
                 success: function (data) {
 
                     $('.list-unstyled').empty();
                     $.each(data, function (i, v) {
-                        var span=v['unread']!=0?'<span class="float-right badge badge-dark">'+v['unread']+'</span>':'';
                         var online=v['online']==1?'text-success':'';
-                        $('.list-unstyled').append('<li class="user-of-chat-list '+online+'" data-id="' + v['id'] + '"><a href="#" id="chat-list-items"><img src="'+v['src']+'" class="profile-chat" alt=""><span id="full-name">'+v['name']+'</span>'+span+'</a></li>');
+                        $('.list-unstyled').append('<li class="user-of-chat-list '+online+'" data-id="' + v['id'] + '"><a href="#" id="chat-list-items"><img src="'+v['src']+'" class="profile-chat" alt=""><span id="full-name">'+v['name']+'</span></a></li>');
                     });
                 },
                 error: function (xhr) {
@@ -123,6 +120,8 @@
             });
 
             $(document).on('click', '.user-of-chat-list', function (e) {
+                $('.user-of-chat-list').removeClass('active');
+                $(this).addClass('active');
                 if (window.matchMedia('(max-width: 400px)').matches) {
                     e.preventDefault();
                     $('#sidebar').toggleClass('active');
@@ -160,7 +159,7 @@
                 dataType: "JSON",
                 beforeSend: function () {
                     $('.message-box').empty();
-                    $('.message-box').append('<center><img src="assets/images/lazy-loader.gif" class="lazy-loader"/></center>');
+                    $('.message-box').append('<center><img src="{{url('user/lazy-loader.gif')}}" class="lazy-loader"/></center>');
                 },
                 success: function (data) {
                     $('.message-box').empty();
@@ -465,6 +464,14 @@
         #full-name{
             left: 50px;
         }
-
+        li.user-of-chat-list {
+            padding: 5px 10px;
+        }
+        li.user-of-chat-list.active {
+            background: #f1f1f1;
+        }
+        .text-right{
+            text-align: right;
+        }
     </style>
 @endsection
