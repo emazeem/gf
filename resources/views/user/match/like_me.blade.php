@@ -24,8 +24,8 @@
                                              style="border: 4px solid #ec6d70">
                                         <h5 class="c-color">{{$user->username}}</h5>
 
-                                        <button data-id="{{$user->id}}" class="match-click btn btn-danger"><i
-                                                    class="bi bi-x"></i></button>
+                                        <button data-id="{{$user->id}}" class="match-click yes btn btn-success"><i
+                                                    class="bi bi-check"></i></button>
 
                                         <a href="{{route('user.chat',[$user->id])}}"
                                            class="btn btn-primary"><i class="bi bi-envelope"></i></a>
@@ -59,19 +59,18 @@
     </main>
     <script>
         $(function () {
-            $('.carousel').carousel({
-                interval: false,
-            });
             $(document).on('click', '.match-click', function () {
                 var to = $(this).attr('data-id');
-                var button = $(this), previous = $(this).html();
+                status='yes';
+                var button = $(this), previous =$(this).html();
                 button.attr('disabled', 'disabled').html('...');
                 $.ajax({
                     type: "POST",
-                    url: "{{route('match.remove')}}",
+                    url: "{{route('match.action')}}",
                     dataType: "JSON",
-                    data: {'to': to, 'status': 'yes', _token: '{{csrf_token()}}'},
+                    data: {'to': to, 'status': status, _token: '{{csrf_token()}}'},
                     success: function (data) {
+                        button.attr('disabled', null).html(previous);
                         location.reload();
                     },
                     error: function (xhr) {
@@ -80,6 +79,7 @@
                     }
                 });
             });
+
         });
     </script>
 @endsection

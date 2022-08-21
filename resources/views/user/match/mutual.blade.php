@@ -10,10 +10,8 @@
                     </div>
                     <div class="card mt-2">
                         <div class="card-header">
-                            <h4 class="c-color">My Likes</h4>
-                            You rated these profiles “yes”. If they also click yes on your profile, it will move to
-                            showing up under mutual match. You could also send them a direct message instead to start
-                            making friends right away!
+                            <h4 class="c-color">Mutual Friendship Matches</h4>
+                            You gals both said “yes”. Send these ladies a message and start becoming friends!
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -23,10 +21,6 @@
                                              class="img-fluid img-thumbnail"
                                              style="border: 4px solid #ec6d70">
                                         <h5 class="c-color">{{$user->username}}</h5>
-
-                                        <button data-id="{{$user->id}}" class="match-click btn btn-danger"><i
-                                                    class="bi bi-x"></i></button>
-
                                         <a href="{{route('user.chat',[$user->id])}}"
                                            class="btn btn-primary"><i class="bi bi-envelope"></i></a>
                                     </div>
@@ -59,19 +53,18 @@
     </main>
     <script>
         $(function () {
-            $('.carousel').carousel({
-                interval: false,
-            });
             $(document).on('click', '.match-click', function () {
                 var to = $(this).attr('data-id');
-                var button = $(this), previous = $(this).html();
+                status='yes';
+                var button = $(this), previous =$(this).html();
                 button.attr('disabled', 'disabled').html('...');
                 $.ajax({
                     type: "POST",
-                    url: "{{route('match.remove')}}",
+                    url: "{{route('match.action')}}",
                     dataType: "JSON",
-                    data: {'to': to, 'status': 'yes', _token: '{{csrf_token()}}'},
+                    data: {'to': to, 'status': status, _token: '{{csrf_token()}}'},
                     success: function (data) {
+                        button.attr('disabled', null).html(previous);
                         location.reload();
                     },
                     error: function (xhr) {
@@ -80,6 +73,7 @@
                     }
                 });
             });
+
         });
     </script>
 @endsection

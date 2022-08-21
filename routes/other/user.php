@@ -59,7 +59,11 @@ Route::middleware(['auth', 'can:user', 'email-verification'])->group(function ()
         Route::group(['prefix' => 'match'], function () {
             Route::get('', [MatchController::class, 'show'])->name('match.show');
             Route::get('you-like', [MatchController::class, 'you_like'])->name('match.you.like');
+            Route::get('mutual', [MatchController::class, 'mutual'])->name('match.mutual');
+            Route::get('who-like-me', [MatchController::class, 'me_like'])->name('match.me.like');
+            Route::get('you-do-not-like', [MatchController::class, 'you_unlike'])->name('match.you.unlike');
             Route::post('action', [MatchController::class, 'action'])->name('match.action');
+            Route::post('remove', [MatchController::class, 'remove'])->name('match.remove');
         });
         Route::group(['prefix' => 'search'], function () {
             Route::get('', [SearchController::class, 'show'])->name('search.show');

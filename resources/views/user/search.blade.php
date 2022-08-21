@@ -13,14 +13,16 @@
                         <div class="card-body">
                             <form action="{{route('search.show')}}" method="get" class="row">
                                 @csrf
+                                {{--DONE--}}
                                 <div class="form-group col-md-4">
                                     <label for="location">Location</label>
                                     <input type="text" class="form-control" id="location" name="location"
-                                           placeholder="Location" value="">
+                                           placeholder="Location" value="{{$requests['location']}}">
                                 </div>
+
                                 <div class="form-group col-md-4">
-                                    <label for="location">Within Kilometers</label>
-                                    <select class="form-control" id="location" name="location">
+                                    <label for="km">Within Kilometers</label>
+                                    <select class="form-control" id="km" name="km">
                                         <option selected value="" hidden></option>
                                         <option value="5">5 Kilometers</option>
                                         <option value="10">10 Kilometers</option>
@@ -29,38 +31,42 @@
                                     </select>
                                 </div>
 
+                                {{--DONE--}}
                                 <div class="form-group col-md-4">
                                     <label for="age">Your Friend's Age Range</label>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" id="age" name="min_age"
-                                                   placeholder="Min" value="">
+                                            <input type="text" class="form-control" id="age" name="min_age" placeholder="Min" value="{{$requests['min_age']}}">
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" id="age" name="max_age"
-                                                   placeholder="Max" value="">
+                                            <input type="text" class="form-control" id="age" name="max_age" placeholder="Max" value="{{$requests['max_age']}}">
                                         </div>
                                     </div>
                                 </div>
-
+                                {{--DONE--}}
+                                <div class="form-group col-md-12">
+                                    <label for="location">Key</label>
+                                    <input type="text" class="form-control" id="key" name="key"
+                                           placeholder="Key" value="{{$requests['key']}}">
+                                </div>
+                                {{--DONE--}}
                                 <div class="form-check col-md-4 mt-3">
                                     <div class="border p-2 rounded-3">
                                         <h6 class="c-color">Does Your Friend Have Children?</h6>
                                         <label class="form-check-label col-12" id="children">
                                             <input type="radio" class="form-check-input" id="children" name="children"
-                                                   value="No">No
+                                                   value="No Children">No
                                         </label>
                                         <label class="form-check-label col-12" id="children">
                                             <input type="radio" class="form-check-input" id="children" name="children"
-                                                   value="Yes">Yes
+                                                   value="Yes I Have Children">Yes
                                         </label>
                                         <label class="form-check-label col-12" id="children">
                                             <input type="radio" class="form-check-input" id="children" name="children"
                                                    value="Prefer Not To Say">Prefer Not To Say
                                         </label>
                                         <label class="form-check-label col-12" id="children">
-                                            <input type="radio" class="form-check-input" id="children" name="children"
-                                                   value="Prefer Not To Say">Not Important
+                                            <input type="radio" class="form-check-input" id="children" name="children">Not Important
                                         </label>
                                     </div>
                                 </div>
@@ -141,17 +147,17 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                @foreach($friends as $friend)
+                                @foreach($users as $user)
                                     <div class="col-md-3 d-flex rounded-3 gf-members-thumbnail img-thumbnail align-items-center"
-                                         onclick="window.location.href='{{route('user.profile.other',[$friend->username])}}'">
+                                         onclick="window.location.href='{{route('user.profile.other',[$user->username])}}'">
                                         <div>
-                                            <img src="{{$friend->details->profile_image()}}" alt="" width="100"
+                                            <img src="{{$user->details->profile_image()}}" alt="" width="100"
                                                  class="img-fluid rounded-3 gf-members-thumbnail">
                                         </div>
                                         <div>
-                                            <h6 class=" c-color">{{$friend->name}}</h6>
-                                            <p class="m-0">{{$friend->username}}</p>
-                                            <p class="m-0">{{getUserAge($friend->id)}} Years old</p>
+                                            <h6 class=" c-color">{{$user->name}}</h6>
+                                            <p class="m-0">{{$user->username}}</p>
+                                            <p class="m-0">{{getUserAge($user->id)}} Years old</p>
                                         </div>
                                     </div>
                                 @endforeach
