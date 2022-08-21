@@ -61,8 +61,7 @@
                         <div class="card-body">
                             @foreach($friends as $friend)
                                 <div class="col-md-4 d-flex rounded-3 gf-members-thumbnail img-thumbnail align-items-center"
-                                onclick="window.location.href='{{route('user.profile.other',[$friend->username])}}'"
-                                >
+                                onclick="window.location.href='{{route('user.profile.other',[$friend->username])}}'">
                                     <div>
                                         <img src="{{$friend->details->profile_image()}}" alt="" width="100"
                                              class="img-fluid rounded-3 gf-members-thumbnail">

@@ -29,7 +29,7 @@ class FriendController extends Controller
         $key=null;
         if ($request->s){
             $key=$request->s;
-            $users= $users->where('role','user')->whereRaw('( username LIKE "%' . $key . '%"  )');
+            $users= $users->where('role','user')->whereRaw('( username LIKE "%' . $key . '%" or name LIKE "%' . $key . '%"  )');
         }
         $friends=$users->get();
         return view('user.friends',compact('friends','key'));

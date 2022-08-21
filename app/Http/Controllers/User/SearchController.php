@@ -15,7 +15,7 @@ class SearchController extends Controller
         if ($request->s){
         }
         $friends=$users->get();
-        return view('user.friends',compact('friends','key'));
+        return view('user.search',compact('friends','key'));
     }
 
 }

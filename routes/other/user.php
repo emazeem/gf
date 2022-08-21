@@ -6,6 +6,7 @@ use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\SettingsController;
 use App\Http\Controllers\User\OtherController;
 use App\Http\Controllers\User\FriendController;
+use App\Http\Controllers\User\MatchController;
 use App\Http\Controllers\User\BlockController;
 use App\Http\Controllers\User\SearchController;
 use App\Http\Controllers\User\ChatController;
@@ -54,6 +55,11 @@ Route::middleware(['auth', 'can:user', 'email-verification'])->group(function ()
             Route::post('cancel-control', [FriendController::class, 'cancel_request'])->name('friend.cancel.request');
             Route::post('request-action', [FriendController::class, 'action'])->name('friend.request.action');
             Route::post('un-friend', [FriendController::class, 'un_friend'])->name('friend.remove.friend');
+        });
+        Route::group(['prefix' => 'match'], function () {
+            Route::get('', [MatchController::class, 'show'])->name('match.show');
+            Route::get('you-like', [MatchController::class, 'you_like'])->name('match.you.like');
+            Route::post('action', [MatchController::class, 'action'])->name('match.action');
         });
         Route::group(['prefix' => 'search'], function () {
             Route::get('', [SearchController::class, 'show'])->name('search.show');

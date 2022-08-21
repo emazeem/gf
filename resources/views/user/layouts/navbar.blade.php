@@ -14,10 +14,15 @@
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
 
+                <li><a class="nav-link scrollto {{(Route::currentRouteName()=='match.show')?'active':''}}" title="match" href="{{route('match.show')}}">
+                        <button class="btn btn-light">MATCH</button>
+                    </a>
+                </li>
                 <li><a class="nav-link scrollto {{(Route::currentRouteName()=='search.show')?'active':''}}" title="friends" href="{{route('search.show')}}">
                         <button class="btn btn-light">SEARCH</button>
                     </a>
                 </li>
+
 
                 <li><a class="nav-link scrollto {{(Route::currentRouteName()=='friend.show')?'active':''}}" title="friends" href="{{route('friend.show')}}">
                         <button class="btn btn-light">FRIENDS</button>
