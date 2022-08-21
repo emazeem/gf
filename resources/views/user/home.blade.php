@@ -22,9 +22,9 @@
                                 <li><a href="{{route('user.profile.photo')}}"><i class="bi bi-camera"></i> Edit My Photo</a></li>
                                 <li><a href="{{route('user.profile.edit',[auth()->user()->username])}}"><i class="bi bi-pencil"></i> Edit My Profile</a></li>
                                 <li><a href="{{route('user.location.edit')}}"><i class="bi bi-pin-map"></i> Edit My Location</a></li>
-                                <li><a href="{{route('user.location.edit')}}"><i class="bi bi-pin-map"></i> Browse Members</a></li>
-                                <li><a href="{{route('user.location.edit')}}"><i class="bi bi-pin-map"></i> Invite Your Friends</a></li>
-                                <li><a href="{{route('user.location.edit')}}"><i class="bi bi-pin-map"></i> Birthdays</a></li>
+                                <li><a href="{{route('friend.show')}}"><i class="bi bi-pin-map"></i> Browse Members</a></li>
+                                <li><a href="{{route('user.invite')}}"><i class="bi bi-share"></i> Invite Your Friends</a></li>
+                                <li><a href="{{route('user.birthdays')}}"><i class="bi bi-calendar-date"></i> Birthdays</a></li>
                             </ul>
                         </div>
 
@@ -98,6 +98,15 @@
                     <div class="card p-3">
                         <h4>New Friendship Matches</h4>
                         When you match with someone they will show up here - Click here to Match with Local Ladies!
+
+
+                        @foreach(getMutualMatch() as $user)
+                            <div class="col-md-2 col-lg-2 col-sm-6 col-xs-12" onclick="window.location.href='{{route('user.profile.other',[$user->username])}}'">
+                                <img src="{{$user->details->profile_image()}}" alt="" class="img-fluid rounded-3 gf-members-thumbnail">
+                                <p><i class="bi bi-calendar-date"></i> {{getUserAge($user->id)}} Years Old</p>
+                            </div>
+                        @endforeach
+
                     </div>
                     <div class="card mt-3">
                         <div class="card-header">

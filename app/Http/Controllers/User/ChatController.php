@@ -5,7 +5,9 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Chat;
 use App\Models\User;
+use App\Notifications\MessageNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class ChatController extends Controller
 {
@@ -64,30 +66,10 @@ class ChatController extends Controller
         $chat->from=auth()->user()->id;
         $chat->save();
         $time=$chat->created_at->format('h:i A');
-
-        /*$data=[
-            'to'=>$request->to,
-            'from'=>auth()->user()->id,
-            'message'=>$request->message,
-            'created_at'=>$time,
-        ];
-
-        $options = array(
-            'cluster' => 'ap2',
-            'encrypted' => true
-        );
-        //Remember to set your credentials below.
-        $pusher = new Pusher(
-            'efcac9346172687a4645',
-            '05c967b740b40d3ba06f',
-            '1250707', $options
-        );
-        $pusher->trigger('channel-chat', 'App\Events\Chat', $data);
-        */
+        $user=User::find($request->to);
+        Notification::send($user, new MessageNotification('1 unread message from '.auth()->user()->username));
         return response()->json($time);
     }
-
-
     /**
      * Display the specified resource.
      *

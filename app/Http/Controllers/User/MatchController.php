@@ -42,14 +42,7 @@ class MatchController extends Controller
         return view('user.match.like_me', compact('users'));
     }
     public function mutual(){
-        $match = Matched::where('from', auth()->user()->id)->where('status', 'yes')->get();
-        $ID = [];
-        foreach ($match as $m) {
-            if (count(Matched::where('to',auth()->user()->id)->where('from',$m->to)->where('status', 'yes')->get())>0){
-                $ID[] = $m->to;
-            }
-        }
-        $users = User::whereIn('id', $ID)->get();
+        $users=getMutualMatch();
         return view('user.match.mutual', compact('users'));
     }
 

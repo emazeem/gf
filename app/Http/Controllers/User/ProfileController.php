@@ -9,8 +9,10 @@ use App\Models\User;
 use App\Models\UserDetail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Mockery\Matcher\Not;
 
 class ProfileController extends Controller
 {
@@ -18,6 +20,30 @@ class ProfileController extends Controller
     public function welcome(){
         return view('user.welcome');
     }
+    public function invite(){
+        return view('user.invite');
+    }
+    public function birthdays(){
+        $users=User::where('role','user');
+        $us=[];
+        foreach ($users->get() as $u){
+            if (date('m')==date('m',strtotime($u->details->dob))){
+               $us[]=$u->id;
+            }
+        }
+        $users=User::whereIn('id',$us)->get();
+        return view('user.birthdays',compact('users'));
+    }
+
+    public function invite_submit(Request $request){
+        $this->validate($request,[
+           'recipients'=>'required',
+           'message'=>'required',
+        ]);
+        dd('Email account third party restriction.');
+        sendEmail($request->recipients,'Invite',$request->message);
+    }
+
 
 
     public function home(){
@@ -26,6 +52,12 @@ class ProfileController extends Controller
         $users=User::where('id','!=',auth()->user()->id)->where('role','user')->get();
         return view('user.home',compact('testimonials','blogs','users'));
     }
+    public function mark_as_read(Request $request){
+        $notification = auth()->user()->notifications()->find($request->id);
+        $notification->markAsRead();
+        return response()->json(true);
+    }
+
 
     public function view($username){
         if ($username==auth()->user()->username){

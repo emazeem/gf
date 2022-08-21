@@ -109,8 +109,6 @@
                 search($('#search').val());
             });
             $('.btn-msg-send').on("click", function () {
-                var obj = document.createElement('audio');
-                obj.src = '{{url("audio/send-message.wav")}}';
                 var message = $('#message').val();
                 var to = $('#to').val();
                 $('#message').val(null).focus();
@@ -123,7 +121,6 @@
                         success: function (data) {
                             $('.message-box').append('<div class="col-12 p-0 text-right"><p class="message-pills message-pills-right">'+message+' <small>'+data+'</small></p></div>');
                             scrollbottom();
-                            obj.play();
                         },
                         error: function (xhr) {
                         }

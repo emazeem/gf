@@ -10,17 +10,14 @@ class Friends{
 function getTitleFromSlug($slug){
     return ucfirst(str_replace('-',' ',$slug));
 }
-function sendEmail($to,$from,$subject,$message){
-    if ($from==null){
-        $from='connectsocial@napollo.net';
-    }
-
+function sendEmail($to,$subject,$message){
     try{
         Mail::html( $message, function( $message ) use ($subject,$to) {
             $message->subject( $subject )->to( $to );
         });
         return true;
     }catch (Exception $exception){
+        dd($exception);
         return response()->json($exception->getMessage());
     }
 }
@@ -99,5 +96,18 @@ function friendRequestsReceived($id){
         }
         $users[] = $user;
     }
+    return $users;
+}
+use App\Models\Matched;
+function getMutualMatch($id=null){
+    if ($id==null){$id=auth()->user()->id;}
+    $match = Matched::where('from', $id)->where('status', 'yes')->get();
+    $ID = [];
+    foreach ($match as $m) {
+        if (count(Matched::where('to',$id)->where('from',$m->to)->where('status', 'yes')->get())>0){
+            $ID[] = $m->to;
+        }
+    }
+    $users = User::whereIn('id', $ID)->get();
     return $users;
 }

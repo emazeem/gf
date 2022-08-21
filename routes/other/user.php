@@ -21,6 +21,10 @@ Route::middleware(['auth', 'can:user', 'email-verification'])->group(function ()
     Route::prefix('user')->group(function () {
         Route::get('welcome', [ProfileController::class, 'welcome'])->name('user.welcome');
         Route::get('home', [ProfileController::class, 'home'])->name('user.home');
+        Route::post('mark-as-read', [ProfileController::class, 'mark_as_read'])->name('notification.mark.as.read');
+        Route::get('invite', [ProfileController::class, 'invite'])->name('user.invite');
+        Route::get('birthdays', [ProfileController::class, 'birthdays'])->name('user.birthdays');
+        Route::post('send-invite', [ProfileController::class, 'invite_submit'])->name('invite.submit');
         Route::get('profile/view/{username}', [ProfileController::class, 'view'])->name('user.profile.view');
         Route::get('profile/edit/{username}', [ProfileController::class, 'edit'])->name('user.profile.edit');
         Route::get('profile/photo', [ProfileController::class, 'p_photo'])->name('user.profile.photo');

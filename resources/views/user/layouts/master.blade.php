@@ -89,8 +89,23 @@
         $(this).removeClass('dropdown');
         $('.navbar .dropdown').removeClass('show');
         $(this).addClass('dropdown').toggleClass('show');
-
     })
+    $(function () {
+       $('.notification-mark-as-read').click(function (e) {
+           e.preventDefault();
+           var id=$(this).attr('data-id');
+           var url=$(this).attr('data-url');
+           $.ajax({
+               url: "{{route('notification.mark.as.read')}}",
+               type: "POST",
+               data: {'id': id, _token: '{{csrf_token()}}'},
+               dataType: "JSON",
+               success: function (data) {
+                   window.location.href=url;
+               }
+           });
+       })
+    });
 </script>
 
 </body>
