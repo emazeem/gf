@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Block;
 use App\Models\User;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
@@ -40,6 +41,17 @@ class SettingsController extends Controller
         $user->save();
         return response()->json(['success'=>'Account settings are updated successfully!']);
     }
-
+    public function status(Request $request){
+        $user=User::find($request->id);
+        $user->status=$request->status;
+        $user->save();
+        return redirect()->back()->with('success','Your account is disabled successfully!');
+    }
+    public function unblock(Request $request){
+        $block=Block::where('from',$request->from)->where('to',$request->to)->first();
+        $name=$block->toUser->username;
+        $block->delete();
+        return redirect()->back()->with('success',$name.' is unblocked successfully!');
+    }
 
 }

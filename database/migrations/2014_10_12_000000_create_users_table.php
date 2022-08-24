@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('username');
             $table->string('timezone');
             $table->string('role')->default('user');
+            $table->string('status')->default('active')->comment('disable,delete');
             $table->rememberToken();
             $table->timestamps();
         });

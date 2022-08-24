@@ -5,7 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Chat;
 use App\Models\User;
-use App\Notifications\MessageNotification;
+use App\Notifications\CustomNotifications;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 
@@ -24,10 +25,11 @@ class ChatController extends Controller
         }
         $users=[];
         foreach ($data as $datum){
+            $unread=Chat::all()->where('from',$datum->id)->where('to',auth()->user()->id)->where('read_at',null)->count();
             $users[]=[
                 'id'=>$datum->id,
                 'name'=>$datum->name,
-                'online'=>1,
+                'unread'=>$unread,
                 'src'=>$datum->details->profile_image(),
             ];
         }
@@ -66,8 +68,9 @@ class ChatController extends Controller
         $chat->from=auth()->user()->id;
         $chat->save();
         $time=$chat->created_at->format('h:i A');
-        $user=User::find($request->to);
-        Notification::send($user, new MessageNotification('1 unread message from '.auth()->user()->username));
+
+        Notification::send(User::find($request->to), new CustomNotifications('1 unread message from '.auth()->user()->username,route('user.chat',[auth()->user()->id])));
+
         return response()->json($time);
     }
     /**
@@ -79,6 +82,10 @@ class ChatController extends Controller
     public function show(Request $request)
     {
         $chat=Chat::where('to',$request->user)->where('from',auth()->user()->id)->orwhere('from',$request->user)->where('to',auth()->user()->id)->get();
+        foreach ($chat as $x){
+            $x->read_at=Carbon::now()->toDateTimeString();
+            $x->save();
+        }
         $messages=[];
         $dates=[];
         foreach ($chat as $item) {

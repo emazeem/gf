@@ -20,7 +20,7 @@
                                 <li><a href="{{route('user.profile.view',[auth()->user()->username])}}"><i class="bi bi-card-list"></i> View My Profile</a></li>
                                 <li><a href="{{route('user.profile.photo')}}"><i class="bi bi-camera"></i> Edit My Photo</a></li>
                                 <li><a href="{{route('user.profile.edit',[auth()->user()->username])}}"><i class="bi bi-pencil"></i> Edit My Profile</a></li>
-                                <li><a href=""><i class="bi bi-pin-map"></i> Edit My Location</a></li>
+                                <li><a href="{{route('user.location.edit')}}"><i class="bi bi-pin-map"></i> Edit My Location</a></li>
                             </ul>
                         </div>
                     </div>

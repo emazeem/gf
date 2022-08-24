@@ -105,6 +105,20 @@
                }
            });
        })
+        $('.notification-delete').click(function (e) {
+           e.preventDefault();
+           var id=$(this).attr('data-id');
+           $.ajax({
+               url: "{{route('notification.delete')}}",
+               type: "POST",
+               data: {'id': id, _token: '{{csrf_token()}}'},
+               dataType: "JSON",
+               success: function (data) {
+                   location.reload();
+               }
+           });
+       })
+
     });
 </script>
 

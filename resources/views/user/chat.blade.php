@@ -76,8 +76,12 @@
 
                     $('.list-unstyled').empty();
                     $.each(data, function (i, v) {
-                        var online=v['online']==1?'text-success':'';
-                        $('.list-unstyled').append('<li class="user-of-chat-list '+online+'" data-id="' + v['id'] + '"><a href="#" id="chat-list-items"><img src="'+v['src']+'" class="profile-chat" alt=""><span id="full-name">'+v['name']+'</span></a></li>');
+                        var unread='';
+                        console.log(v['unread']);
+                        if (v['unread']>0){
+                            unread='<span class="label-primary">'+v['unread']+'</span>'
+                        }
+                        $('.list-unstyled').append('<li class="user-of-chat-list" data-id="' + v['id'] + '"><a href="#" id="chat-list-items"><img src="'+v['src']+'" class="profile-chat" alt=""><span id="full-name">'+v['name']+'</span>'+unread+'</a></li>');
                     });
                     if (onetimechatopen) {
                         var user_to_chat = $('.user-of-chat-list[data-id="{{$id}}"]');
@@ -481,6 +485,14 @@
         }
         .text-right{
             text-align: right;
+        }
+        span.label-primary {
+            text-align: right;
+            float: right;
+            background: black;
+            color: white;
+            border-radius: 10px;
+            padding: 0px 8px;
         }
     </style>
 @endsection

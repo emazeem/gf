@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Block extends Model
 {
     use HasFactory;
+    public function toUser(){
+        return $this->belongsTo(User::class,'to');
+    }
 }

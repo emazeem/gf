@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('from');
             $table->integer('to');
             $table->longText('message');
+            $table->dateTime('read_at')->nullable();
             $table->timestamps();
         });
     }

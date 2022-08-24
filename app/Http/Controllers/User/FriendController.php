@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Block;
 use App\Models\Friend;
 use App\Models\User;
+use App\Notifications\CustomNotifications;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class FriendController extends Controller
 {
@@ -39,6 +41,9 @@ class FriendController extends Controller
             $friends=new Friend();
             $friends->from=auth()->user()->id;
             $friends->to=$request->to;
+
+            Notification::send(User::find($request->to), new CustomNotifications(
+                    auth()->user()->username.' sent you a friend request.',route('user.profile.other',[auth()->user()->username])));
             $friends->save();
         }
         return response()->json(['success'=>'sent']);
@@ -107,6 +112,10 @@ class FriendController extends Controller
         $action=Friend::where('to',auth()->user()->id)->where('from',$request->id)->first();
         if($request->status==1){
             $action->status=$request->status;
+
+            Notification::send(User::find($request->id), new CustomNotifications(
+                auth()->user()->username.' accepted your friend request.',route('user.profile.other',[auth()->user()->username])));
+
             $action->save();
         }else{
             $action->delete();

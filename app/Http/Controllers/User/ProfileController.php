@@ -52,11 +52,7 @@ class ProfileController extends Controller
         $users=User::where('id','!=',auth()->user()->id)->where('role','user')->get();
         return view('user.home',compact('testimonials','blogs','users'));
     }
-    public function mark_as_read(Request $request){
-        $notification = auth()->user()->notifications()->find($request->id);
-        $notification->markAsRead();
-        return response()->json(true);
-    }
+
 
 
     public function view($username){

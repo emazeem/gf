@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class MessageNotification extends Notification
+class CustomNotifications extends Notification
 {
     use Queueable;
 
@@ -17,9 +17,11 @@ class MessageNotification extends Notification
      * @return void
      */
     public $notification;
-    public function __construct($notification)
+    public $route;
+    public function __construct($notification,$route)
     {
         $this->notification=$notification;
+        $this->route=$route;
         //
     }
 
@@ -32,14 +34,8 @@ class MessageNotification extends Notification
     public function via($notifiable)
     {
         return ['database'];
-    }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
+    }
 
     /**
      * Get the array representation of the notification.
@@ -52,7 +48,7 @@ class MessageNotification extends Notification
         return [
             'msg' => $this->notification,
             'from'=>auth()->user()->id,
-            'url'=>route('user.chat',[auth()->user()->id])
+            'url'=>$this->route
         ];
     }
 }

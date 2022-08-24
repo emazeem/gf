@@ -38,7 +38,12 @@ class AuthServiceProvider extends ServiceProvider
             }
             return false;
         });
-
-        //
+        Gate::define('profile-complete', function ($user) {
+            if ($user->profileCompletePercentage()<=90){
+                return false;
+            }
+            return true;
+        });
+        
     }
 }

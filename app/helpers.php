@@ -111,3 +111,29 @@ function getMutualMatch($id=null){
     $users = User::whereIn('id', $ID)->get();
     return $users;
 }
+use Illuminate\Support\Facades\DB;
+
+function NotificationFrom($id){
+    $notification=DB::table('notifications')->where('id',$id)->first();
+    $notification=json_encode($notification,true);
+    $notification=json_decode($notification,true);
+    $data=json_decode($notification['data'],true);
+    $from=$data['from'];
+    $fromUser=User::find($from);
+    return $fromUser;
+}
+use App\Models\Chat;
+function unReadMessages($id=null){
+    if (!$id){
+        $id=auth()->user()->id;
+    }
+    $unread=Chat::all()->where('to',$id)->where('read_at',null);
+    return $unread;
+}
+function getArrayFromKeyofEloquent($eloquent,$key){
+    $array=[];
+    foreach ($eloquent as $k=>$item) {
+        $array[]=$item[$key];
+    }
+    return $array;
+}
