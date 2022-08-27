@@ -14,7 +14,8 @@
                 <div class="card-body">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                            <a class="nav-item nav-link {{(Route::currentRouteName()=='settings.subscription')?'active':''}}"
+                               href="{{route('settings.subscription')}}"
                                role="tab" aria-controls="nav-home" aria-selected="true">Subscription</a>
                             <a class="nav-item nav-link {{(Route::currentRouteName()=='settings.account.show')?'active':''}}"
                             href="{{route('settings.account.show')}}">
@@ -58,10 +59,12 @@
                                 @include('user.settings.components.blocked')
                             </div>
                         @endif
-
-
+                        @if(Route::currentRouteName()=='settings.subscription')
+                            <div class="tab-pane fade active show">
+                                @include('user.settings.components.subscription')
+                            </div>
+                        @endif
                     </div>
-
                 </div>
             </div>
         </div>

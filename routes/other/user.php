@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\SettingsController;
+use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\OtherController;
 use App\Http\Controllers\User\FriendController;
 use App\Http\Controllers\User\MatchController;
@@ -41,6 +42,13 @@ Route::middleware(['auth', 'user-status', 'can:user', 'email-verification'])->gr
         //
         Route::middleware(['profile-completion-pending'])->group(function () {
             Route::prefix('settings')->group(function () {
+                Route::prefix('subscription')->group(function () {
+                    Route::get('', [SettingsController::class, 'index'])->name('settings.subscription');
+                    Route::get('gateway', [PaymentController::class, 'gateway'])->name('settings.payments.gateway');
+                    Route::get('process', [PaymentController::class, 'process'])->name('settings.payments.process');
+                    Route::post('store', [PaymentController::class, 'store'])->name('settings.payments.store');
+                });
+
                 Route::get('change-password', [SettingsController::class, 'index'])->name('settings.change.password.show');
                 Route::get('delete-account', [SettingsController::class, 'index'])->name('settings.delete.account.show');
                 Route::get('account', [SettingsController::class, 'index'])->name('settings.account.show');
@@ -89,7 +97,7 @@ Route::middleware(['auth', 'user-status', 'can:user', 'email-verification'])->gr
                 Route::post('mark-as-read', [NotificationController::class, 'mark_as_read'])->name('notification.mark.as.read');
             });
         });
-        Route::get('profile-pending', function (){
+        Route::get('profile-pending', function () {
             return view('user.profile_complete');
         })->name('user.profile.pending');
 

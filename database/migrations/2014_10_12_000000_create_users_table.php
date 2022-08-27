@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('timezone');
             $table->string('role')->default('user');
             $table->string('status')->default('active')->comment('disable,delete');
+            $table->string('stripe_customer_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
