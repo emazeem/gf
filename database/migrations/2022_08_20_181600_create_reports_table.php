@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
+            $table->integer('from');
+            $table->integer('to');
+            $table->string('type');
+            $table->string('description');
             $table->timestamps();
         });
     }

@@ -137,3 +137,19 @@ function getArrayFromKeyofEloquent($eloquent,$key){
     }
     return $array;
 }
+use App\Models\Block;
+function blockedUserFilter($users){
+    $blocked=Block::where('from',auth()->user()->id)->get();
+    $bFROM=getArrayFromKeyofEloquent($blocked,'to');
+    $blocked=Block::where('to',auth()->user()->id)->get();
+    $bTO=getArrayFromKeyofEloquent($blocked,'from');
+    $BID=array_merge($bFROM,$bTO);
+    return $users->whereNotIn('id',$BID);
+}
+function ifUserInBlockList($id){
+    $blocked=Block::where('from',$id)->orwhere('to',$id)->get()->count();
+    if ($blocked>0){
+        return true;
+    }
+    return false;
+}

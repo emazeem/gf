@@ -23,6 +23,7 @@ class ChatController extends Controller
         }else{
             $data=User::all()->where('id','!=',auth()->user()->id);
         }
+        $data=blockedUserFilter($data);
         $users=[];
         foreach ($data as $datum){
             $unread=Chat::all()->where('from',$datum->id)->where('to',auth()->user()->id)->where('read_at',null)->count();

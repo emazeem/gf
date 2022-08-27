@@ -12,13 +12,8 @@ class SearchController extends Controller
     //
     public function show(Request $request)
     {
-        $blocked=Block::where('from',auth()->user()->id)->get();
-        $bFROM=getArrayFromKeyofEloquent($blocked,'to');
-        $blocked=Block::where('to',auth()->user()->id)->get();
-        $bTO=getArrayFromKeyofEloquent($blocked,'from');
-        $BID=array_merge($bFROM,$bTO);
 
-        $users = User::where('role', 'user')->whereNotIn('id',$BID);
+        $users = User::where('role', 'user');
         $key = null;
         $requests = [];
         if ($request->all()) {
@@ -112,6 +107,8 @@ class SearchController extends Controller
             }
         }
         $users = $users->get();
+        $users=blockedUserFilter($users);
+        
         return view('user.search', compact('users', 'key', 'requests'));
     }
 }

@@ -5,13 +5,20 @@
     <main id="main" style="margin-top: 70px">
         <div class="cover-photo " style="background-image: url('{{$user->details->cover_image()}}');">
             <div class="btn-group">
-                <button type="button" class="btn btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
                     <i class="bi bi-camera"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" onclick="changeCoverPhoto()"><i class="bi bi-camera"></i> <small>Change Cover Photo</small></a>
-                    <a class="dropdown-item" onclick="changeProfilePhoto()"><i class="bi bi-camera"></i> <small>Change Profile Photo</small></a>
-                    <a class="dropdown-item" onclick="deleteCoverPhoto()"><i class="bi bi-trash"></i> <small>Delete Cover Photo</small></a>
+                    <a class="dropdown-item" onclick="changeCoverPhoto()"><i class="bi bi-camera"></i>
+                        <small>Change Cover Photo</small>
+                    </a>
+                    <a class="dropdown-item" onclick="changeProfilePhoto()"><i class="bi bi-camera"></i>
+                        <small>Change Profile Photo</small>
+                    </a>
+                    <a class="dropdown-item" onclick="deleteCoverPhoto()"><i class="bi bi-trash"></i>
+                        <small>Delete Cover Photo</small>
+                    </a>
                 </div>
                 <form id="profile_form">
                     @csrf
@@ -50,16 +57,15 @@
                             <b>About Me -</b> {{$user->details->about_me}}
                             <br>
                             <?php
-                                if ($user->details->dob){
-                                    $fdate = $user->details->dob;
-                                    $tdate = date('Y-m-d');
-                                    $datetime1 = strtotime($fdate); // convert to timestamps
-                                    $datetime2 = strtotime($tdate); // convert to timestamps
-                                    $days = (int)(($datetime2 - $datetime1)/86400/365);
-                                }
-                                else{
-                                    $days=null;
-                                }
+                            if ($user->details->dob) {
+                                $fdate = $user->details->dob;
+                                $tdate = date('Y-m-d');
+                                $datetime1 = strtotime($fdate); // convert to timestamps
+                                $datetime2 = strtotime($tdate); // convert to timestamps
+                                $days = (int)(($datetime2 - $datetime1) / 86400 / 365);
+                            } else {
+                                $days = null;
+                            }
                             ?>
                             <b>Quick Stats -</b> {{$days}}, , live in {{$user->details->location}}
                         </div>
@@ -72,38 +78,44 @@
                             <h3>My Hobbies</h3>
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->hobbies) as $hobby)
-                                    @if($hobby)<li class="active">{{$hobby}}</li>@endif
+                                    @if($hobby)
+                                        <li class="active">{{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
                             <h3>Sports</h3>
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->sports) as $hobby)
-                                    @if($hobby)<li class="active">{{$hobby}}</li>@endif
+                                    @if($hobby)
+                                        <li class="active">{{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
                             <h3>Fitness/Outdoors</h3>
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->fitness) as $hobby)
-                                    @if($hobby)<li class="active">{{$hobby}}</li>@endif
+                                    @if($hobby)
+                                        <li class="active">{{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
                             <h3>Entertainment / Going Out</h3>
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->entertainment) as $hobby)
-                                    @if($hobby)<li class="active">{{$hobby}}</li>@endif
+                                    @if($hobby)
+                                        <li class="active">{{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
                             <h3>Movies</h3>
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->movies) as $hobby)
-                                    @if($hobby)<li class="active">{{$hobby}}</li>@endif
+                                    @if($hobby)
+                                        <li class="active">{{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
 
                             <h3>Music</h3>
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->music) as $hobby)
-                                    @if($hobby)<li class="active">{{$hobby}}</li>@endif
+                                    @if($hobby)
+                                        <li class="active">{{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
 
@@ -187,19 +199,21 @@
         </div>
     </main>
     <style>
-        .cover-photo{
+        .cover-photo {
             height: 300px;
             background-position: center;
             z-index: -100;
             background-size: cover;
         }
+
         .profile-picture {
             border-radius: 50%;
             height: 150px;
             width: 150px;
             margin-top: -75px;
         }
-        td.c-bg{
+
+        td.c-bg {
             background-color: #ec6d70;
         }
     </style>
@@ -207,57 +221,116 @@
         function changeProfilePhoto() {
             $('#profile').click();
         }
+
         function changeCoverPhoto() {
             $('#cover').click();
         }
 
         $(function () {
-           $(document).on('change','#profile',function (e) {
-              $('#profile_form').submit();
-              $('#profile').val('');
-           });
-           $(document).on('change','#cover',function (e) {
-              $('#cover_form').submit();
-              $('#cover').val('');
-           });
+            $(document).on('change', '#profile', function (e) {
+                $('#profile_form').submit();
+                $('#profile').val('');
+            });
+            $(document).on('change', '#cover', function (e) {
+                $('#cover_form').submit();
+                $('#cover').val('');
+            });
 
-           $(document).on('submit','#profile_form',function (e) {
-              e.preventDefault();
-               $.ajax({
-                   type: "POST",
-                   url: "{{route('user.profile')}}",
-                   data: new FormData(this),
-                   dataType: 'JSON',
-                   processData: false,
-                   contentType: false,
-                   cache: false,
-                   success: function (data) {
-                       $('.profile-picture').attr('src',data.profile);
-                   },
-                   error: function (xhr) {
-                       erroralert(xhr);
-                   }
-               });
-           });
-            $(document).on('submit','#cover_form',function (e) {
-              e.preventDefault();
-               $.ajax({
-                   type: "POST",
-                   url: "{{route('user.cover')}}",
-                   data: new FormData(this),
-                   dataType: 'JSON',
-                   processData: false,
-                   contentType: false,
-                   cache: false,
-                   success: function (data) {
-                       $('.cover-photo').css('background-image','url('+data.profile+')');
-                   },
-                   error: function (xhr) {
-                       erroralert(xhr);
-                   }
-               });
-           });
-
+            $(document).on('submit', '#profile_form', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "{{route('user.profile')}}",
+                    data: new FormData(this),
+                    dataType: 'JSON',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (data) {
+                        $('.profile-picture').attr('src', data.profile);
+                    },
+                    error: function (xhr) {
+                        erroralert(xhr);
+                    }
+                });
+            });
+            $(document).on('submit', '#cover_form', function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "{{route('user.cover')}}",
+                    data: new FormData(this),
+                    dataType: 'JSON',
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (data) {
+                        $('.cover-photo').css('background-image', 'url(' + data.profile + ')');
+                    },
+                    error: function (xhr) {
+                        erroralert(xhr);
+                    }
+                });
+            });
+            
+            $(document).on('click','.report-user',function (e) {
+                alert(1);
+                e.preventDefault();
+                alert(1);
+                var id = $(this).attr('data-id');
+                $('#abuse_to').val(id);
+                $('#abuse_modal').modal('show');
+            })
         });
     </script>
+    <div class="modal fade" id="abuse-modal" tabindex="-1" role="dialog"
+         aria-labelledby="update-social-info-modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="update-social-info-modalLabel"><i class="bi bi-flag"></i>Report Abuse
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="social_info_form">
+                    @csrf
+                    <input type="text" name="id" id="abuse_to">
+                    <h6>We take all abuse reports seriously! The user will never know you reported them.</h6>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="type">Type of Abuse</label>
+                                    <select name="type" id="type" class="form-control">
+                                        <option value="" hidden>(select)</option>
+                                        <option value="Man">Male User</option>
+                                        <option value="Spam">Spam / Scam / Asking for Money</option>
+                                        <option value="Abuse">Abuse / Harassment</option>
+                                        <option value="Inappropriate">Inappropriate Content / Pictures</option>
+                                        <option value="Licensed">Licensed Material</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <input type="text" class="form-control"
+                                           value=""
+                                           name="description" id="description">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer share-post-button">
+                        <button type="button" data-dismiss="modal">Close</button>
+                        <button type="submit">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 @endsection
