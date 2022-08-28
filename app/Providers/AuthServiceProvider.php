@@ -44,6 +44,13 @@ class AuthServiceProvider extends ServiceProvider
             }
             return true;
         });
+        Gate::define('if-user-upgraded', function ($user) {
+            if ($user->stripe_customer_id){
+                return true;
+            }
+            return true;
+            return false;
+        });
 
     }
 }

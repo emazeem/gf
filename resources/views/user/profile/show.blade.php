@@ -51,6 +51,21 @@
         </div>
         <div class="container mt-4">
             <div class="row">
+                @can('if-user-upgraded')
+                <div class="col-md-12 mb-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="c-color">Additional VIP Photos</h4>
+                        </div>
+                        <div class="card-body">
+                            
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{route('user.album.manage')}}">Edit or Add Photos to Your Profile Here.</a>
+                        </div>
+                    </div>
+                </div>
+                @endcan
                 <div class="col-md-9 col-12">
                     <div class="card">
                         <div class="card-body">

@@ -6,6 +6,7 @@ use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\SettingsController;
 use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\OtherController;
+use App\Http\Controllers\User\AlbumController;
 use App\Http\Controllers\User\FriendController;
 use App\Http\Controllers\User\MatchController;
 use App\Http\Controllers\User\BlockController;
@@ -68,6 +69,12 @@ Route::middleware(['auth', 'user-status', 'can:user', 'email-verification'])->gr
             Route::group(['prefix' => 'other'], function () {
                 Route::get('member/profile/show/{username}', [OtherController::class, 'show'])->name('user.profile.other');
             });
+            Route::group(['prefix' => 'album'], function () {
+                Route::get('manage', [AlbumController::class, 'index'])->name('user.album.manage');
+                Route::get('add-photos', [AlbumController::class, 'index'])->name('user.album.add');
+                Route::get('store', [AlbumController::class, 'store'])->name('user.album.store');
+            });
+
             Route::group(['prefix' => 'friends'], function () {
                 Route::get('', [FriendController::class, 'show'])->name('friend.show');
                 Route::post('send-request', [FriendController::class, 'send_request'])->name('friend.send.request');

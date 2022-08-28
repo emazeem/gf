@@ -81,7 +81,10 @@
                         if (v['unread']>0){
                             unread='<span class="label-primary">'+v['unread']+'</span>'
                         }
-                        $('.list-unstyled').append('<li class="user-of-chat-list" data-id="' + v['id'] + '"><a href="#" id="chat-list-items"><img src="'+v['src']+'" class="profile-chat" alt=""><span id="full-name">'+v['name']+'</span>'+unread+'</a></li>');
+                        $('.list-unstyled').append('<li class="user-of-chat-list" data-id="' + v['id'] + '">' +
+                            '<a href="#" id="chat-list-items"><img src="'+v['src']+'" class="profile-chat" alt="">' +
+                            '<span id="full-name">'+v['name']+'</span><small class="text-muted">'+v['last_login']+'</small>'+unread+'</a>' +
+                            '</li>');
                     });
                     if (onetimechatopen) {
                         var user_to_chat = $('.user-of-chat-list[data-id="{{$id}}"]');

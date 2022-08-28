@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('role')->default('user');
             $table->string('status')->default('active')->comment('disable,delete');
             $table->string('stripe_customer_id')->nullable();
+            $table->dateTime('last_login')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

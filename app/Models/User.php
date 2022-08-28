@@ -55,4 +55,7 @@ class User extends Authenticatable
         }
         return (int)(count(array_filter($array))/count($array)*100);
     }
+    protected $dates = [
+        'last_login'
+    ];
 }

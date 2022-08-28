@@ -1,6 +1,8 @@
 @extends('user.layouts.master')
 @section('content')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="{{asset('user/css/toast.css')}}">
     <script src="{{asset('user/js/toast.js')}}"></script>
     <main id="main">
         <div class="container">

@@ -18,6 +18,33 @@
                         </div>
                     </div>
                 </div>
+
+
+                <div class="col-md-3">
+                    <div class="card text-light" style="background: rgba(6,6,6,0.56)">
+                        <div class="card-body">
+                            <p class="m-0"><b>Friends :</b> {{count(friendRequestsReceived($user->id))}}</p>
+                            @can('if-user-upgraded')
+                                <h6>VIP Info</h6>
+                                <p class="m-0"><b>Profile Views
+                                        :</b> {{\App\Models\ProfileView::where('view_to',$user->id)->get()->count()}}
+                                </p>
+                                <p class="m-0"><b>Last Login : </b> {{$user->last_login}}</p>
+                                <p class="m-0"><b>Last update : </b> {{$user->last_login}}</p>
+                                <p class="m-0"><b>Joined : </b> {{$user->created_at->format('F d, Y')}}</p>
+                            @endcan
+                            @cannot('if-user-upgraded')
+                                <div class="d-flex justify-content-center p-3">
+                                    <div class="text-center">
+                                        <p class="m-0"><b>Want to see when {{$user->username}}<br> last logged in?</p>
+                                        <a class="btn btn-danger mt-3 c-bg" href="{{route('settings.subscription')}}">UPGRADE</a>
+                                    </div>
+                                </div>
+                             @endcannot
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="col-md-12">
                 <img class="profile-picture" src="{{$user->details->profile_image()}}" alt="profile-picture">
@@ -38,15 +65,14 @@
                             <b>About Me -</b> {{$user->details->about_me}}
                             <br>
                             <?php
-                            if ($user->details->dob){
+                            if ($user->details->dob) {
                                 $fdate = $user->details->dob;
                                 $tdate = date('Y-m-d');
                                 $datetime1 = strtotime($fdate); // convert to timestamps
                                 $datetime2 = strtotime($tdate); // convert to timestamps
-                                $days = (int)(($datetime2 - $datetime1)/86400/365);
-                            }
-                            else{
-                                $days=null;
+                                $days = (int)(($datetime2 - $datetime1) / 86400 / 365);
+                            } else {
+                                $days = null;
                             }
                             ?>
                             <b>Quick Stats -</b> {{$days}}, , live in {{$user->details->location}}
@@ -60,38 +86,44 @@
                             <h3>My Hobbies</h3>
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->hobbies) as $hobby)
-                                    @if($hobby)<li class="active">{{$hobby}}</li>@endif
+                                    @if($hobby)
+                                        <li class="active">{{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
                             <h3>Sports</h3>
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->sports) as $hobby)
-                                    @if($hobby)<li class="active">{{$hobby}}</li>@endif
+                                    @if($hobby)
+                                        <li class="active">{{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
                             <h3>Fitness/Outdoors</h3>
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->fitness) as $hobby)
-                                    @if($hobby)<li class="active">{{$hobby}}</li>@endif
+                                    @if($hobby)
+                                        <li class="active">{{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
                             <h3>Entertainment / Going Out</h3>
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->entertainment) as $hobby)
-                                    @if($hobby)<li class="active">{{$hobby}}</li>@endif
+                                    @if($hobby)
+                                        <li class="active">{{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
                             <h3>Movies</h3>
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->movies) as $hobby)
-                                    @if($hobby)<li class="active">{{$hobby}}</li>@endif
+                                    @if($hobby)
+                                        <li class="active">{{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
 
                             <h3>Music</h3>
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->music) as $hobby)
-                                    @if($hobby)<li class="active">{{$hobby}}</li>@endif
+                                    @if($hobby)
+                                        <li class="active">{{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
 
@@ -162,19 +194,21 @@
         </div>
     </main>
     <style>
-        .cover-photo{
+        .cover-photo {
             height: 300px;
             background-position: center;
             z-index: -100;
             background-size: cover;
         }
+
         .profile-picture {
             border-radius: 50%;
             height: 150px;
             width: 150px;
             margin-top: -30px;
         }
-        td.c-bg{
+
+        td.c-bg {
             background-color: #ec6d70;
         }
     </style>
@@ -184,7 +218,7 @@
 
         });
         $(document).on('click', '.add-as-friend', function () {
-            var button = $(this), previous =$(this).html();
+            var button = $(this), previous = $(this).html();
             button.attr('disabled', 'disabled').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing ...');
             var to = $(this).attr('data-to');
             $.ajax({
@@ -203,7 +237,7 @@
             });
         });
         $(document).on('click', '.block', function () {
-            var button = $(this), previous =$(this).html();
+            var button = $(this), previous = $(this).html();
             button.attr('disabled', 'disabled').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing ...');
             var to = $(this).attr('data-id');
             $.ajax({
@@ -223,7 +257,7 @@
         });
 
         $(document).on('click', '.cancel-friend-request', function () {
-            var button = $(this), previous =$(this).html();
+            var button = $(this), previous = $(this).html();
             button.attr('disabled', 'disabled').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing ...');
             var id = $(this).attr('data-id');
             $.ajax({
@@ -250,7 +284,7 @@
             if ($(this).hasClass('decline')) {
                 status = '{{Friends::STATUS_REJECTED}}'
             }
-            var button = $(this), previous =$(this).html();
+            var button = $(this), previous = $(this).html();
             button.attr('disabled', 'disabled').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing ...');
 
             $.ajax({
@@ -269,7 +303,7 @@
             });
         });
         $(document).on('click', '.remove-friend', function () {
-            var button = $(this), previous =$(this).html();
+            var button = $(this), previous = $(this).html();
             button.attr('disabled', 'disabled').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing ...');
             var id = $(this).attr('data-id');
             $.ajax({
@@ -287,6 +321,7 @@
                 }
             });
         });
+
         function showControls(id) {
             $.ajax({
                 type: "POST",

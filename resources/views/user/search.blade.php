@@ -152,13 +152,16 @@
                                     <div class="col-md-3 d-flex rounded-3 gf-members-thumbnail img-thumbnail align-items-center"
                                          onclick="window.location.href='{{route('user.profile.other',[$user->username])}}'">
                                         <div>
-                                            <img src="{{$user->details->profile_image()}}" alt="" width="100"
-                                                 class="img-fluid rounded-3 gf-members-thumbnail">
+                                            <img src="{{$user->details->profile_image()}}" alt="" width="140"
+                                                 class="img-fluid gf-members-thumbnail p-2 rounded-3">
                                         </div>
                                         <div>
                                             <h6 class=" c-color">{{$user->name}}</h6>
                                             <p class="m-0">{{$user->username}}</p>
                                             <p class="m-0">{{getUserAge($user->id)}} Years old</p>
+                                            @if(\App\Models\Chat::where('from',auth()->user()->id)->where('to',$user->id)->get()->count()>0)
+                                                <p><i class="bi bi-star-fill text-warning"></i> Messaged</p>
+                                            @endif
                                         </div>
                                     </div>
                                 @endforeach

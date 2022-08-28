@@ -141,7 +141,7 @@
                         <li><a href="{{route('user.profile.edit',[auth()->user()->username])}}">Edit Profile</a></li>
                         <li><a href="{{route('user.profile.photo')}}">Edit My Photo</a></li>
                         <li><a href="{{route('user.location.edit')}}">Edit Location</a></li>
-                        <li><a href="#">Subscription</a></li>
+                        <li><a href="{{route('settings.subscription')}}">Subscription</a></li>
                         <li><a href="{{route('settings.account.show')}}">Account Settings</a></li>
                         <li><a href="{{route('settings.block.members.show')}}">Blocked Members</a></li>
                         <li><a href="{{route('settings.email.notification.show')}}">Email Notifications</a></li>
