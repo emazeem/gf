@@ -25,6 +25,8 @@
                                             <div class="card-field-inner">
                                                 <div class="card-field-single">
                                                     <div class="card-field-single-row">
+                                                        <input type="hidden" id="package"
+                                                               name="product" value="{{$package['id']}}">
                                                         <input type="hidden" id="expiration_year"
                                                                name="expiration_year">
                                                         <input type="hidden" id="expiration_month"

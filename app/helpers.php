@@ -188,10 +188,5 @@ function ifUserInBlockList($id)
 }
 
 function getPackageDetails($id){
-    $packages[1]=['type' => 'Gold Membership', 'price'=>'9.99', 'duration'=>'1 Month', 'save'=>null];
-    $packages[2]=['type' => 'Gold Membership', 'price'=>'8.31', 'duration'=>'3 Month', 'save'=>'5'];
-    $packages[3]=['type' => 'Gold Membership', 'price'=>'7.65', 'duration'=>'6 Month', 'save'=>'13'];
-    $packages[4]=['type' => 'Gold Membership', 'price'=>'6.65', 'duration'=>'12 Month', 'save'=>'40'];;
-    $packages[5]=['type' => 'Diamond Membership', 'price'=>'150', 'duration'=>'Lifetime','save'=>null];
-    return $packages[$id];
+    return \App\Models\Product::find($id);
 }

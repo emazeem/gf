@@ -52,19 +52,37 @@
         <div class="container mt-4">
             <div class="row">
                 @can('if-user-upgraded')
-                <div class="col-md-12 mb-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="c-color">Additional VIP Photos</h4>
-                        </div>
-                        <div class="card-body">
-                            
-                        </div>
-                        <div class="card-footer">
-                            <a href="{{route('user.album.manage')}}">Edit or Add Photos to Your Profile Here.</a>
+                    <div class="col-md-12 mb-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="c-color">Additional VIP Photos</h4>
+                            </div>
+                            <div class="card-body">
+                                @foreach(auth()->user()->album as $album)
+                                    <div class="col-md-3 border rounded-3 p-2">
+                                        <div >
+                                            <center>
+                                                <img src="{{Storage::disk('local')->url('/album/'.$album->image)}}"
+                                                     class="img-fluid" style="height: 150px" alt="">
+                                            </center>
+                                        </div>
+                                        <div>
+                                            <h5>
+                                                {{$album->title}}
+                                            </h5>
+                                            <p class="text-sm text-muted">
+                                                {{$album->created_at->format('d F,y h:i A')}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{route('user.album.manage')}}">Edit or Add Photos to Your Profile Here.</a>
+                            </div>
                         </div>
                     </div>
-                </div>
                 @endcan
                 <div class="col-md-9 col-12">
                     <div class="card">
@@ -287,8 +305,8 @@
                     }
                 });
             });
-            
-            $(document).on('click','.report-user',function (e) {
+
+            $(document).on('click', '.report-user', function (e) {
                 alert(1);
                 e.preventDefault();
                 alert(1);

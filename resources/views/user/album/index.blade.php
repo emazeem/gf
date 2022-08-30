@@ -14,8 +14,8 @@
                             <a class="nav-item nav-link {{(Route::currentRouteName()=='user.album.manage')?'active':''}}"
                                href="{{route('user.album.manage')}}"
                                role="tab" aria-controls="nav-home" aria-selected="true">My Albums</a>
-                            <a class="nav-item nav-link {{(Route::currentRouteName()=='user.album.manage')?'active':''}}"
-                               href="{{route('user.album.manage')}}">
+                            <a class="nav-item nav-link {{(Route::currentRouteName()=='user.album.add')?'active':''}}"
+                               href="{{route('user.album.add')}}">
                                 Add New Photos</a>
                         </div>
                     </nav>

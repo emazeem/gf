@@ -1,3 +1,10 @@
+<?php
+$packages=\App\Models\Product::all();
+$products=[];
+foreach ($packages as $package){
+    $products[$package->id]=$package;
+}
+?>
 <div class="col-md-12 mt-md-5">
     <div class="card">
         <div class="card-body">
@@ -22,35 +29,34 @@
                     <h6 class="c-color">Gold Membership - Monthly plans</h6>
                     <div class="row">
                         <div class="col-md-3 text-center">
-                            <div class="border pt-5 pb-5 rounded px-3 package position-relative" data-package="4">
-                                <span>Save $40</span>
-                                <h3>$6.65/mo</h3>
-                                <p>12 Month Plan</p>
+                            <div class="border pt-5 pb-5 rounded px-3 package position-relative" data-package="{{$products[4]['id']}}">
+                                <span>Save ${{$products[4]['save']}}</span>
+                                <h3>${{$products[4]['price']}}/mo</h3>
+                                <p>{{$products[4]['duration']}} Month Plan</p>
                                 <p>$79.80 Yearly</p>
                             </div>
                         </div>
                         <div class="col-md-3 text-center">
-                            <div class="border pt-5 pb-5 rounded px-3 package position-relative" data-package="3">
-                                <span>Save $13</span>
-                                <h3>$7.65/mo</h3>
-                                <p>6 Month Plan</p>
+                            <div class="border pt-5 pb-5 rounded px-3 package position-relative" data-package="{{$products[4]['id']}}">
+                                <span>Save ${{$products[3]['save']}}</span>
+                                <h3>${{$products[3]['price']}}/mo</h3>
+                                <p>{{$products[3]['duration']}} Month Plan</p>
                                 <p>$45.95 Half Year</p>
                             </div>
                         </div>
                         <div class="col-md-3 text-center">
-                            <div class="border pt-5 pb-5 rounded px-3 package position-relative" data-package="2">
-                                <span>Save $5</span>
-                                <h3>$8.31/mo</h3>
-                                <p>3 Month Plan</p>
+                            <div class="border pt-5 pb-5 rounded px-3 package position-relative" data-package="{{$products[2]['id']}}">
+                                <span>Save ${{$products[2]['save']}}</span>
+                                <h3>${{$products[2]['price']}}/mo</h3>
+                                <p>{{$products[2]['duration']}} Month Plan</p>
                                 <p>$24.95 Quarterly</p>
                             </div>
                         </div>
                         <div class="col-md-3 text-center">
-                            <div class="border pt-5 pb-5 rounded px-3 package active position-relative"
-                                 data-package="1">
+                            <div class="border pt-5 pb-5 rounded px-3 package active position-relative" data-package="{{$products[1]['id']}}">
                                 <span>Try it out</span>
-                                <h3>$9.99/mo</h3>
-                                <p>1 Month Plan</p>
+                                <h3>${{$products[1]['price']}}/mo</h3>
+                                <p>{{$products[1]['duration']}} Month Plan</p>
                                 <p>$9.99 Monthly</p>
                             </div>
                         </div>
@@ -58,8 +64,8 @@
                     <h6 class="c-color mt-5">Lifetime Diamond Membership</h6>
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <div class="border pt-5 pb-5 rounded px-3 package position-relative" data-package="5">
-                                <h3>$150.00/one time</h3>
+                            <div class="border pt-5 pb-5 rounded px-3 package position-relative" data-package="{{$products[5]['id']}}">
+                                <h3>${{$products[5]['price']}}/one time</h3>
                                 <p>Lifetime Membership</p>
                                 <p>$150.00 Includes Tax</p>
                             </div>

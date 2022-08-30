@@ -72,7 +72,8 @@ Route::middleware(['auth', 'user-status', 'can:user', 'email-verification'])->gr
             Route::group(['prefix' => 'album'], function () {
                 Route::get('manage', [AlbumController::class, 'index'])->name('user.album.manage');
                 Route::get('add-photos', [AlbumController::class, 'index'])->name('user.album.add');
-                Route::get('store', [AlbumController::class, 'store'])->name('user.album.store');
+                Route::post('store', [AlbumController::class, 'store'])->name('user.album.store');
+                Route::post('delete', [AlbumController::class, 'delete'])->name('user.album.delete');
             });
 
             Route::group(['prefix' => 'friends'], function () {

@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.0",
+        "srmklive/paypal": "^3.0",
         "yajra/laravel-datatables-oracle": "^9.15"
     },
     "require-dev": {

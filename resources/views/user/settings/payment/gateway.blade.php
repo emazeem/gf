@@ -12,7 +12,7 @@
 
                     <h5 class="c-color">{{$package['type']}}</h5>
                     <h6>You have selected the upgrade of: ${{$package['price']}} @if($package['duration']!='Lifetime') /mo @endif</h6>
-                    <h6>Total Duration : {{$package['duration']}}</h6>
+                    <h6>Total Duration : {{$package['duration']}} </h6>
                 </div>
                 <div class="card-footer">
                     <form action="{{route('settings.payments.process')}}">
