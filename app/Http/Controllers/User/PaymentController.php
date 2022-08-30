@@ -23,6 +23,12 @@ class PaymentController extends Controller
         $package = Product::find($request->package);
         return view('user.settings.payment.process', compact('package'));
     }
+    public function after_payment($response)
+    {
+        dd($response);
+        return view('user.settings.payment.process', compact('package'));
+    }
+
 
     public function store(Request $request)
     {

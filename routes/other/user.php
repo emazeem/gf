@@ -5,6 +5,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\SettingsController;
 use App\Http\Controllers\User\PaymentController;
+use App\Http\Controllers\User\PayPalController;
 use App\Http\Controllers\User\OtherController;
 use App\Http\Controllers\User\AlbumController;
 use App\Http\Controllers\User\FriendController;
@@ -47,7 +48,12 @@ Route::middleware(['auth', 'user-status', 'can:user', 'email-verification'])->gr
                     Route::get('', [SettingsController::class, 'index'])->name('settings.subscription');
                     Route::get('gateway', [PaymentController::class, 'gateway'])->name('settings.payments.gateway');
                     Route::get('process', [PaymentController::class, 'process'])->name('settings.payments.process');
-                    Route::post('store', [PaymentController::class, 'store'])->name('settings.payments.store');
+                    Route::get('process/{success}', [PaymentController::class, 'after_payment'])->name('payment.success');
+                    Route::get('process/{cancel}', [PaymentController::class, 'after_payment'])->name('payment.cancel');
+                    Route::prefix('paypal-payment')->group(function () {
+                        Route::post('store', [PayPalController::class, 'processPayPal'])->name('processPayPal');
+                    });
+
                 });
 
                 Route::get('change-password', [SettingsController::class, 'index'])->name('settings.change.password.show');

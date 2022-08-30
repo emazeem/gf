@@ -5,99 +5,17 @@
     <link rel="stylesheet" href="{{asset('user/css/toast.css')}}">
     <script src="{{asset('user/js/toast.js')}}"></script>
     <main id="main">
+
         <div class="container">
             <div class="card mt-2">
                 <div class="card-header">
                     <h4>Checkout Details</h4>
+                    @if(Session::has('error'))
+                        <div class="alert alert-danger">{{Session::get('error')}}</div>
+                    @endif
                 </div>
                 <div class="card-body">
-
-
-                    <form id="payment-form"
-                          class="require-validation"
-                          data-cc-on-file="false"
-                          data-stripe-publishable-key="{{ env('STRIPE_PUBLISH_KEY') }}">
-                        <div class="cart-order-card-content">
-                            <div class="cart-order-card-content-inner">
-                                <div class="cart-order-new-card">
-                                    <div class="cart-order-new-card-inner">
-                                        <div class="card-field-outer">
-                                            <div class="card-field-inner">
-                                                <div class="card-field-single">
-                                                    <div class="card-field-single-row">
-                                                        <input type="hidden" id="package"
-                                                               name="product" value="{{$package['id']}}">
-                                                        <input type="hidden" id="expiration_year"
-                                                               name="expiration_year">
-                                                        <input type="hidden" id="expiration_month"
-                                                               name="expiration_month">
-                                                        <input type="hidden" id="card_type"
-                                                               name="card_type">
-                                                        @csrf
-                                                        <input type="hidden"
-                                                               name="store"
-                                                               value="0">
-                                                        <div class="card-single-field">
-                                                            <label for="field-01">Card
-                                                                Number</label>
-                                                            <input type="text"
-                                                                   class="card-field-input card-number form-control"
-                                                                   name="card_number"
-                                                                   id="card_number"
-                                                                   placeholder="0000 0000 000 0000">
-                                                            <span class='icon'>
-                                                                                <span class="ti-credit-card"></span>
-                                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-field-single-row rows">
-                                                        <div class="card-single-field mr-2">
-                                                            <label for="field-01">Expiry Date</label>
-                                                            <input type="text" id="month_year"
-                                                                   class="card-field-input  form-control"
-                                                                   placeholder="MM/YY" maxlength="5">
-                                                            <span class='icon'>
-                                                                                <span class="ti-calendar"></span>
-                                                                            </span>
-                                                        </div>
-                                                        <div class="card-single-field">
-                                                            <label for="field-01">CVC/CV</label>
-                                                            <input type="text"
-                                                                   class="card-field-input card-cvc form-control"
-                                                                   placeholder="..."
-                                                                   name="cvc"
-                                                                   id="cvc" maxlength="4">
-                                                            <span class='icon'>
-                                                                                                        <span class="ti-info-alt"></span> </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-field-single-row">
-                                                        <div class="card-single-field">
-                                                            <label for="field-01">Card
-                                                                Holder
-                                                                Name</label>
-                                                            <input type="text"
-                                                                   class="card-field-input form-control"
-                                                                   name="full_name"
-                                                                   id="full_name"
-                                                                   placeholder="Enter Card Holder's Full Name">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="cart-order-card-action">
-                            <div class="cart-order-card-action-inner">
-                                <button type="submit" id="save-card-btn" class="btn mt-2 btn-primary"> Add Card</button>
-                            </div>
-                        </div>
-                    </form>
-
-
+                    <div id="paypal-button-container"></div>
                 </div>
             </div>
         </div>
@@ -108,8 +26,42 @@
         $(":input").inputmask();
         $("#month_year").inputmask({"mask": "99/99"});
     </script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AVCjpmwfZivYOE2OXTG1yRd8FokNrnixQ13CDXhMELxHxoHHEs3FRnU9fn2F1gJVKtdNUNLfu1vL_toJ&currency=USD"></script>
 
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script>
+
+        paypal.Buttons({
+            // Sets up the transaction when a payment button is clicked
+            createOrder: (data, actions) => {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '77.44' // Can also reference a variable or function
+                        }
+                    }]
+                });
+            },
+            // Finalize the transaction after payer approval
+            onApprove: (data, actions) => {
+                return actions.order.capture().then(function(orderData) {
+                    // Successful capture! For dev/demo purposes:
+                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    const transaction = orderData.purchase_units[0].payments.captures[0];
+                    alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+                });
+            }
+        }).render('#paypal-button-container');
+
+    </script>
+
+
+
+
+
+
+
+
+{{--    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <script type="text/javascript">
         $(function () {
             var $form = $("#payment-form");
@@ -206,5 +158,5 @@
                 }
             }
         });
-    </script>
+    </script>--}}
 @endsection
