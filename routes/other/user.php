@@ -48,12 +48,7 @@ Route::middleware(['auth', 'user-status', 'can:user', 'email-verification'])->gr
                     Route::get('', [SettingsController::class, 'index'])->name('settings.subscription');
                     Route::get('gateway', [PaymentController::class, 'gateway'])->name('settings.payments.gateway');
                     Route::get('process', [PaymentController::class, 'process'])->name('settings.payments.process');
-                    Route::get('process/{success}', [PaymentController::class, 'after_payment'])->name('payment.success');
-                    Route::get('process/{cancel}', [PaymentController::class, 'after_payment'])->name('payment.cancel');
-                    Route::prefix('paypal-payment')->group(function () {
-                        Route::post('store', [PayPalController::class, 'processPayPal'])->name('processPayPal');
-                    });
-
+                    Route::post('process/store', [PaymentController::class, 'after_payment'])->name('payment.success');
                 });
 
                 Route::get('change-password', [SettingsController::class, 'index'])->name('settings.change.password.show');

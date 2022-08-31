@@ -16,8 +16,7 @@
                 </div>
                 <div class="card-footer">
                     <form action="{{route('settings.payments.process')}}">
-                        <input type="hidden" value="{{$id}}" name="package">
-                        <button class="btn btn-lg btn-success">Pay with Stripe</button>
+                        <button class="btn btn-lg btn-success">Pay with PayPal</button>
                     </form>
                 </div>
             </div>

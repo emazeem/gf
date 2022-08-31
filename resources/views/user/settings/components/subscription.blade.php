@@ -26,58 +26,24 @@ foreach ($packages as $package){
                     <h4 class="c-color">Change your Upgraded Plan to a New Version?</h4>
                 </div>
                 <div class="card-body">
-                    <h6 class="c-color">Gold Membership - Monthly plans</h6>
                     <div class="row">
+                        @foreach(\App\Models\Product::all() as $product)
                         <div class="col-md-3 text-center">
-                            <div class="border pt-5 pb-5 rounded px-3 package position-relative" data-package="{{$products[4]['id']}}">
-                                <span>Save ${{$products[4]['save']}}</span>
-                                <h3>${{$products[4]['price']}}/mo</h3>
-                                <p>{{$products[4]['duration']}} Month Plan</p>
-                                <p>$79.80 Yearly</p>
+                            <div class="border pt-5 pb-5 rounded px-3 package position-relative {{($product->id==1)?'active':''}}" data-package="{{$product['id']}}">
+                                <span>Save ${{$product['save']}}</span>
+                                <h3>${{$product['price']}}/mo</h3>
+                                <p>{{$product['duration']}} Month Plan</p>
                             </div>
+                            <h6 class="c-color">{{$product->type}}</h6>
                         </div>
-                        <div class="col-md-3 text-center">
-                            <div class="border pt-5 pb-5 rounded px-3 package position-relative" data-package="{{$products[4]['id']}}">
-                                <span>Save ${{$products[3]['save']}}</span>
-                                <h3>${{$products[3]['price']}}/mo</h3>
-                                <p>{{$products[3]['duration']}} Month Plan</p>
-                                <p>$45.95 Half Year</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3 text-center">
-                            <div class="border pt-5 pb-5 rounded px-3 package position-relative" data-package="{{$products[2]['id']}}">
-                                <span>Save ${{$products[2]['save']}}</span>
-                                <h3>${{$products[2]['price']}}/mo</h3>
-                                <p>{{$products[2]['duration']}} Month Plan</p>
-                                <p>$24.95 Quarterly</p>
-                            </div>
-                        </div>
-                        <div class="col-md-3 text-center">
-                            <div class="border pt-5 pb-5 rounded px-3 package active position-relative" data-package="{{$products[1]['id']}}">
-                                <span>Try it out</span>
-                                <h3>${{$products[1]['price']}}/mo</h3>
-                                <p>{{$products[1]['duration']}} Month Plan</p>
-                                <p>$9.99 Monthly</p>
-                            </div>
-                        </div>
-                    </div>
-                    <h6 class="c-color mt-5">Lifetime Diamond Membership</h6>
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <div class="border pt-5 pb-5 rounded px-3 package position-relative" data-package="{{$products[5]['id']}}">
-                                <h3>${{$products[5]['price']}}/one time</h3>
-                                <p>Lifetime Membership</p>
-                                <p>$150.00 Includes Tax</p>
-                            </div>
-                        </div>
-
+                        @endforeach
                     </div>
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <p class="m-0 mt-4">All paid memberships are managed securely with Stripe.</p>
-                            <p class="m-0">You can use your credit card or your bank account to upgrade via Stripe.</p>
+                            <p class="m-0 mt-4">All paid memberships are managed securely with PayPal.</p>
+                            <p class="m-0">You can use your credit card or your bank account to upgrade via PayPal.</p>
                             <div>
-                                <img src="{{url('user/stripe.png')}}" class="img-fluid" alt="">
+                                <img src="{{url('user/paypal.png')}}" class="img-fluid" alt="">
                             </div>
                             <form id="submit-form" action="{{route('settings.payments.gateway')}}" method="get">
                                 <input type="hidden" id="package" name="package">
@@ -115,7 +81,7 @@ foreach ($packages as $package){
                         someone.</p>
                 </div>
                 <div class="card-footer text-sm text-muted">
-                    You will be forwarded to Stripe to complete your subscription when you click 'Upgrade'. A copy of
+                    You will be forwarded to PayPal to complete your subscription when you click 'Upgrade'. A copy of
                     your subscription details will be sent to you via email for your records. At the end of your current
                     upgrade, Girlfriend Social will automatically continue your subscription for the same period and
                     amount as your current upgrade. You can cancel on this page at any time. Upgrade today and start
