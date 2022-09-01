@@ -5,9 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Stripe\Customer;
 
 class PaymentController extends Controller
 {
@@ -33,6 +31,11 @@ class PaymentController extends Controller
         return view('user.settings.payment.process', compact('package'));
     }
     public function after_payment(Request $request){
+
+        foreach (Order::where('user_id',auth()->user()->id)->get() as $item) {
+            $item->status='Expired';
+            $item->save();
+        }
         $package=session()->get('cart_product');
         $order=new Order();
         $order->user_id=auth()->user()->id;

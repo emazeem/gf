@@ -1,23 +1,57 @@
 <?php
-$packages=\App\Models\Product::all();
-$products=[];
-foreach ($packages as $package){
-    $products[$package->id]=$package;
+$packages = \App\Models\Product::all();
+$products = [];
+foreach ($packages as $package) {
+    $products[$package->id] = $package;
 }
 ?>
 <div class="col-md-12 mt-md-5">
     <div class="card">
-        <div class="card-body">
-            <h4 class="c-color">Your Girlfriend Social Subscription</h4>
+        @if(ifUpgraded())
+            <div class="card-body">
+                <h4 class="c-color">Girlfriend Social Subscription Information</h4>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>SUBSCRIPTION</th>
+                        <th>COST</th>
+                        <th>STATUS</th>
+                        <th>RENEWAL DATE</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach(\App\Models\Order::where('user_id',auth()->user()->id)->get() as $order)
+                        <tr>
+                            <td>{{$order->product->type}}</td>
+                            <td>{{$order->product->price}}</td>
+                            <td>
+                                @if($order->status=='Active')
+                                    <span style="color: #00bf38">●</span>
+                                @else
+                                    <span style="color: #bf0024">●</span>
+                                @endif
+                                {{$order->status}}
+                            </td>
+                            <td>{{$order->end}}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+            @else
+            <div class="card-body">
+                <h4 class="c-color">Your Girlfriend Social Subscription</h4>
 
-            <p>As an upgraded member, you will show up <b>FIRST</b> in the Match Section. This means that new users will
-                let you know if they are interested in becoming friends with you within minutes of signup!
-                Messaging users who already want to be friends is the most effective way to use the site. You'll get all
-                the features listed below and you will help us grow.</p>
+                <p>As an upgraded member, you will show up <b>FIRST</b> in the Match Section. This means that new users will
+                    let you know if they are interested in becoming friends with you within minutes of signup!
+                    Messaging users who already want to be friends is the most effective way to use the site. You'll get all
+                    the features listed below and you will help us grow.</p>
 
-            <p>If you would like to upgrade your account and start taking your friendship search seriously, please
-                select an option below and then click on the green Upgrade button.</p>
-        </div>
+                <p>If you would like to upgrade your account and start taking your friendship search seriously, please
+                    select an option below and then click on the green Upgrade button.</p>
+            </div>
+            @endif
+
     </div>
     <div class="row mt-4">
         <div class="col-md-8">
@@ -28,14 +62,15 @@ foreach ($packages as $package){
                 <div class="card-body">
                     <div class="row">
                         @foreach(\App\Models\Product::all() as $product)
-                        <div class="col-md-3 text-center">
-                            <div class="border pt-5 pb-5 rounded px-3 package position-relative {{($product->id==1)?'active':''}}" data-package="{{$product['id']}}">
-                                <span>Save ${{$product['save']}}</span>
-                                <h3>${{$product['price']}}/mo</h3>
-                                <p>{{$product['duration']}} Month Plan</p>
+                            <div class="col-md-3 text-center">
+                                <div class="border pt-5 pb-5 rounded px-3 package position-relative {{($product->id==1)?'active':''}}"
+                                     data-package="{{$product['id']}}">
+                                    <span>Save ${{$product['save']}}</span>
+                                    <h3>${{$product['price']}}/mo</h3>
+                                    <p>{{$product['duration']}} Month Plan</p>
+                                </div>
+                                <h6 class="c-color">{{$product->type}}</h6>
                             </div>
-                            <h6 class="c-color">{{$product->type}}</h6>
-                        </div>
                         @endforeach
                     </div>
                     <div class="row">
@@ -47,7 +82,8 @@ foreach ($packages as $package){
                             </div>
                             <form id="submit-form" action="{{route('settings.payments.gateway')}}" method="get">
                                 <input type="hidden" id="package" name="package">
-                                <button type="submit" class="btn btn-lg btn-success upgrade-btn mt-2 mb-4">Upgrade and Continue
+                                <button type="submit" class="btn btn-lg btn-success upgrade-btn mt-2 mb-4">Upgrade and
+                                    Continue
                                 </button>
                             </form>
                             <p>
@@ -64,7 +100,12 @@ foreach ($packages as $package){
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="c-color">Upgraded Features</h4>
+                    @if(ifUpgraded())
+                        <h4 class="c-color">Thank you for your Upgraded Support Girlfriend!</h4>
+                        <p>Let's go through some of the cool stuff you can do ...</p>
+                    @else
+                        <h4 class="c-color">Upgraded Features</h4>
+                    @endif
                 </div>
                 <div class="card-body">
                     <p><i class="bi bi-check border"></i> Show up first in Match!</p>

@@ -35,7 +35,7 @@
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '77.44' // Can also reference a variable or function
+                            value: '{{$package['price']}}' // Can also reference a variable or function
                         }
                     }]
                 });

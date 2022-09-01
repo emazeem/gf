@@ -190,3 +190,11 @@ function ifUserInBlockList($id)
 function getPackageDetails($id){
     return \App\Models\Product::find($id);
 }
+function ifUpgraded($id=null){
+    if ($id==null){$id=auth()->user()->id;}
+    $order=\App\Models\Order::where('user_id',$id)->where('status','Active')->whereDate('end','>',date('Y-m-d'))->first();
+    if ($order){
+        return true;
+    }
+    return false;
+}
