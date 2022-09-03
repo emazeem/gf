@@ -13,7 +13,7 @@ class MatchController extends Controller
     public function show(){
 
         $match = Matched::where('from', auth()->user()->id)->get();
-        $not_ID = [];
+        $not_ID = [auth()->user()->id];
         foreach ($match as $m) {
             $not_ID[] = $m->to;
         }

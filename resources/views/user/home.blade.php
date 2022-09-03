@@ -40,7 +40,7 @@
                                 <li><i class="bi bi-star-fill"></i>See Members Last Logged In Date</li>
                                 <li><i class="bi bi-star-fill"></i>Support The Site and So Much More!</li>
                             </ul>
-                            <center><a href="" class="btn btn-danger btn-sm c-bg">UPGRADE</a></center>
+                            <center><a href="{{route('settings.subscription')}}" class="btn btn-danger btn-sm c-bg">UPGRADE</a></center>
                         </div>
                     </div>
                     <div class="card mt-3">
@@ -49,7 +49,20 @@
                         </div>
                         <div class="card-header">
                             <ul style="list-style-type: none;">
-                                <li><i class="bi bi-star-fill"></i></li>
+                                @foreach(friendRequestsReceived(auth()->user()->id) as $item)
+                                    <li>
+                                        <a href="{{route('user.profile.other',[$item->username])}}" class="d-flex align-items-center justify-content-around">
+                                            <div>
+                                                <img src="{{$item->details->profile_image()}}" alt="" width="40"> {{$item->name}}
+                                            </div>
+                                            <div>
+
+                                                <i data-id="{{$item->id}}" class="friend-request-sent approve bi bi-check "></i>
+                                                <i data-id="{{$item->id}}" class="friend-request-sent decline bi bi-x"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -72,8 +85,10 @@
                                     }
                                 </style>
                                 @for($i=0;$i<=21;$i++)
-                                    <img src="{{url('user/default_profile.png')}}" alt="" class="img-fluid rounded-3">
                                 @endfor
+                                @foreach($users as $user)
+                                    <img src="{{$user->details->profile_image()}}" title="{{$user->name}}"  onclick="window.location.href='{{route('user.profile.other',[$user->username])}}'" alt="" class="img-fluid rounded-3">
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -133,6 +148,7 @@
                             <h4>Check out what Girlfriend Social Members are saying....</h4>
                         </div>
                         <div class="card-body">
+                            @if(count($testimonials)>0)
                             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
                                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -141,7 +157,6 @@
                                 </ol>
                                 <div class="carousel-inner">
                                     @foreach($testimonials as $k=>$testimonial)
-
                                     <div class="carousel-item {{$k==0?'active':''}} text-center">
                                         <img src="{{$testimonial->profile()}}" width="100" height="100" style="border-radius: 50%;border: 4px solid #ec6d70">
 
@@ -165,6 +180,11 @@
                                     <i class="bi bi-arrow-right"></i>
                                 </a>
                             </div>
+                            @else
+                                <i class="text-muted">
+                                    No testimonials
+                                </i>
+                            @endif
                         </div>
                         <div class="card-footer">
                             <a href="{{route('w.testimonial')}}">Click here to read even more Girlfriend Social Reviews ...</a>
@@ -184,4 +204,34 @@
             </div>
         </div>
     </main>
+    <script>
+        $(function () {
+            $(document).on('click', '.friend-request-sent', function () {
+                var id = $(this).attr('data-id');
+                var status = null;
+                if ($(this).hasClass('approve')) {
+                    status = '{{Friends::STATUS_APPROVED}}'
+                }
+                if ($(this).hasClass('decline')) {
+                    status = '{{Friends::STATUS_REJECTED}}'
+                }
+                var button = $(this), previous =$(this).html();
+                button.attr('disabled', 'disabled').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing ...');
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{route('friend.request.action')}}",
+                    dataType: "JSON",
+                    data: {'id': id, 'status': status, _token: '{{csrf_token()}}'},
+                    success: function (data) {
+                        location.reload();
+                    },
+                    error: function (xhr) {
+                        button.attr('disabled', null).html(previous);
+                        erroralert(xhr);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
