@@ -71,7 +71,6 @@ class FriendController extends Controller
 
         $from = auth()->user()->id;
         $to = $request->id;
-
         $addAsFriend = "         <button class='btn btn-light border add-as-friend' data-to='" . $to . "'><i class='bi bi-plus-circle'></i> Add Friend</button>";
         $sendMessage = "         <a class='btn btn-light border' href='".route('user.chat',[$to])."'><i class='bi bi-envelope'></i> Send Message</a>";
         $confirmFriendRequest = '<button class="btn btn-light border friend-request-sent approve" data-id="' . $to . '">Confirm Friend Request</button>';

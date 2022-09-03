@@ -40,8 +40,10 @@ class ProfileController extends Controller
            'recipients'=>'required',
            'message'=>'required',
         ]);
-        dd('Email account third party restriction.');
-        sendEmail($request->recipients,'Invite',$request->message);
+        foreach (explode(',',$request->recipients) as $recipient){
+            sendEmail($recipient,'Invite',$request->message);
+        }
+        return response()->json(['success'=>'Invite sent successfully!']);
     }
 
 
@@ -222,7 +224,7 @@ class ProfileController extends Controller
 
     public function interest(Request $request)
     {
-        $this->validate($request, [
+/*        $this->validate($request, [
             'hobbies' => 'required',
             'sports' => 'required',
             'fitness' => 'required',
@@ -236,7 +238,7 @@ class ProfileController extends Controller
             'fav_teams' => 'required',
             'fav_bands' => 'required',
             'fav_books' => 'required',
-        ]);
+        ]);*/
         $data = UserDetail::find(auth()->user()->details->id);
         if (!$data) {
             $data = new UserDetail();

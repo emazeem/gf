@@ -26,7 +26,7 @@
 
     <!-- Template Main CSS File -->
     <link href="{{url('web/assets/css/style.css')}}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{url('user/css/toast.css')}}">
     <!-- =======================================================
     * Template Name: Delicious - v4.8.0
     * Template URL: https://bootstrapmade.com/delicious-free-restaurant-bootstrap-theme/
@@ -63,6 +63,8 @@
 <script src="{{url('web/assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
 <script src="{{url('web/assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
 <script src="{{url('web/assets/vendor/php-email-form/validate.js')}}"></script>
+<script  src="{{url('user/js/toast.js')}}"></script>
+
 
 <!-- Template Main JS File -->
 <script src="{{url('web/assets/js/main.js')}}"></script>

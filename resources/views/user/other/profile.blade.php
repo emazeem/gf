@@ -40,7 +40,7 @@
                                         <a class="btn btn-danger mt-3 c-bg" href="{{route('settings.subscription')}}">UPGRADE</a>
                                     </div>
                                 </div>
-                             @endcannot
+                            @endcannot
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@
                             <div class="card-body">
                                 @foreach($user->album as $album)
                                     <div class="col-md-3 border rounded-3 p-2">
-                                        <div >
+                                        <div>
                                             <center>
                                                 <img src="{{Storage::disk('local')->url('/album/'.$album->image)}}"
                                                      class="img-fluid" style="height: 150px" alt="">
@@ -88,7 +88,6 @@
                         </div>
                     </div>
                 @endcan
-
 
 
                 <div class="col-md-9 col-12">
@@ -354,6 +353,34 @@
                 }
             });
         });
+        $(document).on('submit', '#report_form', function (e) {
+            e.preventDefault();
+            var button = $(this).find('button[type=submit]'), previous = button.html();
+            button.attr('disabled', 'disabled').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing ...');
+
+            $.ajax({
+                type: "POST",
+                url: "{{route('report.store')}}",
+                dataType: "JSON",
+                data: new FormData(this),
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (data) {
+                    button.attr('disabled', null).html(previous);
+                    showControls('{{$user->id}}');
+                    $.toast({heading: 'Success', text:data.success, icon: 'success', position: 'top-right'});
+
+                    $('#abuse-modal').modal('hide');
+
+                },
+                error: function (xhr) {
+                    button.attr('disabled', null).html(previous);
+                    erroralert(xhr);
+                }
+            });
+        });
+
 
         function showControls(id) {
             $.ajax({
@@ -370,5 +397,58 @@
             });
         }
 
+
+        $(document).on('click', '.report-user', function (e) {
+            e.preventDefault();
+            var id = $(this).attr('data-id');
+            $('#abuse_to').val(id);
+            $('#abuse-modal').modal('show');
+        });
     </script>
+    <div class="modal fade" id="abuse-modal" tabindex="-1" role="dialog" aria-labelledby="update-social-info-modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="update-social-info-modalLabel"><i class="bi bi-flag"></i>Report Abuse
+                    </h5>
+                    <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="report_form">
+                    @csrf
+                    <input type="hidden" name="id" id="abuse_to">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h6>We take all abuse reports seriously! The user will never know you reported them.</h6>
+                                <div class="form-group">
+                                    <label for="type">Type of Abuse</label>
+                                    <select name="type" id="type" class="form-control">
+                                        <option value="" hidden>(select)</option>
+                                        <option value="Man">Male User</option>
+                                        <option value="Spam">Spam / Scam / Asking for Money</option>
+                                        <option value="Abuse">Abuse / Harassment</option>
+                                        <option value="Inappropriate">Inappropriate Content / Pictures</option>
+                                        <option value="Licensed">Licensed Material</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea type="text" class="form-control" name="description" id="description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer share-post-button">
+                        <button type="button" class="btn" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection

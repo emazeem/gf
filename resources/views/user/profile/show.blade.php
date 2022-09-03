@@ -218,10 +218,10 @@
                         <div class="card-body">
                             <ul style="list-style-type: none">
                                 <li>
-                                    <a href=""><i class="bi bi-pencil"></i> Edit my Profile</a>
+                                    <a href="{{route('user.profile.edit',[auth()->user()->username])}}"><i class="bi bi-pencil"></i> Edit my Profile</a>
                                 </li>
                                 <li>
-                                    <a href=""><i class="bi bi-pin-map"></i> Edit Location</a>
+                                    <a href="{{route('user.location.edit')}}"><i class="bi bi-pin-map"></i> Edit Location</a>
                                 </li>
                             </ul>
                         </div>

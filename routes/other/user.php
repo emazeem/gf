@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\ReportController;
 use App\Http\Controllers\User\SettingsController;
 use App\Http\Controllers\User\PaymentController;
 use App\Http\Controllers\User\PayPalController;
@@ -23,6 +24,9 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::middleware(['auth', 'user-status', 'can:user', 'email-verification'])->group(function () {
     Route::prefix('user')->group(function () {
+        Route::prefix('report')->group(function () {
+            Route::post('store', [ReportController::class, 'store'])->name('report.store');
+        });
 
         Route::get('welcome', [ProfileController::class, 'welcome'])->name('user.welcome');
         Route::get('home', [ProfileController::class, 'home'])->name('user.home');

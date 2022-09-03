@@ -259,13 +259,13 @@
 
     <div class="row justify-content-center">
         <div class="form-group mt-3">
-            <label for="books" class="h4 c-h">Movies Genres
+            <label for="movies" class="h4 c-h">Movies Genres
             </label><br>
-            <label for="books">
+            <label for="movies">
                 Select the different Movie Genres that you enjoy.
             </label>
             <div class="col-md-12 ">
-                <ul class="c-select-single books">
+                <ul class="c-select-single movies">
                     @php $e_movies=explode('@@@',$de->movies); @endphp
                     @php $movies='Action ,Cartoon/Disney/Pixar ,Comedy ,Crime ,Drama ,Fantasy ,Musicals ,Historical ,International/Subtitles ,Horror ,Romance/Chick Flicks ,Science Fiction ,War ,Westerns ,Dont Like Movies Much';
                     $movies=explode(',',$movies);

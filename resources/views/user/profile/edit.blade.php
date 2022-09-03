@@ -22,7 +22,7 @@
                         Looks Like You Need To Complete Your Profile Girlfriend
                     </h4>
                     <h5>
-                        It is only 7 % complete
+                        It is only {{auth()->user()->profileCompletePercentage()}} % complete
                     </h5>
                     <h6>
                         Before you can use Girlfriend Social to meet new friends we need to find out more about you!
