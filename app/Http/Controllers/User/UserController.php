@@ -43,9 +43,11 @@ class UserController extends Controller
         $detail->dob=$request->dob;
         $detail->hear_about_us=$request->hear_about;
         $detail->save();
+        $token=Str::random(50);
         $user=User::find(auth()->user()->id);
-        $user->remember_token=Str::random(50);
+        $user->remember_token=$token;
         $user->save();
+        sendEmail(auth()->user()->email,'Email Verification','Please verify your account using link given below. <a href="'.url('verification-link/'.auth()->user()->username.'/'.$token).'">Click here</a>');
         return redirect()->route('user.verification.email.sent');
     }
 
