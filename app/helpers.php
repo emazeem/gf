@@ -13,16 +13,33 @@ function getTitleFromSlug($slug)
 {
     return ucfirst(str_replace('-', ' ', $slug));
 }
-
+use PHPMailer\PHPMailer\PHPMailer;
 function sendEmail($to, $subject, $message)
 {
+/*    $mail = new PHPMailer(true);
+    $mail->IsSMTP();
+    $mail->SMTPDebug = 2;
+    $mail->Mailer = "smtp";
+    $mail->Host = "ssl://smtp.gmail.com";
+    $mail->Port = 587;
+    $mail->SMTPAuth = true;
+    $mail->Username = "emazeem07@gmail.com";
+    $mail->Password = "enviro123@";
+
+    $mail->setFrom('noreply@rubiscol.com', 'Girlfriend Vibez');
+    $mail->addAddress($to, explode('@',$to[0]));
+    $mail->isHTML(true);
+    $mail->Subject = $subject;
+    $mail->Body = $message;
+
+*/
+
     try {
+/*        $mail->send();*/
         Mail::html($message, function ($message) use ($subject, $to) {
             $message->subject($subject)->to($to);
         });
-        dd('Email sent successfully!');
-        //return true;
-
+        return true;
     } catch (Exception $exception) {
         dd($exception);
         return response()->json($exception->getMessage());
