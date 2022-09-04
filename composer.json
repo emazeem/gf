@@ -14,6 +14,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "ifsnop/mysqldump-php": "^2.9",
         "kwn/number-to-words": "^1.12",
+        "sendgrid/sendgrid": "~7",
         "laravel/framework": "^8.12",
         "laravel/passport": "^10.1",
         "laravel/tinker": "^2.5",
