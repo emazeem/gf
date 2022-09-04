@@ -20,7 +20,9 @@ function sendEmail($to, $subject, $message)
         Mail::html($message, function ($message) use ($subject, $to) {
             $message->subject($subject)->to($to);
         });
-        return true;
+        dd('Email sent successfully!');
+        //return true;
+
     } catch (Exception $exception) {
         dd($exception);
         return response()->json($exception->getMessage());
