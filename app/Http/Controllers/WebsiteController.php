@@ -18,7 +18,6 @@ class WebsiteController extends Controller
     public function home(){
 
 
-        dd(Hash::make('admin123'));
         $sliders = Slider::all();
         $testimonials=Testimonial::all();
         $thumbnails=Thumbnail::all();
