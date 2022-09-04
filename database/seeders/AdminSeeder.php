@@ -19,6 +19,7 @@ class AdminSeeder extends Seeder
         $user->name='Admin';
         $user->email='admin@gmail.com';
         $user->email_verified_at='2022-04-28 08:49:09';
+        //admin123
         $user->password='$2y$10$SKjPz.HBfF5hpBNKXxDGHury8ZN2IW8G3KuWoe6UqRShPltsh8UGm';
         $user->username='emazeem0';
         $user->timezone='';
