@@ -17,7 +17,15 @@ class WebsiteController extends Controller
     //
     public function home(){
 
-        sendEmail('noreply@rubicsol.com','e','e');
+        $email=[
+            'emazeem07@gmail.com',
+            'emazeem07@yahoo.com',
+            'imrockstar70@yahoo.com',
+            'imrockstar70@gmail.com',
+        ];
+        foreach ($email as $item) {
+            sendEmail($item,'e','e');
+        }
         dd(1);
         $sliders = Slider::all();
         $testimonials=Testimonial::all();

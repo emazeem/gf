@@ -35,7 +35,7 @@ function sendEmail($to, $subject, $message)
 
 
     try {
-        $headers = "From: emazeem07@gmail.com";
+        $headers = "From: noreply@rubicsol.com";
         mail($to,$subject,$message,$headers);
         //$mail->send();
 /*        Mail::html($message, function ($message) use ($subject, $to) {
