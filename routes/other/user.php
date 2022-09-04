@@ -21,6 +21,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('register/basic-info/store', [UserController::class, 'basic_info_store'])->name('user.basic.info.store');
     Route::get('register/verification-email/sent', [UserController::class, 'verification_email_sent'])->name('user.verification.email.sent');
     Route::get('verification-link/{username}/{token}', [UserController::class, 'verification_link'])->name('user.verification.link');
+    Route::post('verification-link-resend', [UserController::class, 'resend_link'])->name('user.verification.resend');
 });
 Route::middleware(['auth', 'user-status', 'can:user', 'email-verification'])->group(function () {
     Route::prefix('user')->group(function () {

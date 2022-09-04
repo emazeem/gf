@@ -50,5 +50,8 @@ class UserController extends Controller
         sendEmail(auth()->user()->email,'Email Verification','Please verify your account using link given below. <a href="'.url('verification-link/'.auth()->user()->username.'/'.$token).'">Click here</a>');
         return redirect()->route('user.verification.email.sent');
     }
-
+    public function resend_link(Request $request){
+        sendEmail(auth()->user()->email,'Email Verification','Please verify your account using link given below. <a href="'.url('verification-link/'.auth()->user()->username.'/'.auth()->user()->remember_token).'">Click here</a>');
+        return redirect()->back()->with('success','Verification link is sent to '.auth()->user()->email);
+    }
 }

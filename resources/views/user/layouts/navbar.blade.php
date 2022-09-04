@@ -8,8 +8,8 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
         <div class="logo me-auto">
-            <h1><a href="{{route('w.home')}}">Girlfriend Vibez</a></h1>
-            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+            {{--<h1><a href="{{route('w.home')}}">Girlfriend Vibez</a></h1>--}}
+            <a href="{{route('w.home')}}"><img src="{{url('user/logo.png')}}" alt="" class="img-fluid"></a>
         </div>
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
