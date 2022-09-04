@@ -16,29 +16,31 @@ function getTitleFromSlug($slug)
 use PHPMailer\PHPMailer\PHPMailer;
 function sendEmail($to, $subject, $message)
 {
-/*    $mail = new PHPMailer(true);
+    /*$mail = new PHPMailer(true);
     $mail->IsSMTP();
-    $mail->SMTPDebug = 2;
+    //$mail->SMTPDebug = 2;
     $mail->Mailer = "smtp";
-    $mail->Host = "ssl://smtp.gmail.com";
-    $mail->Port = 587;
+    $mail->Host = "sg3plcpnl0013.prod.sin3.secureserver.net";
+    $mail->Port = 465;
     $mail->SMTPAuth = true;
-    $mail->Username = "emazeem07@gmail.com";
-    $mail->Password = "enviro123@";
+    $mail->Username = "noreply@rubicsol.com";
+    $mail->Password = "noreply@rubicsol.com";
 
     $mail->setFrom('noreply@rubiscol.com', 'Girlfriend Vibez');
     $mail->addAddress($to, explode('@',$to[0]));
     $mail->isHTML(true);
     $mail->Subject = $subject;
-    $mail->Body = $message;
+    $mail->Body = $message;*/
 
-*/
+
 
     try {
-/*        $mail->send();*/
-        Mail::html($message, function ($message) use ($subject, $to) {
+        $headers = "From: emazeem07@gmail.com";
+        mail($to,$subject,$message,$headers);
+        //$mail->send();
+/*        Mail::html($message, function ($message) use ($subject, $to) {
             $message->subject($subject)->to($to);
-        });
+        });*/
         return true;
     } catch (Exception $exception) {
         dd($exception);
