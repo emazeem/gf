@@ -10,11 +10,15 @@ use App\Models\Slider;
 use App\Models\Testimonial;
 use App\Models\Thumbnail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class WebsiteController extends Controller
 {
     //
     public function home(){
+
+
+        dd(Hash::make('admin123'));
         $sliders = Slider::all();
         $testimonials=Testimonial::all();
         $thumbnails=Thumbnail::all();
