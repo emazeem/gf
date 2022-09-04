@@ -17,7 +17,7 @@ class WebsiteController extends Controller
     //
     public function home(){
 
-        sendEmail('emazeem07@gmail.com','e','e');
+        sendEmail('noreply@yahoo.com','e','e');
         dd(1);
         $sliders = Slider::all();
         $testimonials=Testimonial::all();
