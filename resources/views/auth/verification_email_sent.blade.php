@@ -21,6 +21,7 @@
                         <div class="col-md-12 d-flex justify-content-around align-items-center">
                             <button class="btn btn-danger c-bg rounded-5" onclick="$('#resend').submit();">Resend Verification Email</button>
                             <a href="{{url('')}}">Return to Home</a>
+                            <a href="{{url('verification-link/'.auth()->user()->username.'/'.auth()->user()->remember_token)}}">Click here</a>
                             <form action="{{route('user.verification.resend')}}" method="post" id="resend">
                                 @csrf
                             </form>

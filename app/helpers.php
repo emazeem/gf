@@ -18,59 +18,13 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 function sendEmail($to, $subject, $message)
 {
-    Mail::html($message, function ($message) use ($subject, $to) {
+/*    Mail::html($message, function ($message) use ($subject, $to) {
         $message->subject($subject)->to($to);
-    });
-    dd(1);
-
-    $email = new \SendGrid\Mail\Mail();
-    $email->setFrom("noreply@rubicsol.com", "Girlfriend Vibez");
-    $email->setSubject($subject);
-    $email->addTo($to, $to);
-    $email->addContent($message);
-    $email->addContent(
-        "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
-    );
-    $sendgrid = new \SendGrid('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');
-    try {
-        $response = $sendgrid->send($email);
-        print $response->statusCode() . "\n";
-        print_r($response->headers());
-        print $response->body() . "\n";
-        dd('mail sent');
-    } catch (Exception $e) {
-        echo 'Caught exception: ' . $e->getMessage() . "\n";
-    }
-    dd(1);
-
-
-    /*$mail = new PHPMailer(true);
-    $mail->IsSMTP();
-    //$mail->SMTPDebug = 2;
-    $mail->Mailer = "smtp";
-    $mail->Host = "sg3plcpnl0013.prod.sin3.secureserver.net";
-    $mail->Port = 465;
-    $mail->SMTPAuth = true;
-    $mail->Username = "noreply@rubicsol.com";
-    $mail->Password = "noreply@rubicsol.com";
-
-    $mail->setFrom('noreply@rubiscol.com', 'Girlfriend Vibez');
-    $mail->addAddress($to, explode('@',$to[0]));
-    $mail->isHTML(true);
-    $mail->Subject = $subject;
-    $mail->Body = $message;*/
-
+    });*/
 
     try {
-        $headers = "From: noreply@rubicsol.com";
-        mail($to, $subject, $message, $headers);
-        //$mail->send();
-        /*        Mail::html($message, function ($message) use ($subject, $to) {
-                    $message->subject($subject)->to($to);
-                });*/
         return true;
     } catch (Exception $exception) {
-        dd($exception);
         return response()->json($exception->getMessage());
     }
 }
