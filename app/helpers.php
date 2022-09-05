@@ -22,7 +22,6 @@ function sendEmail($to, $subject, $message)
             Mail::html($message, function ($message) use ($subject, $to) {
                 $message->subject($subject)->to($to);
             });
-
             dd(1);
         $email = new \SendGrid\Mail\Mail();
         $email->setFrom("noreply@rubicsol.com", "Girlfriend Vibez");
