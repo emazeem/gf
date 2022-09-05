@@ -57,6 +57,18 @@ class User extends Authenticatable
         }
         return (int)(count(array_filter($array))/count($array)*100);
     }
+    public function nextActionOfProfileCompletion(){
+        $string='headline,about_me,gender,employment,income_range,employment_group,hear_about_us,friends,education_level,location,dob,astrology,relationship,children,smoke,pets,drink,job_title,why_you_are_on_gfv,personality_type,communication_style,contact_by_people_from,availability,hobbies,sports,fitness,entertainment,music,movies,books,fav_tv_shows,fav_movies,fav_hobbies,fav_teams,fav_bands,fav_books,profile,cover';
+        $columns=explode(',',$string);
+        $next=null;
+        foreach ($columns as $column){
+            if (!$this->details[$column]){
+                $next=$column;
+            }
+        }
+        return $next;
+    }
+
     protected $dates = [
         'last_login'
     ];

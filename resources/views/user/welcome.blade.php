@@ -75,7 +75,7 @@
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" aria-valuenow="0"  style="width: {{auth()->user()->profileCompletePercentage()}}%" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                                <a href="">Click here to finish updating your profile now.</a>
+                                <a href="{{route('user.profile.edit',[auth()->user()->username])}}">Click here to finish updating your details now. Your next step is to update {{auth()->user()->nextActionOfProfileCompletion()}}</a>
 
                             </div>
                             Please finish your profile and you will then be able to gain full access to the website, and start making friends. Detailed, fun and complete profiles will get you the best results.

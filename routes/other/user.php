@@ -34,6 +34,7 @@ Route::middleware(['auth', 'user-status', 'can:user', 'email-verification'])->gr
         Route::get('invite', [ProfileController::class, 'invite'])->name('user.invite');
         Route::get('birthdays', [ProfileController::class, 'birthdays'])->name('user.birthdays');
         Route::post('send-invite', [ProfileController::class, 'invite_submit'])->name('invite.submit');
+        Route::post('cover-photo/remove', [ProfileController::class, 'cover_photo_remove'])->name('user.cover.photo.delete');
         Route::get('profile/view/{username}', [ProfileController::class, 'view'])->name('user.profile.view');
         Route::get('profile/edit/{username}', [ProfileController::class, 'edit'])->name('user.profile.edit');
         Route::get('profile/photo', [ProfileController::class, 'p_photo'])->name('user.profile.photo');

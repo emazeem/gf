@@ -112,6 +112,13 @@ class ProfileController extends Controller
         $data->save();
         return response()->json(['success'=>true,'profile'=>$data->cover_image()]);
     }
+    public function cover_photo_remove(Request $request){
+        $data=UserDetail::find(auth()->user()->details->id);
+        $data->cover = null;
+        $data->save();
+        return redirect()->back();
+    }
+
 
     public function location_update(Request $request){
         $this->validate($request,[

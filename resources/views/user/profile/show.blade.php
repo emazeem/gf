@@ -5,7 +5,7 @@
     <main id="main" style="margin-top: 70px">
         <div class="cover-photo " style="background-image: url('{{$user->details->cover_image()}}');">
             <div class="btn-group">
-                <button type="button" class="btn btn-lg dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                <button type="button" class="btn btn-lg dropdown-toggle bg-white" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
                     <i class="bi bi-camera"></i>
                 </button>
@@ -16,9 +16,12 @@
                     <a class="dropdown-item" onclick="changeProfilePhoto()"><i class="bi bi-camera"></i>
                         <small>Change Profile Photo</small>
                     </a>
-                    <a class="dropdown-item" onclick="deleteCoverPhoto()"><i class="bi bi-trash"></i>
+                    <a class="dropdown-item" onclick="$('#remove-cover-photo').submit()"><i class="bi bi-trash"></i>
                         <small>Delete Cover Photo</small>
                     </a>
+                    <form id="remove-cover-photo" action="{{route('user.cover.photo.delete')}}" method="post">
+                        @csrf
+                    </form>
                 </div>
                 <form id="profile_form">
                     @csrf
