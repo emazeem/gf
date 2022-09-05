@@ -142,7 +142,7 @@
                                 @csrf
                                 <input type="hidden"  name="image" value="{{$image['name']}}">
                             </form>
-                            <img src="{{url('user/Def_Profile/'.$image['name'])}}" alt="" class="img-thumbnail" onclick="$('#profileForm{{$k}}').submit()">
+                            <img src="{{url('user/defprofile/'.$image['name'])}}" alt="" class="img-thumbnail" onclick="$('#profileForm{{$k}}').submit()">
                         </div>
                     @endforeach
                     </div>

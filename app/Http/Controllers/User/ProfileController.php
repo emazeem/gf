@@ -74,7 +74,7 @@ class ProfileController extends Controller
     }
     public function p_photo(){
 
-        $files = File::files(public_path('user\Def_Profile'));
+        $files = File::files(public_path('user\defprofile'));
         $images=[];
         foreach ($files as $image){
             $checks=explode('/',str_replace('\\','/',$image));
@@ -131,7 +131,7 @@ class ProfileController extends Controller
 
         $dest = public_path('storage/profile/');
         $fileName=time().$request->image;
-        File::copy(public_path('user/Def_Profile/'.$request->image),$dest.$fileName);
+        File::copy(public_path('user/defprofile/'.$request->image),$dest.$fileName);
 
         $data=UserDetail::find(auth()->user()->details->id);
         if (!$data){
