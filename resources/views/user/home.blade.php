@@ -144,7 +144,7 @@
                     </div>
                     <div class="card mt-2">
                         <div class="card-header">
-                            <h4>Check out what Girlfriend Social Members are saying....</h4>
+                            <h4>Check out what Girlfriend Vibez Members are saying....</h4>
                         </div>
                         <div class="card-body">
                             @if(count($testimonials)>0)

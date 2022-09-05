@@ -17,7 +17,7 @@
                     <div class="col-md-6">
                         <form method="POST" action="{{ route('login') }}" class="php-email-form" id="login">
                             @csrf
-                            <h4 class="mb-4"><i class="bi bi-lock"></i>Admin | <span>Login</span></h4>
+                            <h4 class="mb-4"><i class="bi bi-lock"></i><span>Login</span></h4>
                             <div class="row justify-content-center">
                                 <div class="form-group mt-3 mt-md-0">
                                     <label for="email">Email</label>
