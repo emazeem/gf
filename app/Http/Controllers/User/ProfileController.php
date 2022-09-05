@@ -74,7 +74,7 @@ class ProfileController extends Controller
     }
     public function p_photo(){
 
-        $files = File::files(public_path('user\defprofile'));
+        $files = File::files(public_path('user/defprofile'));
         $images=[];
         foreach ($files as $image){
             $checks=explode('/',str_replace('\\','/',$image));
