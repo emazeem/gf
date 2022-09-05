@@ -21,3 +21,6 @@ Route::get('/home', [HomeController::class,'home'])->name('home');
 Route::group([],__DIR__.'/other/admin.php');
 Route::group([],__DIR__.'/other/user.php');
 Auth::routes();
+
+
+// girlfriendvibezllc@gmail.com Emazeem123@ mailchimp
