@@ -16,7 +16,7 @@ class WebsiteController extends Controller
 {
     //
     public function home(){
-        
+        echo '<h1>'.env('MAILGUN_SECRET').'</h1>';
         $sliders = Slider::all();
         $testimonials=Testimonial::all();
         $thumbnails=Thumbnail::all();
