@@ -24,3 +24,13 @@ Auth::routes();
 
 
 // girlfriendvibezllc@gmail.com Emazeem123@ mailchimp
+
+/*
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.sendgrid.net
+MAIL_PORT=587
+MAIL_FROM=noreply@rubicsol.com
+MAIL_USERNAME=apikey
+MAIL_PASSWORD=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
+MAIL_ENCRYPTION=ssl
+*/

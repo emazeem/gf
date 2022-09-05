@@ -16,9 +16,7 @@ class WebsiteController extends Controller
 {
     //
     public function home(){
-
-        sendEmail('noreply@rubicsol.com','Verification','My message will be send here');
-        dd(1);
+        
         $sliders = Slider::all();
         $testimonials=Testimonial::all();
         $thumbnails=Thumbnail::all();
