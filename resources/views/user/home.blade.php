@@ -69,7 +69,7 @@
 
                     <div class="card mt-3">
                         <div class="card-header c-color">
-                            Newest GFS Members
+                            Newest GFV Members
                         </div>
                         <div class="card-header">
                             <div class="d-flex friends-div">
@@ -125,7 +125,7 @@
                     </div>
                     <div class="card mt-3">
                         <div class="card-header">
-                            <h4>Some GFS Members In Your Area...</h4>
+                            <h4>Some GFV Members In Your Area...</h4>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -137,7 +137,6 @@
                                 @endforeach
                             </div>
                             <p>
-                                You have sent 1 messages on Girlfriend Social.<br>
                                 In order to meet new friends you need to reach out!<br>
                                 Why not Send a message to a local lady shown here? Take a chance, Say hi and meet a new friend!
                             </p>

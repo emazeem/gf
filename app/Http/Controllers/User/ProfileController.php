@@ -18,7 +18,8 @@ class ProfileController extends Controller
 {
     //
     public function welcome(){
-        return view('user.welcome');
+        $users=User::where('id','!=',auth()->user()->id)->where('role','user')->get();
+        return view('user.welcome',compact('users'));
     }
     public function invite(){
         return view('user.invite');

@@ -8,7 +8,7 @@
                     <div class="col-md-8">
                         <h3>Sign Up For Free On Girlfriend Vibez</h3>
 
-                        <h6> Welcome to Girlfriend Social - The Largest Women Only Friendship Website In The World</h6>
+                        <h6> Welcome to Girlfriend Vibez - The Largest Women Only Friendship Website In The World</h6>
                         <p>
                             You are only minutes away from meeting new local ladies in your area who want to be friends.
                             Everyone who is a women over 18 can join.. So let's get started on your path to making new

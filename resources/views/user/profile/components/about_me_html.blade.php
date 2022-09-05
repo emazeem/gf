@@ -84,7 +84,7 @@
     <div class="form-group mt-3">
         <label for="communication_style" class="h4 c-h">Communication Style</label><br>
         <label for="communication_style">
-            Ways that you are interested in Communicating with New Friends on GFS. Check All
+            Ways that you are interested in Communicating with New Friends on GFV. Check All
             that Apply.
         </label>
         <div class="col-md-12 ">

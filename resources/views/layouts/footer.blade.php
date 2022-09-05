@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="copyright pt-5">
-            Copyright Girlfriend Social &copy;{{date('Y')}}
+            Copyright Girlfriend Vibez &copy;{{date('Y')}}
         </div>
     </div>
 </footer><!-- End Footer -->

@@ -9,7 +9,7 @@ foreach ($packages as $package) {
     <div class="card">
         @if(ifUpgraded())
             <div class="card-body">
-                <h4 class="c-color">Girlfriend Social Subscription Information</h4>
+                <h4 class="c-color">Girlfriend Vibez Subscription Information</h4>
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -40,7 +40,7 @@ foreach ($packages as $package) {
             </div>
             @else
             <div class="card-body">
-                <h4 class="c-color">Your Girlfriend Social Subscription</h4>
+                <h4 class="c-color">Your Girlfriend Vibez Subscription</h4>
 
                 <p>As an upgraded member, you will show up <b>FIRST</b> in the Match Section. This means that new users will
                     let you know if they are interested in becoming friends with you within minutes of signup!
@@ -91,7 +91,7 @@ foreach ($packages as $package) {
                                         Conditions</a></small>
                             </p>
                         </div>
-                        <h4 class="c-color">Upgrade and Help support GFS so that women everywhere can make friends AND
+                        <h4 class="c-color">Upgrade and Help support GFV so that women everywhere can make friends AND
                             make your friendship search easier at the same time!</h4>
                     </div>
                 </div>
@@ -112,7 +112,7 @@ foreach ($packages as $package) {
                     <p><i class="bi bi-check border"></i> Add additional images to enhance your Profile.</p>
                     <p><i class="bi bi-check border"></i> See when a user last logged in.</p>
                     <p><i class="bi bi-check border"></i> See if your emails were read or deleted.</p>
-                    <p><i class="bi bi-check border"></i> Experience GFS ad-free.</p>
+                    <p><i class="bi bi-check border"></i> Experience GFV ad-free.</p>
                     <p><i class="bi bi-check border"></i> Find out the date and time someone viewed your profile.</p>
                     <p><i class="bi bi-check border"></i> Massive increase in emails.</p>
                     <p><i class="bi bi-check border"></i> Number of people viewing your profile triples.</p>
@@ -124,7 +124,7 @@ foreach ($packages as $package) {
                 <div class="card-footer text-sm text-muted">
                     You will be forwarded to PayPal to complete your subscription when you click 'Upgrade'. A copy of
                     your subscription details will be sent to you via email for your records. At the end of your current
-                    upgrade, Girlfriend Social will automatically continue your subscription for the same period and
+                    upgrade, Girlfriend Vibez will automatically continue your subscription for the same period and
                     amount as your current upgrade. You can cancel on this page at any time. Upgrade today and start
                     connecting!
                 </div>

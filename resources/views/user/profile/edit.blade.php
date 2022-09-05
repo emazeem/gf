@@ -25,7 +25,7 @@
                         It is only {{auth()->user()->profileCompletePercentage()}} % complete
                     </h5>
                     <h6>
-                        Before you can use Girlfriend Social to meet new friends we need to find out more about you!
+                        Before you can use Girlfriend Vibez to meet new friends we need to find out more about you!
                     </h6>
                     <p>
                         Please use this section to complete your profile and you will then be able to gain access to the

@@ -7,8 +7,8 @@
                 <div class="col-md-3">
                     <div class="card">
                         <div class="card-body text-center">
-                            This Page will show all your GFS friends, GFS friend requests you get and what they are up
-                            to on GFS. If you don't see any results here, why not do a and try adding some new GFS
+                            This Page will show all your GFV friends, GFV friend requests you get and what they are up
+                            to on GFV. If you don't see any results here, why not do a and try adding some new GFV
                             friends?
                         </div>
                         <div class="card-footer">
@@ -38,7 +38,7 @@
 
                     <div class="card ">
                         <div class="card-header">
-                            <h4 class="c-color">Search All GFS By Username</h4>
+                            <h4 class="c-color">Search All GFV By Username</h4>
                         </div>
                         <div class="card-body">
                             <form action="{{route('friend.show')}}" method="get">
@@ -55,7 +55,7 @@
                     </div>
                     <div class="card mt-2">
                         <div class="card-header">
-                            <h4>Your Girlfriend Social Friends</h4>
+                            <h4>Your Girlfriend Vibez Friends</h4>
                             <h6>You have {{count(getFriendsList(auth()->user()->id))}} friends</h6>
                         </div>
                         <div class="card-body">

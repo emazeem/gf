@@ -38,9 +38,9 @@
                                         margin-top: 3px;
                                     }
                                 </style>
-                                @for($i=0;$i<=21;$i++)
-                                    <img src="{{url('user/default_profile.png')}}" alt="" class="img-fluid rounded-3">
-                                @endfor
+                                @foreach($users as $user)
+                                    <img src="{{$user->details->profile_image()}}" title="{{$user->name}}"  onclick="window.location.href='{{route('user.profile.other',[$user->username])}}'" alt="" class="img-fluid rounded-3">
+                                @endforeach
                             </div>
 
                         </div>
@@ -53,7 +53,7 @@
                                 <img src="https://www.girlfriendsocial.com/images/tellus.png" alt="" class="img-fluid" width="150">
                             </div>
                             <div class="col-md-10">
-                                <h4>Welcome to Girlfriend Social!</h4>
+                                <h4>Welcome to Girlfriend Vibez!</h4>
                                 We are so glad you could join us! Let's get started on making you some new friends...
                                 <br>
                                 Looks like your are new around here Girlfriend... or Maybe you haven't logged in lately?
@@ -62,7 +62,7 @@
                     </div>
                     <div class="card mt-3">
                         <div class="card-header">
-                            <h4>Finish Your GFS Profile</h4>
+                            <h4>Finish Your GFV Profile</h4>
                         </div>
                         <div class="card-body">
                             We need you complete your profile!
@@ -85,7 +85,7 @@
                         </div>
                         <div class="card-footer">
                             <h4>Why do we ask for all this?</h4>
-                            Girlfriend social is about creating real, meaningful, friendships. It only takes a few moments for you to fill out a profile with your location, interests and other information about the friendships you are looking for. Not having a complete profile makes it harder to find friends to match and connect with because they won't know what to talk with you about. We also find scammers, men, and others here to waste your time, don't take this part seriously and are easier to spot, report and remove. Take some time for you (Only 5 - 15 minutes or so), pour a cup of coffee, wine or water and do this part right!
+                            Girlfriend Vibez is about creating real, meaningful, friendships. It only takes a few moments for you to fill out a profile with your location, interests and other information about the friendships you are looking for. Not having a complete profile makes it harder to find friends to match and connect with because they won't know what to talk with you about. We also find scammers, men, and others here to waste your time, don't take this part seriously and are easier to spot, report and remove. Take some time for you (Only 5 - 15 minutes or so), pour a cup of coffee, wine or water and do this part right!
                         </div>
                     </div>
                     <div class="card mt-2">

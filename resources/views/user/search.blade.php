@@ -8,7 +8,7 @@
 
                     <div class="card ">
                         <div class="card-header">
-                            <h4 class="c-color">Search All GFS By Username</h4>
+                            <h4 class="c-color">Search All GFV By Username</h4>
                         </div>
                         <div class="card-body">
                             <form action="{{route('search.show')}}" method="get" class="row">
@@ -100,7 +100,7 @@
                                 </div>
                                 <div class="form-check col-md-4 mt-3">
                                     <div class="border p-2 rounded-3">
-                                        <h6 class="c-color">Why Is Your Friend on GFS?</h6>
+                                        <h6 class="c-color">Why Is Your Friend on GFV?</h6>
                                         <label class="form-check-label col-12" id="why"><input type="radio" class="form-check-input" id="why" name="why" @if($requests['why'] ?? null) {{$requests['why']== 'Meet New Girl Friends' ?'checked':''}} @endif  value="Meet New Girl Friends">Meet New Girl Friends</label>
                                         <label class="form-check-label col-12" id="why"><input type="radio" class="form-check-input" id="why" name="why" @if($requests['why'] ?? null) {{$requests['why']== 'Having a Baby / Meet other Moms' ?'checked':''}} @endif  value="Having a Baby / Meet other Moms">Having a Baby / Meet other Moms</label>
                                         <label class="form-check-label col-12" id="why"><input type="radio" class="form-check-input" id="why" name="why" @if($requests['why'] ?? null) {{$requests['why']== 'Getting Married / GirlFriends Not Married' ?'checked':''}} @endif  value="Getting Married / GirlFriends Not Married"> Getting Married / GirlFriends Not Married</label>
@@ -143,7 +143,7 @@
                     </div>
                     <div class="card mt-2">
                         <div class="card-header">
-                            <h4>Your Girlfriend Social Friends</h4>
+                            <h4>Your Girlfriend Vibez Friends</h4>
                             <h6>You have {{count(getFriendsList(auth()->user()->id))}} friends</h6>
                         </div>
                         <div class="card-body">

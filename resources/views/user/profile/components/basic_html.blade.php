@@ -12,7 +12,7 @@
         <div class="form-group mt-3">
             <label for="headline" class="h4  c-h">Headline</label>
             <label for="headline">Enter a short headline about you. Example - Single Mom Looking
-                to get out and Dance! Reminder - GFS is for Women friendship purposes only. Any
+                to get out and Dance! Reminder - GFV is for Women friendship purposes only. Any
                 accounts with inappropriate, selling or sexual themes will be removed.</label>
             <div class="col-md-6">
                 <input type="text" class="form-control" name="headline" id="headline" value="{{$de->headline}}">
