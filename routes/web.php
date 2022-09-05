@@ -5,6 +5,7 @@ use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\HomeController;
 
 Route::get('/', [WebsiteController::class,'home'])->name('w.home');
+Route::get('/send-mail', [WebsiteController::class,'sendmail'])->name('send.email');
 Route::get('/about-us', [WebsiteController::class,'about'])->name('w.about');
 Route::get('/contact-us', [WebsiteController::class,'contact'])->name('w.contact');
 Route::get('/press', [WebsiteController::class,'press'])->name('w.press');

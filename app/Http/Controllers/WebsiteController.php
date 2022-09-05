@@ -3,19 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
-use App\Models\Faq;
 use App\Models\FaqCategory;
 use App\Models\Setting;
 use App\Models\Slider;
 use App\Models\Testimonial;
 use App\Models\Thumbnail;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Support\Facades\Mail;
+
 
 class WebsiteController extends Controller
 {
     //
+    public function sendmail(){
+        Mail::raw('Sending emails with Mailgun and Laravel is easy!', function($message)
+        {
+            $message->to('emazeem07@gmail.com');
+        });
+        dd('sent');
+    }
     public function home(){
+
         $sliders = Slider::all();
         $testimonials=Testimonial::all();
         $thumbnails=Thumbnail::all();
