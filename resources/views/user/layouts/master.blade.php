@@ -41,9 +41,19 @@
 @if(Route::CurrentRouteName()=='w.home')
     <section id="topbar" class="d-flex align-items-center fixed-top topbar-transparent">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-center justify-content-lg-start">
-            <i class="bi bi-phone d-flex align-items-center"><span>+1 5589 55488 55</span></i>
-            <i class="bi bi-clock ms-4 d-none d-lg-flex align-items-center"><span>Mon-Sat: 11:00 AM - 23:00 PM</span></i>
+            <h4 class="gorgeous-style">Hello Gorgeous!</h4>
+{{--            <i class="bi bi-clock ms-4 d-none d-lg-flex align-items-center"><span>Mon-Sat: 11:00 AM - 23:00 PM</span></i>--}}
+
         </div>
+        <style>
+            h4.gorgeous-style {
+                font-family: serif;
+                font-style: italic;
+                /* font-style: oblique; */
+                color: #ecc5c0;
+                font-size: 26px;
+            }
+        </style>
     </section>
 @endif
 @include('user.layouts.navbar')

@@ -44,7 +44,7 @@ function getUserAge($id)
 
 function receivedFriendRequest($id)
 {
-    if (Friend::where('to', auth()->user()->id)->where('from', $id)->where('status', Friends::STATUS_REQUEST_SENT)->get()->count() > 0) {
+    if (Friend::where('to', auth()->user()->id)->where('status', Friends::STATUS_REQUEST_SENT)->get()->count() > 0) {
         return true;
     }
     return false;

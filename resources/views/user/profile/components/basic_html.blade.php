@@ -19,6 +19,7 @@
             </div>
         </div>
     </div>
+
     <div class="row justify-content-center">
         <div class="form-group mt-3">
             <label for="about_me" class="h4  c-h">About Me</label>
@@ -36,7 +37,7 @@
             <div class="col-md-6">
                 <select class="form-control" name="gender" id="gender" data-rule="gender">
                     <option selected hidden value="">(Select an option)</option>
-                    <option value="male" {{$de->gender=='male'?'selected':''}}>Male</option>
+                    {{--<option value="male" {{$de->gender=='male'?'selected':''}}>Male</option>--}}
                     <option value="female" {{$de->gender=='female'?'selected':''}}>Female</option>
                 </select>
             </div>
@@ -110,24 +111,32 @@
     </div>
     <div class="row justify-content-center">
         <div class="form-group mt-3">
-            <label for="hear_about" class="h4 c-h">Hear About us</label><br>
-            <label for="hear_about">Where did you hear about us from?</label>
+            <label for="favourite_season" class="h4  c-h">What is your favourite season of the year?</label>
             <div class="col-md-6">
-                <select class="form-control" name="hear_about" id="hear_about" data-rule="hear_about">
-                    <option hidden disabled selected value="">(Select an option)</option>
-                    <option value="Search Engine">Search Engine</option>
-                    <option value="Friend">Friend</option>
-                    <option value="News/Media">News/Media</option>
-                    <option value="Craigslist">Craigslist</option>
-                    <option value="Flyer/Poster">Flyer/Poster</option>
-                    <option value="Other">Other</option>
-                    <option value="Social Media">Social Media</option>
-                </select>
+                <input type="text" class="form-control" name="favourite_season" id="favourite_season" value="{{$de->favourite_season}}">
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="form-group mt-3">
+            <label for="travel" class="h4 c-h">Do you like to travel?</label><br>
+            <div class="col-md-12 ">
+                <ul class="c-select-single travel">
+                    <li>Yes</li>
+                    <li>No</li>
+                </ul>
+                <input type="hidden" name="travel" id="travel">
                 <script>
-                    @if($de->hear_about_us)
-                    $('#hear_about option').each(function (i,v) {
-                        if ($(this).val()=='{{$de->hear_about_us}}'){
-                            $(this).attr('selected','selected');
+                    $('.c-select-single.travel li').click(function () {
+                        $('.c-select-single.travel li').removeClass('active');
+                        $(this).addClass('active');
+                        $('#travel').val($(this).text());
+                    });
+                    @if($de->travel)
+                    $('.c-select-single.travel li').each(function (i,v) {
+                        if ($(this).html()=='{{$de->travel}}'){
+                            $(this).addClass('active');
+                            $('#travel').val('{{$de->travel}}');
                         }
                     });
                     @endif
@@ -137,33 +146,13 @@
     </div>
     <div class="row justify-content-center">
         <div class="form-group mt-3">
-            <label for="friend" class="h4  c-h">Friends Name</label>
-            <div class="col-md-6 customer_records d-flex">
-                <input type="text" class="form-control" name="friend[]" id="friend" data-rule="friend"
-                       @if($de->friends)
-                       @php $first=explode('@@@',$de->friends); @endphp
-                       @if(count($first)>0)
-                       value="{{$first[0]}}"
-                        @endif
-                        @endif
-                >
-                <a class="extra-fields-customer btn border-0"><i class="bi bi-plus-circle"></i></a>
+            <label for="spot_for_vacation" class="h4  c-h">What is your favourite spot for vacation?</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" name="spot_for_vacation" id="spot_for_vacation" value="{{$de->spot_for_vacation}}">
             </div>
-            <div class="customer_records_dynamic col-md-6">
-                @if($de->friends)
-                    @foreach(explode('@@@',$de->friends) as $k=>$friend)
-                        @if($k!=0)
-                            <div class="remove d-flex">
-                                <input type="text" class="form-control" value="{{$friend}}" name="friend[]" id="friend" data-rule="friend">
-                                <a class="remove-field btn-remove-customer btn"><i class="bi bi-x-circle"></i></a>
-                            </div>
-                        @endif
-                    @endforeach
-                @endif
-            </div>
-
         </div>
     </div>
+
     <div class="row justify-content-center">
         <div class="form-group mt-3">
             <label for="education_level" class="h4 c-h">Education Level</label><br>

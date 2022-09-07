@@ -118,15 +118,29 @@
             $('.btn-msg-send').on("click", function () {
                 var message = $('#message').val();
                 var to = $('#to').val();
+
+                var time = new Date();
+                $('.message-box').append('<div class="col-12 p-0 text-right"><p class="message-pills message-pills-right">'+message+' <small>'+time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })+'</small></p></div>');
+
                 $('#message').val(null).focus();
+
+
+
+                var btn=$(this),previous=$(btn).html();
                 if (message){
                     $.ajax({
                         url: "{{route('chat.store')}}",
                         type: "POST",
                         data: {'message': message, 'to': to, _token: '{{csrf_token()}}'},
                         dataType: "JSON",
+                        beforeSend: function () {
+                            btn.html('...');
+                        },
+                        complete: function () {
+                            btn.html(previous);
+                        },
                         success: function (data) {
-                            $('.message-box').append('<div class="col-12 p-0 text-right"><p class="message-pills message-pills-right">'+message+' <small>'+data+'</small></p></div>');
+
                             scrollbottom();
                         },
                         error: function (xhr) {
@@ -497,5 +511,6 @@
             border-radius: 10px;
             padding: 0px 8px;
         }
+        
     </style>
 @endsection

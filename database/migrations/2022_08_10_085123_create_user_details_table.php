@@ -19,11 +19,13 @@ return new class extends Migration
             $table->string('headline')->nullable();
             $table->longText('about_me')->nullable();
             $table->string('gender')->nullable();
-            $table->string('employment')->nullable();
             $table->string('income_range')->nullable();
             $table->string('employment_group')->nullable();
-            $table->string('hear_about_us')->nullable();
-            $table->string('friends')->nullable();
+
+            $table->string('travel')->nullable();
+            $table->string('favourite_season')->nullable();
+            $table->string('spot_for_vacation')->nullable();
+
             $table->string('education_level')->nullable();
             $table->string('location')->nullable();
             $table->string('dob')->nullable();

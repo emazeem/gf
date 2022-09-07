@@ -31,9 +31,8 @@ class UserController extends Controller
     public function basic_info_store(Request $request){
         $this->validate($request,[
            'gender'=>'required',
-           'hear_about'=>'required',
            'location'=>'required',
-           'dob'=>'required',
+           'dob'=>'required|date|before:-18 years',
         ]);
         $already=UserDetail::where('user_id',auth()->user()->id)->first();
         $detail=($already)? $already : new UserDetail();
@@ -41,7 +40,6 @@ class UserController extends Controller
         $detail->gender=$request->gender;
         $detail->location=$request->location;
         $detail->dob=$request->dob;
-        $detail->hear_about_us=$request->hear_about;
         $detail->save();
         $token=Str::random(50);
         $user=User::find(auth()->user()->id);

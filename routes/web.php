@@ -34,4 +34,9 @@ MAIL_FROM=noreply@rubicsol.com
 MAIL_USERNAME=apikey
 MAIL_PASSWORD=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
 MAIL_ENCRYPTION=ssl
+
+
+ALTER TABLE `notifications` ADD `notifiable_type` VARCHAR(225) NOT NULL AFTER `id`, ADD `notifiable_id` VARCHAR(225) NOT NULL AFTER `notifiable_type`;
+
 */
+

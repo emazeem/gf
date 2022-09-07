@@ -51,8 +51,12 @@
                        title="View Profile" href="{{route('user.profile.view',[auth()->user()->username])}}"><i
                                 class="bi bi-person" style="font-size: 25px"></i></a></li>
                 <li class="dropdown">
-                    <a href="javascript:void(0)"><i class="bi bi-bell" title="Notifications"
-                                                    style="font-size: 25px"></i></a>
+                    <a href="javascript:void(0)">
+                        <i class="bi bi-bell" title="Notifications" style="font-size: 25px"></i>
+                        @if(count(auth()->user()->unreadNotifications)>0)
+                            <span class="notification badge">{{count(auth()->user()->unreadNotifications)}}</span>
+                        @endif
+                    </a>
                     <ul>
                         <li><h5 class="px-2 c-color border-bottom">My Notifications</h5></li>
                         @if(count(auth()->user()->unreadNotifications)>0)
@@ -81,8 +85,14 @@
                 </li>
                 @if(auth()->user()->can('profile-complete'))
                     <li class="dropdown">
-                        <a href="javascript:void(0)"><i class="bi bi-envelope" title="Inbox"
-                                                        style="font-size: 25px"></i></a>
+                        <a href="javascript:void(0)">
+                            <i class="bi bi-envelope" title="Inbox"
+                                                        style="font-size: 25px"></i>
+                            @if(count(auth()->user()->myUnreadMessages())>0)
+                                <span class="notification badge">{{count(auth()->user()->myUnreadMessages())}}</span>
+                            @endif
+
+                        </a>
                         <ul>
                             <li><h5 class="px-2 c-color border-bottom">Recent Messages</h5></li>
                             @if(count(unReadMessages())>0)
@@ -155,10 +165,9 @@
                     </ul>
                 </li>
                 <li>
-                    <a class="nav-link scrollto"
-                       title="Logout" href="{{ route('logout') }}"
+                    <a class="btn btn-danger c-bg logout-btn" title="Logout" href="{{ route('logout') }}"
                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                        <i class="bi bi-box-arrow-right" style="font-size: 25px"></i>
+                        <i class="bi bi-box-arrow-right" style="font-size: 25px;margin-right: 5px"></i> Logout
                     </a>
                 </li>
             </ul>
@@ -172,3 +181,20 @@
 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
     @csrf
 </form>
+<style>
+    a.btn.btn-danger.c-bg.logout-btn {
+        padding: 10px 20px;
+        margin-left: 19px;
+        font-weight: bold;
+        border-radius: 50px;
+    }
+    .notification.badge {
+        position: absolute;
+        right: 0;
+        top: 0;
+        left: 47px;
+        background: #ec6d70;
+        padding: 5px 13px 3px 7px;
+        border-radius: 50%;
+    }
+</style>

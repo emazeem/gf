@@ -154,11 +154,11 @@ class ProfileController extends Controller
     public function basic(Request $request){
         $this->validate($request,[
            'headline'=>'required',
-           'about_me'=>'required',
+           'about_me'=>'required|max:100',
            'gender'=>'required',
            'employment_group'=>'required',
            'income_range'=>'required',
-           'hear_about'=>'required',
+           'favourite_season'=>'required',
            'friend.*'=>'required',
            'education_level'=>'required',
         ]);
@@ -172,8 +172,9 @@ class ProfileController extends Controller
         $data->gender=$request->gender;
         $data->employment_group=$request->employment_group;
         $data->income_range=$request->income_range;
-        $data->hear_about_us=$request->hear_about;
-        $data->friends=implode('@@@',$request->friend);
+        $data->favourite_season=$request->favourite_season;
+        $data->travel=$request->travel;
+        $data->spot_for_vacation=$request->spot_for_vacation;
         $data->education_level=$request->education_level;
         $data->save();
         return response()->json(['success'=>'Your basic information is updated successfully!']);

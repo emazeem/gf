@@ -28,7 +28,7 @@
                                             class="form-control @error('gender') is-invalid @enderror" name="gender"
                                             value="{{ old('gender') }}">
                                         <option hidden disabled selected>(Select gender)</option>
-                                        <option value="male">Male</option>
+                                        {{--<option value="male">Male</option>--}}
                                         <option value="female">Female</option>
                                     </select>
                                     @error('gender')
@@ -38,35 +38,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <label for="gender" class="col-md-3 col-form-label ">{{ __('Hear About Us') }}</label>
-
-                                <div class="col-md-9">
-                                    <label for="hear_about">Where did you hear about us from?</label>
-                                    <select id="hear_about" type="text"
-                                            class="form-control @error('hear_about') is-invalid @enderror" name="hear_about"
-                                            value="{{ old('hear_about') }}">
-
-                                        <option hidden disabled selected>(Select an option)</option>
-                                        <option value="55">Search Engine</option>
-                                        <option value="56">Friend</option>
-                                        <option value="57">News/Media</option>
-                                        <option value="58">Craigslist</option>
-                                        <option value="61">Flyer/Poster</option>
-                                        <option value="62">Other</option>
-                                        <option value="302">Social Media</option>
-
-
-                                    </select>
-                                    @error('hear_about')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-
                             <div class="row mb-3">
                                 <label for="location" class="col-md-3 col-form-label ">{{ __('Location') }}</label>
 

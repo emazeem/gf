@@ -21,9 +21,9 @@ class ChatController extends Controller
     public function fetch_user_list(Request $request)
     {
         if ($request->search) {
-            $data = User::where('name', 'like', '%' . $request->search . '%')->where('id', '!=', auth()->user()->id)->get();
+            $data = User::where('role','user')->where('name', 'like', '%' . $request->search . '%')->where('id', '!=', auth()->user()->id)->get();
         } else {
-            $data = User::all()->where('id', '!=', auth()->user()->id);
+            $data = User::all()->where('role','user')->where('id', '!=', auth()->user()->id);
         }
         $data = blockedUserFilter($data);
         $users = [];
@@ -78,9 +78,7 @@ class ChatController extends Controller
         $chat->from = auth()->user()->id;
         $chat->save();
         $time = $chat->created_at->format('h:i A');
-
-        Notification::send(User::find($request->to), new CustomNotifications('1 unread message from ' . auth()->user()->username, route('user.chat', [auth()->user()->id])));
-
+        //Notification::send(User::find($request->to), new CustomNotifications('1 unread message from ' . auth()->user()->username, route('user.chat', [auth()->user()->id])));
         return response()->json($time);
     }
 

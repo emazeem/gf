@@ -24,11 +24,11 @@ class UserDetail extends Model
     {
         if ($this->cover) {
             if (!File::exists(public_path() . '/storage/cover/' .$this->cover)) {
-                return url('user/default_profile.png');
+                return url('user/default_cover.png');
             }
             return Storage::disk('local')->url('/cover/'.$this->cover);
         }
-        return url('user/default_profile.png');
+        return url('user/default_cover.png');
     }
 
 }
