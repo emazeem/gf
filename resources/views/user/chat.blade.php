@@ -511,6 +511,6 @@
             border-radius: 10px;
             padding: 0px 8px;
         }
-        
+
     </style>
 @endsection

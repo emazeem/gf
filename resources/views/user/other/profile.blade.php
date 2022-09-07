@@ -5,21 +5,6 @@
     <main id="main" style="margin-top: 70px">
         <div class="cover-photo " style="background-image: url('{{$user->details->cover_image()}}');">
             <div class="col-md-12 d-flex justify-content-center">
-                <div class="col-md-5">
-                    <div class="card text-light" style="background: rgba(6,6,6,0.56)">
-                        <div class="card-header">
-                            <h4>{{$user->username}}</h4>
-                        </div>
-                        <div class="card-body">
-                            <p class="m-0"><b>Lives in :</b> {{$user->details->location}}</p>
-                            <p class="m-0"><b>Joined GFV :</b> {{$user->details->why_you_are_on_gfv}}</p>
-                            <p class="m-0"><b>Personality : </b> {{$user->details->personality_type}}</p>
-                            <p class="m-0"><b>Communicate : </b> {{$user->details->communication_style}}</p>
-                        </div>
-                    </div>
-                </div>
-
-
                 <div class="col-md-3">
                     <div class="card text-light" style="background: rgba(6,6,6,0.56)">
                         <div class="card-body">
@@ -164,7 +149,27 @@
 
                 </div>
                 <div class="col-md-3 col-12">
+
                     <div class="card">
+                        <div class="card-header">
+                            <h4>{{$user->username}}</h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="m-0"><b>Lives in :</b> {{$user->details->location}}</p>
+                            <p class="m-0"><b>Joined GFV :</b> {{$user->details->why_you_are_on_gfv}}</p>
+                            <p class="m-0"><b>Personality : </b> {{$user->details->personality_type}}</p>
+                            <p class="m-0"><b>Communicate : </b>
+                                @if($user->details->communication_style)
+                                    @foreach(explode('@@@',$user->details->communication_style) as $k=>$style)
+                                        {{$style}}
+                                        @if($k+1<count(explode('@@@',$user->details->communication_style))) , @endif
+                                    @endforeach
+                                @endif
+                                </p>
+                        </div>
+                    </div>
+
+                    <div class="card d-none">
                         <div class="card-header">
                             <h4>Availability</h4>
                         </div>

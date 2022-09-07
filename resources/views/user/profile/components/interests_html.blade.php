@@ -217,7 +217,7 @@
             <div class="col-md-12 ">
                 <ul class="c-select-single music">
                     @php $e_music=explode('@@@',$de->music); @endphp
-                    @php $musics='Alternative,Blues,Classical,Country,Classic Rock,Dance/Electronica,Heavy Metal,Musicals/Soundtracks,New Age/Celtic,Oldies,Pop,Rap,Rock Music,RnB/Hip Hop,Top 40,Dont Like Music Much';
+                    @php $musics='Alternative,Blues,Classical,Country,Classic Rock,Dance/Electronica,Heavy Metal,Musicals/Soundtracks,New Age/Celtic,Oldies,Pop,Rap,Rock Music,RnB/Hip Hop,Top 40,Reggae,Dont Like Music Much';
                     $musics=explode(',',$musics);
                     @endphp
                     @foreach($musics as $music)
