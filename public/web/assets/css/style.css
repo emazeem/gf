@@ -9,7 +9,8 @@
 # General
 --------------------------------------------------------------*/
 body {
-  font-family: "Poppins", sans-serif;
+  /*font-family: "Poppins", sans-serif;*/
+  font-family: fangsong;
   color: #444444;
 }
 
@@ -1654,6 +1655,7 @@ h6{
 }
 .c-bg{
   background-color: #ec6d70;
+  bac
 }
 
 .btn-gfv{
@@ -1683,23 +1685,17 @@ h6{
   border: 3px solid #ec6d70;
 }
 
+.card,.card-header,.card-footer,.card-body{
+  border-radius: 0 !important;
+}
+.card-header {
+  padding-top: 20px;
+  background-image: linear-gradient(#edc6c18f , rgb(229 198 198 / 64%),#e3cbc845);
+}
+.card-body {
+  background-color: #f1dddf82;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+h1, h2, h3, h4, h5, h6 {
+  font-family: fangsong;
+}

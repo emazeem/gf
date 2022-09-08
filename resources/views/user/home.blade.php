@@ -31,9 +31,9 @@
                     </div>
                     <div class="card mt-3">
                         <div class="card-header c-color">
-                            Upgrade Today
+                            <h4>Upgrade Today</h4>
                         </div>
-                        <div class="card-header">
+                        <div class="card-body">
                             <ul style="list-style-type: none;">
                                 <li><i class="bi bi-star-fill"></i>Show up first in match</li>
                                 <li><i class="bi bi-star-fill"></i>Remove All Ads</li>
@@ -45,9 +45,10 @@
                     </div>
                     <div class="card mt-3">
                         <div class="card-header c-color">
-                            Requests
+                            <h4>Requests</h4>
+
                         </div>
-                        <div class="card-header">
+                        <div class="card-body">
                             <ul style="list-style-type: none;">
                                 @foreach(friendRequestsReceived(auth()->user()->id) as $item)
                                     <li>
@@ -69,9 +70,9 @@
 
                     <div class="card mt-3">
                         <div class="card-header c-color">
-                            Newest GFV Members
+                            <h4>Newest GFV Members</h4>
                         </div>
-                        <div class="card-header">
+                        <div class="card-body">
                             <div class="d-flex friends-div">
                                 <style>
                                     .friends-div {
