@@ -39,6 +39,8 @@ class UserController extends Controller
         $detail->user_id=auth()->user()->id;
         $detail->gender=$request->gender;
         $detail->location=$request->location;
+        $detail->longitude=$request->longitude;
+        $detail->latitude=$request->latitude;
         $detail->dob=$request->dob;
         $detail->save();
         $token=Str::random(50);

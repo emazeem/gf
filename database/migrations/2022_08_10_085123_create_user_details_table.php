@@ -27,7 +27,11 @@ return new class extends Migration
             $table->string('spot_for_vacation')->nullable();
 
             $table->string('education_level')->nullable();
+
             $table->string('location')->nullable();
+            $table->string('longitude')->nullable();
+            $table->string('latitude')->nullable();
+
             $table->string('dob')->nullable();
             $table->string('astrology')->nullable();
             $table->string('relationship')->nullable();

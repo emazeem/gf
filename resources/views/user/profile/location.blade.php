@@ -79,8 +79,8 @@
 
     </script>
 
-    <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade bd-example-modal-lg" style="z-index: 100" data-backdrop="false" id="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Edit Location</h5>
@@ -99,6 +99,8 @@
                             <div class="form-group">
                                 <label for="location">Your Location</label>
                                 <input type="text" value="{{auth()->user()->details->location}}" class="form-control" name="location" id="location">
+                                <input type="hidden" id="longitude" name="longitude">
+                                <input type="hidden" id="latitude" name="latitude">
                             </div>
                             <div class="d-flex mt-2 align-items-center justify-content-evenly">
                                 <button type="submit" class="btn btn-sm btn-danger c-bg">Save Location</button>
@@ -112,4 +114,14 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyBHnU37fb7vYUBQVFAQ3_bFSX7KqNNlpUY&sensor=false&libraries=places&language=en-AU"></script>
+    <script>
+        var autocomplete = new google.maps.places.Autocomplete($("#location")[0], {});
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+            var place = autocomplete.getPlace();
+            $('#longitude').val(place.geometry.location.lat());
+            $('#latitude').val(place.geometry.location.lng());
+        });
+    </script>
 @endsection

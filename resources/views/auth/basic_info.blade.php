@@ -46,6 +46,8 @@
                                            class="form-control @error('location') is-invalid @enderror" name="location"
                                            value="{{ old('location') }}" autocomplete="email">
 
+                                    <input type="hidden" id="longitude" name="longitude">
+                                    <input type="hidden" id="latitude" name="latitude">
                                     @error('location')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -82,4 +84,14 @@
             </div>
         </section>
     </main>
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyBHnU37fb7vYUBQVFAQ3_bFSX7KqNNlpUY&sensor=false&libraries=places&language=en-AU"></script>
+    <script>
+        var autocomplete = new google.maps.places.Autocomplete($("#location")[0], {});
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+            var place = autocomplete.getPlace();
+            $('#longitude').val(place.geometry.location.lat());
+            $('#latitude').val(place.geometry.location.lng());
+        });
+    </script>
 @endsection

@@ -130,6 +130,9 @@ class ProfileController extends Controller
             $data=new UserDetail();
             $data->user_id=auth()->user()->id;
         }
+
+        $data->longitude=$request->longitude;
+        $data->latitude=$request->latitude;
         $data->location = $request->location;
         $data->save();
         return response()->json(['success'=>true]);
