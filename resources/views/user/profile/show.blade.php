@@ -5,7 +5,8 @@
     <main id="main" style="margin-top: 70px">
         <div class="cover-photo " style="background-image: url('{{$user->details->cover_image()}}');">
             <div class="btn-group">
-                <button type="button" class="btn btn-lg dropdown-toggle bg-white" data-toggle="dropdown" aria-haspopup="true"
+                <button type="button" class="btn btn-lg dropdown-toggle bg-white" data-toggle="dropdown"
+                        aria-haspopup="true"
                         aria-expanded="false">
                     <i class="bi bi-camera"></i>
                 </button>
@@ -48,7 +49,7 @@
                             <div class="card-body">
                                 @foreach(auth()->user()->album as $album)
                                     <div class="col-md-3 border rounded-3 p-2">
-                                        <div >
+                                        <div>
                                             <center>
                                                 <img src="{{Storage::disk('local')->url('/album/'.$album->image)}}"
                                                      class="img-fluid" style="height: 150px" alt="">
@@ -100,28 +101,62 @@
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->hobbies) as $hobby)
                                     @if($hobby)
-                                        <li class="active">{{$hobby}}</li>@endif
+                                        <li class="active">
+                                            <?php
+                                                $image=strtolower($hobby);
+                                                $image=str_replace('/','',$image);
+                                                $image=str_replace('  ',' ',$image);
+                                            ?>
+                                            <img src="{{url('icons/'.$image.'.png')}}" title="{{$image}}" width="30px" alt="">
+                                                {{$hobby}}
+                                        </li>
+                                    @endif
                                 @endforeach
                             </ul>
                             <h3>Sports</h3>
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->sports) as $hobby)
                                     @if($hobby)
-                                        <li class="active">{{$hobby}}</li>@endif
+                                        <li class="active">
+                                            <?php
+                                            $image=strtolower($hobby);
+                                            $image=str_replace('/','',$image);
+                                            $image=str_replace('  ',' ',$image);
+                                            ?>
+                                            <img src="{{url('icons/'.$image.'.png')}}" title="{{$image}}" width="30px" alt="">
+
+                                            {{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
                             <h3>Fitness/Outdoors</h3>
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->fitness) as $hobby)
                                     @if($hobby)
-                                        <li class="active">{{$hobby}}</li>@endif
+                                        <li class="active">
+                                            <?php
+                                            $image=strtolower($hobby);
+                                            $image=str_replace('/','',$image);
+                                            $image=str_replace('  ',' ',$image);
+                                            ?>
+                                            <img src="{{url('icons/'.$image.'.png')}}" title="{{$image}}" width="30px" alt="">
+
+                                            {{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
                             <h3>Entertainment / Going Out</h3>
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->entertainment) as $hobby)
                                     @if($hobby)
-                                        <li class="active">{{$hobby}}</li>@endif
+                                        <li class="active">
+                                            <?php
+                                            $image=strtolower($hobby);
+                                            $image=str_replace('/','',$image);
+                                            $image=str_replace('  ',' ',$image);
+                                            ?>
+                                            <img src="{{url('icons/'.$image.'.png')}}" title="{{$image}}" width="30px" alt="">
+                                                
+
+                                            {{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
                             <h3>Movies</h3>
@@ -221,10 +256,12 @@
                         <div class="card-body">
                             <ul style="list-style-type: none">
                                 <li>
-                                    <a href="{{route('user.profile.edit',[auth()->user()->username])}}"><i class="bi bi-pencil"></i> Edit my Profile</a>
+                                    <a href="{{route('user.profile.edit',[auth()->user()->username])}}"><i
+                                                class="bi bi-pencil"></i> Edit my Profile</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('user.location.edit')}}"><i class="bi bi-pin-map"></i> Edit Location</a>
+                                    <a href="{{route('user.location.edit')}}"><i class="bi bi-pin-map"></i> Edit
+                                        Location</a>
                                 </li>
                             </ul>
                         </div>
