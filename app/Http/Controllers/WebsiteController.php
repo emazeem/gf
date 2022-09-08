@@ -22,6 +22,10 @@ class WebsiteController extends Controller
         });
         dd('sent');
     }
+    public function place(){
+        return view('place');
+    }
+
     public function home(){
 
         $sliders = Slider::all();

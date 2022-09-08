@@ -154,8 +154,6 @@
                                             $image=str_replace('  ',' ',$image);
                                             ?>
                                             <img src="{{url('icons/'.$image.'.png')}}" title="{{$image}}" width="30px" alt="">
-                                                
-
                                             {{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
