@@ -23,7 +23,7 @@ class WebsiteController extends Controller
         dd('sent');
     }
     public function place(){
-        return view('place');
+        return view('user.place');
     }
 
     public function home(){
