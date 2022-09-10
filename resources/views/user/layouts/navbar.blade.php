@@ -11,7 +11,7 @@
             {{--<h1><a href="{{route('w.home')}}">Girlfriend Vibez</a></h1>--}}
             <a href="{{route('user.home')}}"><img src="{{url('user/logo.png')}}" alt="" class="img-fluid"></a>
             <style>
-                #header .logo img{
+                #header .logo img {
                     max-height: 70px;
                 }
             </style>
@@ -41,15 +41,30 @@
                             <button class="btn btn-light">INBOX</button>
                         </a>
                     </li>
+                    @cannot('if-user-upgraded')
+
+                        <li>
+                            <a class="nav-link scrollto {{(Route::currentRouteName()=='settings.subscription')?'active':''}}"
+                               title="chat" href="{{route('settings.subscription')}}">
+                                <button class="btn btn-warning">VIP</button>
+                            </a>
+                        </li>
+                    @endcannot
                 @endif
+
+                <li><a class="nav-link scrollto {{(Route::currentRouteName()=='user.profile.view')?'active':''}}"
+                       title="View Profile" href="{{route('user.profile.view',[auth()->user()->username])}}">
+                        <img src="{{auth()->user()->details->profile_image()}}" width="40" class="border border-light border-2 rounded" alt="">
+                    </a></li>
+
+
                 <li><a class="nav-link scrollto {{(Route::currentRouteName()=='user.home')?'active':''}}" title="home"
                        href="{{route('user.home')}}"><i class="bi bi-house" style="font-size: 25px"></i></a></li>
-                <li><a class="nav-link scrollto {{(Route::currentRouteName()=='user.profile.edit')?'active':''}}"
+                {{--<li><a class="nav-link scrollto {{(Route::currentRouteName()=='user.profile.edit')?'active':''}}"
                        title="Edit Profile" href="{{route('user.profile.edit',[auth()->user()->username])}}">Edit
                         Profile</a></li>
-                <li><a class="nav-link scrollto {{(Route::currentRouteName()=='user.profile.view')?'active':''}}"
-                       title="View Profile" href="{{route('user.profile.view',[auth()->user()->username])}}"><i
-                                class="bi bi-person" style="font-size: 25px"></i></a></li>
+                    --}}
+
                 <li class="dropdown">
                     <a href="javascript:void(0)">
                         <i class="bi bi-bell" title="Notifications" style="font-size: 25px"></i>
@@ -87,7 +102,7 @@
                     <li class="dropdown">
                         <a href="javascript:void(0)">
                             <i class="bi bi-envelope" title="Inbox"
-                                                        style="font-size: 25px"></i>
+                               style="font-size: 25px"></i>
                             @if(count(auth()->user()->myUnreadMessages())>0)
                                 <span class="notification badge">{{count(auth()->user()->myUnreadMessages())}}</span>
                             @endif
@@ -188,6 +203,7 @@
         font-weight: bold;
         border-radius: 50px;
     }
+
     .notification.badge {
         position: absolute;
         right: 0;

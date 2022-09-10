@@ -5,31 +5,6 @@
     <main id="main" style="margin-top: 70px">
         <div class="cover-photo " style="background-image: url('{{$user->details->cover_image()}}');">
             <div class="col-md-12 d-flex justify-content-center">
-                <div class="col-md-3">
-                    <div class="card text-light" style="background: rgba(6,6,6,0.56)">
-                        <div class="card-body">
-                            <p class="m-0"><b>Friends :</b> {{count(friendRequestsReceived($user->id))}}</p>
-                            @can('if-user-upgraded')
-                                <h6>VIP Info</h6>
-                                <p class="m-0"><b>Profile Views
-                                        :</b> {{\App\Models\ProfileView::where('view_to',$user->id)->get()->count()}}
-                                </p>
-                                <p class="m-0"><b>Last Login : </b> {{$user->last_login}}</p>
-                                <p class="m-0"><b>Last update : </b> {{$user->last_login}}</p>
-                                <p class="m-0"><b>Joined : </b> {{$user->created_at->format('F d, Y')}}</p>
-                            @endcan
-                            @cannot('if-user-upgraded')
-                                <div class="d-flex justify-content-center p-3">
-                                    <div class="text-center">
-                                        <p class="m-0"><b>Want to see when {{$user->username}}<br> last logged in?</p>
-                                        <a class="btn btn-danger mt-3 c-bg" href="{{route('settings.subscription')}}">UPGRADE</a>
-                                    </div>
-                                </div>
-                            @endcannot
-                        </div>
-                    </div>
-                </div>
-
             </div>
             <div class="col-md-12">
                 <img class="profile-picture" src="{{$user->details->profile_image()}}" alt="profile-picture">
@@ -104,28 +79,58 @@
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->hobbies) as $hobby)
                                     @if($hobby)
-                                        <li class="active">{{$hobby}}</li>@endif
+                                        <li class="active">
+                                            <?php
+                                            $image=strtolower($hobby);
+                                            $image=str_replace('/','',$image);
+                                            $image=str_replace('  ',' ',$image);
+                                            ?>
+                                            <img src="{{url('icons/'.$image.'.png')}}" title="{{$image}}" width="30px" alt="">
+                                            {{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
                             <h3>Sports</h3>
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->sports) as $hobby)
                                     @if($hobby)
-                                        <li class="active">{{$hobby}}</li>@endif
+                                        <li class="active">
+
+                                            <?php
+                                            $image=strtolower($hobby);
+                                            $image=str_replace('/','',$image);
+                                            $image=str_replace('  ',' ',$image);
+                                            ?>
+                                            <img src="{{url('icons/'.$image.'.png')}}" title="{{$image}}" width="30px" alt="">
+                                                {{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
                             <h3>Fitness/Outdoors</h3>
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->fitness) as $hobby)
                                     @if($hobby)
-                                        <li class="active">{{$hobby}}</li>@endif
+                                        <li class="active">
+                                            <?php
+                                            $image=strtolower($hobby);
+                                            $image=str_replace('/','',$image);
+                                            $image=str_replace('  ',' ',$image);
+                                            ?>
+                                            <img src="{{url('icons/'.$image.'.png')}}" title="{{$image}}" width="30px" alt="">
+                                            {{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
                             <h3>Entertainment / Going Out</h3>
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->entertainment) as $hobby)
                                     @if($hobby)
-                                        <li class="active">{{$hobby}}</li>@endif
+                                        <li class="active">
+                                            <?php
+                                            $image=strtolower($hobby);
+                                            $image=str_replace('/','',$image);
+                                            $image=str_replace('  ',' ',$image);
+                                            ?>
+                                            <img src="{{url('icons/'.$image.'.png')}}" title="{{$image}}" width="30px" alt="">
+
+                                            {{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
                             <h3>Movies</h3>
@@ -151,6 +156,30 @@
                 <div class="col-md-3 col-12">
 
                     <div class="card">
+                        <div class="card-body">
+                            <p class="m-0"><b>Friends :</b> {{count(friendRequestsReceived($user->id))}}</p>
+                            @can('if-user-upgraded')
+                                <h6>VIP Info</h6>
+                                <p class="m-0"><b>Profile Views
+                                        :</b> {{\App\Models\ProfileView::where('view_to',$user->id)->get()->count()}}
+                                </p>
+                                <p class="m-0"><b>Last Login : </b> {{$user->last_login}}</p>
+                                <p class="m-0"><b>Last update : </b> {{$user->last_login}}</p>
+                                <p class="m-0"><b>Joined : </b> {{$user->created_at->format('F d, Y')}}</p>
+                            @endcan
+                            @cannot('if-user-upgraded')
+                                <div class="d-flex justify-content-center p-3">
+                                    <div class="text-center">
+                                        <p class="m-0"><b>Want to see when {{$user->username}}<br> last logged in?</p>
+                                        <a class="btn btn-danger mt-3 c-bg" href="{{route('settings.subscription')}}">UPGRADE</a>
+                                    </div>
+                                </div>
+                            @endcannot
+                        </div>
+                    </div>
+
+
+                    <div class="card mt-2">
                         <div class="card-header">
                             <h4>{{$user->username}}</h4>
                         </div>

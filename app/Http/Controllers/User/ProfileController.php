@@ -216,7 +216,7 @@ class ProfileController extends Controller
            'personality_type'=>'required',
            'communication_style'=>'required',
            'contact_by_people_from'=>'required',
-           'availability'=>'required',
+           //'availability'=>'required',
         ]);
         $data=UserDetail::find(auth()->user()->details->id);
         if (!$data){
@@ -228,7 +228,7 @@ class ProfileController extends Controller
         $data->personality_type=$request->personality_type;
         $data->communication_style=str_replace(',','@@@',$request->communication_style);
         $data->contact_by_people_from=str_replace(',','@@@',$request->contact_by_people_from);
-        $data->availability=str_replace(',','@@@',$request->availability);
+        //$data->availability=str_replace(',','@@@',$request->availability);
         $data->save();
 
         return response()->json(['success'=>'Your about me info is updated successfully!']);

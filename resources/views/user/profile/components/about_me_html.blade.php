@@ -177,7 +177,7 @@
         </div>
     </div>
 </div>
-<div class="row justify-content-center">
+<div class="row justify-content-center d-none">
     <div class="form-group mt-3">
         <label for="availability" class="h4 c-h">When Are You Available?
         </label><br>
