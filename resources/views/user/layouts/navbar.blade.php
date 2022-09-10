@@ -104,12 +104,12 @@
                             <i class="bi bi-envelope" title="Inbox"
                                style="font-size: 25px"></i>
                             @if(count(auth()->user()->myUnreadMessages())>0)
-                                <span class="notification badge">{{count(auth()->user()->myUnreadMessages())}}</span>
+                                <span class="notification badge message">{{count(auth()->user()->myUnreadMessages())}}</span>
                             @endif
 
                         </a>
                         <ul>
-                            <li><h5 class="px-2 c-color border-bottom">Recent Messages</h5></li>
+                            <li id="recent-messages"><h5 class="px-2 c-color border-bottom">Recent Messages</h5></li>
                             @if(count(unReadMessages())>0)
                                 @foreach(unReadMessages() as $message)
                                     <li class="border-bottom li-notification">

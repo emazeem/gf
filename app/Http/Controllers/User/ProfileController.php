@@ -102,6 +102,7 @@ class ProfileController extends Controller
         return response()->json(['success'=>true,'profile'=>$data->profile_image()]);
     }
     public function cover(Request $request){
+        /*
         $data=UserDetail::find(auth()->user()->details->id);
         if (!$data){
             $data=new UserDetail();
@@ -111,7 +112,26 @@ class ProfileController extends Controller
         Storage::disk('local')->put('/public/cover/' . $attachment, File::get($request->cover));
         $data->cover = $attachment;
         $data->save();
-        return response()->json(['success'=>true,'profile'=>$data->cover_image()]);
+        */
+
+        $image_parts = explode(";base64,", $request->image);
+        $image_base64 = base64_decode($image_parts[1]);
+        $imageName = uniqid() . '.png';
+
+
+        Storage::disk('local')->put('/public/cover/' . $imageName, $image_base64);
+
+
+
+        $data=UserDetail::find(auth()->user()->details->id);
+        if (!$data){
+            $data=new UserDetail();
+            $data->user_id=auth()->user()->id;
+        }
+        $data->cover = $imageName;
+        $data->save();
+
+        return response()->json(['success'=>true,'cover'=>$data->cover_image()]);
     }
     public function cover_photo_remove(Request $request){
         $data=UserDetail::find(auth()->user()->details->id);

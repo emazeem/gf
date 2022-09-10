@@ -28,7 +28,7 @@
                             <h6 class="font-weight-bold mt-3" id="header-to-h5">Chat</h6>
                         </div>
                         <div class="card-body p-0 message-box-cover">
-                            <div class="message-box nav-pills-bg">
+                            <div class="message-box nav-pills-bg" style="background-image: url('{{url('user/chat.jpg')}}');background-size: contain">
                                 <div class="d-flex justify-content-center align-items-center" style="height: 100%">
                                     <div>
                                         <h1>Welcome to Girlfriend Vibez Chat Box</h1>
@@ -54,7 +54,10 @@
         </div>
     </main>
     <script>
-        var onetimechatopen = true;
+
+
+
+    var onetimechatopen = true;
         @if($id)
             onetimechatopen = true;
         @else
@@ -77,9 +80,8 @@
                     $('.list-unstyled').empty();
                     $.each(data, function (i, v) {
                         var unread='';
-                        console.log(v['unread']);
                         if (v['unread']>0){
-                            unread='<span class="label-primary">'+v['unread']+'</span>'
+                            unread='<span class="label-primary" id="unread-' + v['id'] + '" data-user="' + v['id'] + '">'+v['unread']+'</span>'
                         }
                         $('.list-unstyled').append('<li class="user-of-chat-list" data-id="' + v['id'] + '">' +
                             '<a href="#" id="chat-list-items"><img src="'+v['src']+'" class="profile-chat" alt="">' +
@@ -124,8 +126,6 @@
 
                 $('#message').val(null).focus();
 
-
-
                 var btn=$(this),previous=$(btn).html();
                 if (message){
                     $.ajax({
@@ -140,7 +140,6 @@
                             btn.html(previous);
                         },
                         success: function (data) {
-
                             scrollbottom();
                         },
                         error: function (xhr) {
@@ -180,6 +179,35 @@
                 }
             });
 
+
+
+
+            Pusher.logToConsole = false;
+            var pusher = new Pusher('95d3f503009ba982a42d', {
+                cluster: 'ap2'
+            });
+            var channel = pusher.subscribe('channel-chat');
+            channel.bind('App\\Events\\Chat', function (data) {
+                var obj = document.createElement('audio');
+                obj.src = '{{url("audio/send-message.wav")}}';
+                if (data.chat['to'] == '{{auth()->user()->id}}') {
+                    if (data.chat['from'] == $('#to').val()) {
+                        $('.message-box').append('<div class="col-12 p-0 text-left"><p class="message-pills message-pills-left">'+data.chat['message']+' <small>'+data.chat['time']+'</small></p></div>');
+                        $('.chat-bx-all-messages').append(data.html);
+                        scrollbottom();
+                        obj.play();
+                    } else {
+                        var unread = $('#unread-' + data.chat['from']);
+                        if (unread.text()) {
+                            unread.text(parseInt(unread.text()) + 1);
+                            obj.play();
+                        } else {
+                            obj.play();
+                            unread.text(1);
+                        }
+                    }
+                }
+            });
         });
         function getMessages(user) {
             $.ajax({
@@ -210,6 +238,7 @@
                 scrollTop: $('.message-box').height()*1000
             }, 1000);
         }
+
     </script>
     <style>
         .email-card .nav-pills > li .nav-link {
@@ -440,19 +469,17 @@
         .message-pills{
             font-weight: 600;
             display:inline-block;
-            color: #0656b2;
+            color: #ec7d78;
             padding: 10px;
         }
         .message-pills-left{
             border-radius:0 20px 20px 0  ;
-            background:rgba(0 ,0, 0 , 0.05);
-            border-color:rgba(0 ,0, 0 , 0.1);
+            background:#d2a7a769;
             padding-right: 20px;
         }
         .message-pills-right{
             border-radius:20px 0 0 20px;
-            background:rgba(0 ,0, 0 , 0.05);
-            border-color:rgba(0 ,0, 0 , 0.1);
+            background:#d2a7a769;
             padding-left: 20px;
         }
         .message-pills-date{

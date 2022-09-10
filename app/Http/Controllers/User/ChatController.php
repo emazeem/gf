@@ -5,10 +5,9 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Chat;
 use App\Models\User;
-use App\Notifications\CustomNotifications;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Notification;
+use Pusher\Pusher;
 
 class ChatController extends Controller
 {
@@ -65,9 +64,7 @@ class ChatController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-
+    public function store(Request $request){
         $this->validate($request, [
             'to' => 'required',
             'message' => 'required',
@@ -78,7 +75,28 @@ class ChatController extends Controller
         $chat->from = auth()->user()->id;
         $chat->save();
         $time = $chat->created_at->format('h:i A');
-        //Notification::send(User::find($request->to), new CustomNotifications('1 unread message from ' . auth()->user()->username, route('user.chat', [auth()->user()->id])));
+
+        $options = array(
+            'cluster' => 'ap2',
+            'encrypted' => true
+        );
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'), $options
+        );
+        $chat['time']=date('h:i A');
+        $pusher->trigger('channel-chat', 'App\Events\Chat', ['chat'=>$chat]);
+
+        $pusher->trigger('channel-chat-notification-event', 'App\Events\ChatNotificationEvent', ['profile'=>auth()->user()->details->profile_image(),'chat'=>$chat,'time'=>$chat->created_at->diffForHumans(\Carbon\Carbon::now())]);
+
+
+
+
+
+
+
+
         return response()->json($time);
     }
 

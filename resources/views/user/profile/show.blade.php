@@ -3,7 +3,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <main id="main" style="margin-top: 70px">
-        <div class="cover-photo " style="background-image: url('{{$user->details->cover_image()}}');">
+        <div class="cover-photo" style="background-image: url('{{$user->details->cover_image()}}');">
+            <div id="uploading">
+                <h4>Uploading <i class="spinner-border"></i></h4>
+            </div>
             <div class="btn-group">
                 <button type="button" class="btn btn-lg dropdown-toggle bg-white" data-toggle="dropdown"
                         aria-haspopup="true"
@@ -302,10 +305,10 @@
                 $('#profile_form').submit();
                 $('#profile').val('');
             });
-            $(document).on('change', '#cover', function (e) {
+/*            $(document).on('change', '#cover', function (e) {
                 $('#cover_form').submit();
                 $('#cover').val('');
-            });
+            });*/
 
             $(document).on('submit', '#profile_form', function (e) {
                 e.preventDefault();
@@ -325,7 +328,7 @@
                     }
                 });
             });
-            $(document).on('submit', '#cover_form', function (e) {
+/*            $(document).on('submit', '#cover_form', function (e) {
                 e.preventDefault();
                 $.ajax({
                     type: "POST",
@@ -342,7 +345,7 @@
                         erroralert(xhr);
                     }
                 });
-            });
+            });*/
 
             $(document).on('click', '.report-user', function (e) {
                 alert(1);
@@ -404,4 +407,155 @@
         </div>
     </div>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
+    <style type="text/css">
+        img {
+            display: block;
+            max-width: 100%;
+        }
+        .preview {
+            overflow: hidden;
+            width: 160px;
+            height: 160px;
+            margin: 10px;
+            border: 1px solid red;
+        }
+        .modal-lg{
+            max-width: 1000px !important;
+        }
+    </style>
+
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Crop Cover Photo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="img-container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+                            </div>
+                            <div class="col-md-4">
+                                <div class="preview"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="crop">Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var $modal = $('#modal');
+        var image = document.getElementById('image');
+        var cropper;
+        $("body").on("change", "#cover", function(e){
+            var files = e.target.files;
+            var done = function (url) {
+                image.src = url;
+                $modal.modal('show');
+            };
+            var reader;
+            var file;
+            var url;
+            if (files && files.length > 0) {
+                file = files[0];
+                if (URL) {
+                    done(URL.createObjectURL(file));
+                } else if (FileReader) {
+                    reader = new FileReader();
+                    reader.onload = function (e) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+        $modal.on('shown.bs.modal', function () {
+            cropper = new Cropper(image, {
+                aspectRatio: false,
+                viewMode: 3,
+                preview: '.preview'
+            });
+        }).on('hidden.bs.modal', function () {
+            cropper.destroy();
+            cropper = null;
+        });
+        $("#crop").click(function(){
+            canvas = cropper.getCroppedCanvas({
+                minWidth: 256,
+                minHeight: 256,
+                maxWidth: 4096,
+                maxHeight: 4096,
+                imageSmoothingEnabled: true,
+                imageSmoothingQuality: 'high',
+            });
+            canvas.toBlob(function(blob) {
+                url = URL.createObjectURL(blob);
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = function() {
+                    var base64data = reader.result;
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: "{{route('user.cover')}}",
+                        data: {'_token':'{{csrf_token()}}', 'image': base64data},
+                        success: function(data){
+                            $modal.modal('hide');
+                            $('.cover-photo').css('background-image', 'url(' + data.cover + ')');
+                        },
+                        beforeSend: function () {
+                            $('#crop').html('Processing ... ');
+                            $('.cover-photo').addClass('.edit-overlay');
+                        },
+                        complete: function () {
+                            $('#cover').val('');
+                            $('#crop').html('Upload');
+                            $('.cover-photo').removeClass('.edit-overlay');
+                        },
+                    });
+                }
+            });
+        })
+    </script>
+    <style>
+        .cover-photo #uploading{
+            display: none;
+        }
+        .edit-overlay{
+            position: relative;
+        }
+        .cover-photo.edit-overlay #uploading{
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 300px;
+            background-color: rgba(255, 255, 255, 0.38);
+        }
+        .cover-photo.edit-overlay #uploading h4{
+            position: absolute;
+            left: calc( 50% - 50px );
+            color: black;
+            top: calc( 50% - 25px );
+            font-size: 44px;
+        }
+
+        .spinner-border{
+            width: 50px;
+            height: 50px;
+            border: 5px solid black !important;
+            border-right-color: transparent !important;
+        }
+    </style>
 @endsection
