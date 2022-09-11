@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FaqCategoryController;
 use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\SliderController;
@@ -20,7 +21,6 @@ Route::middleware(['auth','can:admin'])->group(function () {
             Route::post('edit', [FaqController::class, 'edit'])->name('edit');
             Route::post('store', [FaqController::class, 'store'])->name('store');
             Route::post('destroy', [FaqController::class, 'destroy'])->name('destroy');
-
             Route::name('category.')->prefix('category')->group(function () {
                 Route::get('', [FaqCategoryController::class, 'index'])->name('index');
                 Route::post('fetch', [FaqCategoryController::class, 'fetch'])->name('fetch');
@@ -36,6 +36,13 @@ Route::middleware(['auth','can:admin'])->group(function () {
             Route::post('store', [TestimonialController::class, 'store'])->name('store');
             Route::post('destroy', [TestimonialController::class, 'destroy'])->name('destroy');
         });
+
+        Route::name('user.')->prefix('user')->group(function () {
+            Route::get('', [UserController::class, 'index'])->name('index');
+            Route::post('fetch', [UserController::class, 'fetch'])->name('fetch');
+            Route::get('show/{id}', [UserController::class, 'show'])->name('show');
+        });
+
 
         Route::name('setting.')->prefix('setting')->group(function () {
             Route::get('{slug}', [SettingController::class, 'index'])->name('index');

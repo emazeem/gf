@@ -39,6 +39,7 @@ class TestimonialController extends Controller
             ->make(true);
 
     }
+
     public function store(Request $request){
         $this->validate(\request(),[
             'name' =>'required',

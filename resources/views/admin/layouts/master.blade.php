@@ -51,5 +51,8 @@
 {{--<script src="{{url('admin/assets/libs/chartist/dist/chartist.min.js')}}"></script>
 <script src="{{url('admin/assets/libs/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js')}}"></script>
 <script src="{{url('admin/dist/js/pages/dashboards/dashboard1.js')}}"></script>--}}
+<style>
+
+</style>
 </body>
 </html>
