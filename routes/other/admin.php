@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FaqCategoryController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ReportsController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\SliderController;
@@ -40,8 +41,16 @@ Route::middleware(['auth','can:admin'])->group(function () {
         Route::name('user.')->prefix('user')->group(function () {
             Route::get('', [UserController::class, 'index'])->name('index');
             Route::post('fetch', [UserController::class, 'fetch'])->name('fetch');
+            Route::post('disable', [UserController::class, 'disable'])->name('disable');
             Route::get('show/{id}', [UserController::class, 'show'])->name('show');
         });
+        Route::name('report.')->prefix('report')->group(function () {
+            Route::get('', [ReportsController::class, 'index'])->name('index');
+            Route::post('fetch', [ReportsController::class, 'fetch'])->name('fetch');
+            Route::post('action', [ReportsController::class, 'action'])->name('action');
+            Route::get('show/{id}', [ReportsController::class, 'show'])->name('show');
+        });
+
 
 
         Route::name('setting.')->prefix('setting')->group(function () {

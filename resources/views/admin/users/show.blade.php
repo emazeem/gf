@@ -45,6 +45,9 @@
                         <h6>{{$user->last_login}}</h6>
                         <small class="text-muted p-t-30 db">Joined GFV</small>
                         <h6>{{$user->created_at}}</h6>
+                        <small class="text-muted p-t-30 db">Account Status</small>
+                        <h6>{{$user->status}}</h6>
+
                     </div>
                 </div>
             </div>
@@ -104,47 +107,92 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <label class="col-md-12"><b>Like Travelling?</b> {{$user->details->travel}}</label>
-                        <label class="col-md-12"><b>Favourite Season?</b> {{$user->details->favourite_season}}</label>
-                        <label class="col-md-12"><b>Spot for Vacations?</b> {{$user->details->spot_for_vacation}}
-                        </label>
-                        <label class="col-md-12"><b>Education Level?</b> {{$user->details->education_level}}</label>
-                        <label class="col-md-12"><b>Date of birth?</b> {{date('d F,y',strtotime($user->details->dob))}}
-                        </label>
-                        <label class="col-md-12"><b>Astrology?</b> {{$user->details->astrology}}</label>
-                        <label class="col-md-12"><b>Relationship Status?</b> {{$user->details->relationship}}</label>
-                        <label class="col-md-12"><b>Have Children?</b> {{$user->details->children}}</label>
-                        <label class="col-md-12"><b>Do you smoke?</b> {{$user->details->smoke}}</label>
-                        <label class="col-md-12"><b>Do you drink?</b> {{$user->details->drink}}</label>
-                        <label class="col-md-12"><b>Job title?</b> {{$user->details->job_title}}</label>
-                        <label class="col-md-12"><b>Why are you on gfv?</b> {{$user->details->why_you_are_on_gfv}}</label>
-                        <label class="col-md-12"><b>Personality Type?</b> {{$user->details->personality_type}}</label>
-                        <label class="col-md-12"><b>Communication Style?</b> {{$user->details->communication_style}}</label>
-                        <label class="col-md-12"><b>Contact by people from?</b> {{$user->details->contact_by_people_from}}</label>
-                        <hr>
-                        <label class="col-md-12"><b>Fav TV Show?</b> {{$user->details->fav_tv_shows}}</label>
-                        <label class="col-md-12"><b>Fav Movies?</b> {{$user->details->fav_movies}}</label>
-                        <label class="col-md-12"><b>Fav Hobbies?</b> {{$user->details->fav_hobbies}}</label>
-                        <label class="col-md-12"><b>Fav Teams?</b> {{$user->details->fav_teams}}</label>
-                        <label class="col-md-12"><b>Fav Bands?</b> {{$user->details->fav_bands}}</label>
-                        <label class="col-md-12"><b>Fav Books?</b> {{$user->details->fav_books}}</label>
-                        <hr>
-                        <label class="col-md-12"><b>Pets? </b> @foreach(explode('@@@',$user->details->pets) as $pet)
-                                <span class="text-decoration-underline">{{$pet}}</span> @endforeach</label>
-                        <label class="col-md-12"><b>Hobbies? </b> @foreach(explode('@@@',$user->details->hobbies) as $pet)
-                                <span class="text-decoration-underline">{{$pet}}</span> @endforeach</label>
-                        <label class="col-md-12"><b>Sports? </b> @foreach(explode('@@@',$user->details->sports) as $pet)
-                                <span class="text-decoration-underline">{{$pet}}</span> @endforeach</label>
-                        <label class="col-md-12"><b>Fitness? </b> @foreach(explode('@@@',$user->details->fitness) as $pet)
-                                <span class="text-decoration-underline">{{$pet}}</span> @endforeach</label>
-                        <label class="col-md-12"><b>Entertainment? </b> @foreach(explode('@@@',$user->details->entertainment) as $pet)
-                                <span class="text-decoration-underline">{{$pet}}</span> @endforeach</label>
-                        <label class="col-md-12"><b>Music? </b> @foreach(explode('@@@',$user->details->music) as $pet)
-                                <span class="text-decoration-underline">{{$pet}}</span> @endforeach</label>
-                        <label class="col-md-12"><b>Movies? </b> @foreach(explode('@@@',$user->details->movies) as $pet)
-                                <span class="text-decoration-underline">{{$pet}}</span> @endforeach</label>
-                        <label class="col-md-12"><b>Books? </b> @foreach(explode('@@@',$user->details->books) as $pet)
-                                <span class="text-decoration-underline">{{$pet}}</span> @endforeach</label>
+                        <ul class="nav nav-tabs border" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link tab active" id="personal-tab" data-toggle="tab" href="#personal" role="tab" aria-controls="home" aria-selected="true">Personal</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link tab" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="false">About me</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link tab" id="interest-tab" data-toggle="tab" href="#interest" role="tab" aria-controls="interest" aria-selected="false">Interest</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link tab" id="friends-tab" data-toggle="tab" href="#friends" role="tab" aria-controls="friends" aria-selected="false">Friends</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content border p-md-4 p-2" id="myTabContent">
+                            <div class="tab-pane fade active show" id="personal" role="tabpanel" aria-labelledby="personal-tab">
+                                <label class="col-md-12"><b>Like Travelling?</b> {{$user->details->travel}}</label>
+                                <label class="col-md-12"><b>Favourite Season?</b> {{$user->details->favourite_season}}</label>
+                                <label class="col-md-12"><b>Spot for Vacations?</b> {{$user->details->spot_for_vacation}}</label>
+                                <label class="col-md-12"><b>Education Level?</b> {{$user->details->education_level}}</label>
+                                <label class="col-md-12"><b>Date of birth?</b> {{date('d F,y',strtotime($user->details->dob))}}</label>
+                                <label class="col-md-12"><b>Astrology?</b> {{$user->details->astrology}}</label>
+                                <label class="col-md-12"><b>Relationship Status?</b> {{$user->details->relationship}}</label>
+                                <label class="col-md-12"><b>Have Children?</b> {{$user->details->children}}</label>
+                                <label class="col-md-12"><b>Do you smoke?</b> {{$user->details->smoke}}</label>
+                                <label class="col-md-12"><b>Do you drink?</b> {{$user->details->drink}}</label>
+
+                            </div>
+                            <div class="tab-pane fade" id="about" role="tabpanel" aria-labelledby="about-tab">
+
+
+                                <label class="col-md-12"><b>Job title?</b> {{$user->details->job_title}}</label>
+                                <label class="col-md-12"><b>Why are you on gfv?</b> {{$user->details->why_you_are_on_gfv}}</label>
+                                <label class="col-md-12"><b>Personality Type?</b> {{$user->details->personality_type}}</label>
+                                <label class="col-md-12"><b>Communication Style?</b> {{$user->details->communication_style}}</label>
+                                <label class="col-md-12"><b>Contact by people from?</b> {{$user->details->contact_by_people_from}}</label>
+
+
+
+
+
+                            </div>
+                            <div class="tab-pane fade" id="interest" role="tabpanel" aria-labelledby="interest-tab">
+
+                                <label class="col-md-12"><b>Pets? </b> @foreach(explode('@@@',$user->details->pets) as $pet)
+                                        <span class="text-decoration-underline">{{$pet}}</span> @endforeach</label>
+                                <label class="col-md-12"><b>Hobbies? </b> @foreach(explode('@@@',$user->details->hobbies) as $pet)
+                                        <span class="text-decoration-underline">{{$pet}}</span> @endforeach</label>
+                                <label class="col-md-12"><b>Sports? </b> @foreach(explode('@@@',$user->details->sports) as $pet)
+                                        <span class="text-decoration-underline">{{$pet}}</span> @endforeach</label>
+                                <label class="col-md-12"><b>Fitness? </b> @foreach(explode('@@@',$user->details->fitness) as $pet)
+                                        <span class="text-decoration-underline">{{$pet}}</span> @endforeach</label>
+                                <label class="col-md-12"><b>Entertainment? </b> @foreach(explode('@@@',$user->details->entertainment) as $pet)
+                                        <span class="text-decoration-underline">{{$pet}}</span> @endforeach</label>
+                                <label class="col-md-12"><b>Music? </b> @foreach(explode('@@@',$user->details->music) as $pet)
+                                        <span class="text-decoration-underline">{{$pet}}</span> @endforeach</label>
+                                <label class="col-md-12"><b>Movies? </b> @foreach(explode('@@@',$user->details->movies) as $pet)
+                                        <span class="text-decoration-underline">{{$pet}}</span> @endforeach</label>
+                                <label class="col-md-12"><b>Books? </b> @foreach(explode('@@@',$user->details->books) as $pet)
+                                        <span class="text-decoration-underline">{{$pet}}</span> @endforeach</label>
+
+
+
+
+
+
+
+
+                                <label class="col-md-12"><b>Fav TV Show?</b> {{$user->details->fav_tv_shows}}</label>
+                                <label class="col-md-12"><b>Fav Movies?</b> {{$user->details->fav_movies}}</label>
+                                <label class="col-md-12"><b>Fav Hobbies?</b> {{$user->details->fav_hobbies}}</label>
+                                <label class="col-md-12"><b>Fav Teams?</b> {{$user->details->fav_teams}}</label>
+                                <label class="col-md-12"><b>Fav Bands?</b> {{$user->details->fav_bands}}</label>
+                                <label class="col-md-12"><b>Fav Books?</b> {{$user->details->fav_books}}</label>
+
+                            </div>
+                            <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="friends-tab">
+                                <ul>
+                                    @foreach(getFriendsList($user->id) as $friend)
+                                        <li><a href="{{route('a.user.show',[$friend->id])}}">{{$friend->name}} [{{$friend->email}}]</a></li>
+                                    @endforeach
+                                </ul>
+
+                            </div>
+
+                        </div>
 
                     </div>
                 </div>
@@ -152,5 +200,16 @@
             <!-- Column -->
         </div>
     </div>
+    <script>
+        $(function () {
+            $('.nav-link.tab').click(function () {
+                $('.nav-link.tab').removeClass('active');
+                $(this).addClass('active');
 
+                $('.tab-pane.fade').removeClass('active show');
+                $('.tab-pane.fade').removeClass('active show');
+                $($(this).attr('href')).addClass('active show');
+            });
+        });
+    </script>
 @endsection

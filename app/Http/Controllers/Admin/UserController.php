@@ -32,5 +32,10 @@ class UserController extends Controller
             ->make(true);
 
     }
-
+    public function disable(Request $request){
+        $user=User::find($request->id);
+        $user->status=$request->status;
+        $user->save();
+        return redirect()->back()->with('success','Account is deleted successfully!');
+    }
 }

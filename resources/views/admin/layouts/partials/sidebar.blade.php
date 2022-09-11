@@ -32,11 +32,18 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="{{route('a.user.index',['homepage'])}}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                    <a href="{{route('a.user.index')}}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
                         <i class="mdi mdi-view-dashboard"></i>
                         <span class="hide-menu">Users</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="{{route('a.report.index')}}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span class="hide-menu">Report</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-item">
                     <a href="javascript:void(0)" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
                         <span class="font-weight-bold"><b><u>WEBSITE</u></b></span>

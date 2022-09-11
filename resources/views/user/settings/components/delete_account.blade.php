@@ -31,7 +31,6 @@
                 <input type="hidden" value="{{auth()->user()->id}}" name="id">
                 <input type="hidden" value="delete" name="status">
                 <button type="submit" class="btn btn-danger c-bg">Yes I still want to Delete my Account.</button>
-
             </form>
         </div>
     </div>
