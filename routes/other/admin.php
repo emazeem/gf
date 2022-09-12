@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\FaqCategoryController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ReportsController;
+use App\Http\Controllers\Admin\BlockController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\SliderController;
@@ -50,8 +51,10 @@ Route::middleware(['auth','can:admin'])->group(function () {
             Route::post('action', [ReportsController::class, 'action'])->name('action');
             Route::get('show/{id}', [ReportsController::class, 'show'])->name('show');
         });
-
-
+        Route::name('block.')->prefix('block')->group(function () {
+            Route::get('', [BlockController::class, 'index'])->name('index');
+            Route::post('fetch', [BlockController::class, 'fetch'])->name('fetch');
+        });
 
         Route::name('setting.')->prefix('setting')->group(function () {
             Route::get('{slug}', [SettingController::class, 'index'])->name('index');

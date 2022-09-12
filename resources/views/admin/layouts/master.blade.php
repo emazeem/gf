@@ -29,8 +29,7 @@
     <div class="page-wrapper">
         @yield('content')
         <footer class="footer text-center">
-            All Rights Reserved by Xtreme Admin. Designed and Developed by <a
-                    href="https://www.wrappixel.com">WrapPixel</a>.
+            Copyright@ {{date('Y')}}, Girlfriend Vibez
         </footer>
     </div>
 </div>

@@ -43,6 +43,13 @@
                         <span class="hide-menu">Report</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="{{route('a.block.index')}}" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">
+                        <i class="mdi mdi-view-dashboard"></i>
+                        <span class="hide-menu">Block Users</span>
+                    </a>
+                </li>
+
 
                 <li class="sidebar-item">
                     <a href="javascript:void(0)" class="sidebar-link waves-effect waves-dark sidebar-link" aria-expanded="false">

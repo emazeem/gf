@@ -28,10 +28,7 @@
                                 <th>#</th>
                                 <th>From</th>
                                 <th>To</th>
-                                <th>Type</th>
-                                <th>Description</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>Date</th>
                             </tr>
                             </thead>
                         </table>
@@ -40,8 +37,6 @@
             </div>
         </div>
     </div>
-
-
     <script type="text/javascript">
         function InitTable() {
             $('#example').DataTable({
@@ -62,10 +57,7 @@
                     {"data": "id"},
                     {"data": "from"},
                     {"data": "to"},
-                    {"data": "type"},
-                    {"data": "description"},
-                    {"data": "status"},
-                    {"data": "options", "orderable": false},
+                    {"data": "date"},
                 ]
             });
         }

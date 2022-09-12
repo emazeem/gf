@@ -11,4 +11,7 @@ class Block extends Model
     public function toUser(){
         return $this->belongsTo(User::class,'to');
     }
+    public function fromUser(){
+        return $this->belongsTo(User::class,'from');
+    }
 }
