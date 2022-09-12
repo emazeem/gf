@@ -59,7 +59,7 @@
                 <tbody>
                 @foreach(\App\Models\User::whereDate('created_at','>=',date('Y-m-01'))->where('role','user')->get() as $user)
                     <tr>
-                        <td><img src="{{$user->details->profile_image()}}" width="30" style="border-radius: 50%" alt=""> {{$user->name}}</td>
+                        <td><img src="{{$user->details->profile_image()}}" width="30" height="30" style="border-radius: 50%;object-fit:cover" alt=""> {{$user->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->username}}</td>
                         <td>{{$user->last_login}}</td>
@@ -90,8 +90,8 @@
                 @foreach(\App\Models\Report::orderBy('created_at','DESC')->take(5)->get() as $report)
                     <tr>
                         <td>{{$report->id()}}</td>
-                        <td><img src="{{$report->fromUser->details->profile_image()}}" width="30" height="30" style="border-radius: 50%" alt=""> {{$report->fromUser->name}}</td>
-                        <td><img src="{{$report->toUser->details->profile_image()}}" width="30" height="30" style="border-radius: 50%" alt=""> {{$report->toUser->name}}</td>
+                        <td><img src="{{$report->fromUser->details->profile_image()}}" width="30" height="30" style="border-radius: 50%;object-fit:cover" alt=""> {{$report->fromUser->name}}</td>
+                        <td><img src="{{$report->toUser->details->profile_image()}}" width="30" height="30" style="border-radius: 50%;object-fit:cover" alt=""> {{$report->toUser->name}}</td>
                         <td>{{$report->type}}</td>
                         <td>{{$report->description}}</td>
                         <td>{{$report->status()}}</td>
