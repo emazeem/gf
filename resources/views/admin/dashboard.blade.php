@@ -90,8 +90,8 @@
                 @foreach(\App\Models\Report::orderBy('created_at','DESC')->take(5)->get() as $report)
                     <tr>
                         <td>{{$report->id()}}</td>
-                        <td><img src="{{$report->fromUser->details->profile_image()}}" width="30" style="border-radius: 50%" alt=""> {{$report->fromUser->name}}</td>
-                        <td><img src="{{$report->toUser->details->profile_image()}}" width="30" style="border-radius: 50%" alt=""> {{$report->toUser->name}}</td>
+                        <td><img src="{{$report->fromUser->details->profile_image()}}" width="30" height="30" style="border-radius: 50%" alt=""> {{$report->fromUser->name}}</td>
+                        <td><img src="{{$report->toUser->details->profile_image()}}" width="30" height="30" style="border-radius: 50%" alt=""> {{$report->toUser->name}}</td>
                         <td>{{$report->type}}</td>
                         <td>{{$report->description}}</td>
                         <td>{{$report->status()}}</td>
