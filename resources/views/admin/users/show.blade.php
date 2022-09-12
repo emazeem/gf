@@ -25,7 +25,7 @@
                 <div class="card">
                     <div class="card-body">
                         <center class="m-t-30"><img src="{{$user->details->profile_image()}}" class="rounded-circle"
-                                                    width="150">
+                                                    width="150" height="150" style="object-fit: cover">
                             <h4 class="card-title m-t-10">{{$user->name}}</h4>
                             <h6 class="card-subtitle">{{$user->username}}</h6>
                             <div class="row text-center justify-content-md-center">
