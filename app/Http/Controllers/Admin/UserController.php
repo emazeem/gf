@@ -22,7 +22,7 @@ class UserController extends Controller
         $data=User::where('role','user')->get();
         return DataTables::of($data)
             ->addColumn('profile', function ($data) {
-                return "<img src='{$data->details->profile_image()}' width='40' style='border-radius: 50%'>";
+                return "<img src='{$data->details->profile_image()}' width='40' height='40' style='border-radius: 50%;object-fit: cover'>";
             })
             ->addColumn('options', function ($data) {
                 $action="<a href='".route('a.user.show',[$data->id])."' type='button' title='Edit' class='btn edit btn-sm btn-warning' data-toggle='modal' data-id='" . $data->id . "'><i class='fa fa-eye'></i></button>";
