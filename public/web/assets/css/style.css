@@ -1655,14 +1655,10 @@ h6{
 }
 .c-bg{
   background-color: #ec6d70;
-  background-image: linear-gradient(#ec5655, rgba(236, 154, 146, 0.83),#ec6d70);
-
 }
 
 .btn-gfv{
   background: #ec6d70;
-  background-image: linear-gradient(#ec5655, rgba(236, 154, 146, 0.83),#ec6d70);
-
   color: white;
 }
 

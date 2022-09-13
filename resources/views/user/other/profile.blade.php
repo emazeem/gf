@@ -4,17 +4,13 @@
 
     <main id="main" style="margin-top: 70px">
         <div class="cover-photo " style="background-image: url('{{$user->details->cover_image()}}');">
-            <div class="col-md-12 d-flex justify-content-center">
-            </div>
-            <div class="col-md-12">
-                <img class="profile-picture" src="{{$user->details->profile_image()}}" alt="profile-picture">
-                <span class="profile-action-btn">
+
+        </div>
+        <div class="col-md-12">
+            <img class="profile-picture" src="{{$user->details->profile_image()}}" alt="profile-picture">
+            <span class="profile-action-btn">
 
                 </span>
-            </div>
-        </div>
-        <div class="profile-pic text-center">
-
         </div>
         <div class="container mt-4">
             <div class="row">
@@ -264,14 +260,13 @@
             height: 300px;
             background-position: center;
             z-index: -100;
-            background-size: cover;
         }
 
         .profile-picture {
             border-radius: 50%;
             height: 150px;
             width: 150px;
-            margin-top: -30px;
+            margin-top: -75px;
         }
 
         td.c-bg {
@@ -485,4 +480,14 @@
             </div>
         </div>
     </div>
+    <style>
+        .cover-photo {
+            height: 300px;
+            background-position: center;
+            z-index: -100;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-color: #ec6d70;
+        }
+    </style>
 @endsection

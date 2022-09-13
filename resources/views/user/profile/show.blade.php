@@ -557,5 +557,13 @@
             border: 5px solid black !important;
             border-right-color: transparent !important;
         }
+        .cover-photo {
+            height: 300px;
+            background-position: center;
+            z-index: -100;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-color: #ec6d70;
+        }
     </style>
 @endsection
