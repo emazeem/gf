@@ -54,7 +54,7 @@
 
                 <li><a class="nav-link scrollto {{(Route::currentRouteName()=='user.profile.view')?'active':''}}"
                        title="View Profile" href="{{route('user.profile.view',[auth()->user()->username])}}">
-                        <img src="{{auth()->user()->details->profile_image()}}" width="40" class="border border-light border-2 rounded" alt="">
+                        <img src="{{auth()->user()->details->profile_image()}}" width="40" height="40" style="object-fit: cover" class="border border-light border-2 rounded" alt="">
                     </a></li>
 
 
