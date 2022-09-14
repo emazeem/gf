@@ -44,7 +44,7 @@ return new class extends Migration
             $table->string('personality_type')->nullable();
             $table->string('communication_style')->nullable();
             $table->string('contact_by_people_from')->nullable();
-            $table->longText('availability')->nullable();
+            //$table->longText('availability')->nullable();
             $table->longText('hobbies')->nullable();
             $table->longText('sports')->nullable();
             $table->longText('fitness')->nullable();

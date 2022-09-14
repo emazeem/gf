@@ -40,4 +40,3 @@ MAIL_ENCRYPTION=ssl
 ALTER TABLE `notifications` ADD `notifiable_type` VARCHAR(225) NOT NULL AFTER `id`, ADD `notifiable_id` VARCHAR(225) NOT NULL AFTER `notifiable_type`;
 
 */
-

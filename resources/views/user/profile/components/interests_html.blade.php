@@ -267,7 +267,7 @@
             <div class="col-md-12 ">
                 <ul class="c-select-single movies">
                     @php $e_movies=explode('@@@',$de->movies); @endphp
-                    @php $movies='Action ,Cartoon/Disney/Pixar ,Comedy ,Crime ,Drama ,Fantasy ,Musicals ,Historical ,International/Subtitles ,Horror ,Romance/Chick Flicks ,Science Fiction ,War ,Westerns ,Dont Like Movies Much';
+                    @php $movies='Action,Cartoon/Disney/Pixar,Comedy,Crime,Drama,Fantasy,Musicals,Historical,International/Subtitles,Horror,Romance/Chick Flicks,Science Fiction,War,Westerns,Dont Like Movies Much';
                     $movies=explode(',',$movies);
                     @endphp
                     @foreach($movies as $movi)
