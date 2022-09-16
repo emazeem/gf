@@ -133,7 +133,13 @@
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->movies) as $hobby)
                                     @if($hobby)
-                                        <li class="active">{{$hobby}}</li>@endif
+                                        <li class="active">                                            <?php
+                                            $image=strtolower($hobby);
+                                            $image=str_replace('/','',$image);
+                                            $image=str_replace('  ',' ',$image);
+                                            ?>
+                                            <img src="{{url('icons/'.$image.'.png')}}" title="{{$image}}" width="30px" alt="">
+                                            {{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
 
@@ -141,7 +147,13 @@
                             <ul class="c-select-single">
                                 @foreach(explode('@@@',$user->details->music) as $hobby)
                                     @if($hobby)
-                                        <li class="active">{{$hobby}}</li>@endif
+                                        <li class="active">                                            <?php
+                                            $image=strtolower($hobby);
+                                            $image=str_replace('/','',$image);
+                                            $image=str_replace('  ',' ',$image);
+                                            ?>
+                                            <img src="{{url('icons/'.$image.'.png')}}" title="{{$image}}" width="30px" alt="">
+                                            {{$hobby}}</li>@endif
                                 @endforeach
                             </ul>
 

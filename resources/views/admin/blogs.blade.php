@@ -192,6 +192,10 @@
                 var route="{{route('a.blog.destroy')}}";
                 deleted(id,token,route);
             });
+            $(document).on('click','.add',function () {
+                $('#edit_id').val('');
+                $('#modal').modal('show');
+            });
         });
     </script>
 @endsection
