@@ -26,7 +26,7 @@
         </nav>
 
         @if(\Illuminate\Support\Facades\Auth::user())
-            <a href="{{route('user.welcome')}}" class="book-a-table-btn scrollto">My Account</a>
+            <a href="{{route('home')}}" class="book-a-table-btn scrollto">My Account</a>
         @else
             <a href="{{route('login')}}" class="book-a-table-btn scrollto">Login</a>
             <a href="{{route('register')}}" class="book-a-table-btn scrollto">Sign Up</a>
