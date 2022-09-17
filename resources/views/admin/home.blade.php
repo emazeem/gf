@@ -86,7 +86,6 @@
                             </div>
 
                         </div>
-
                         <input type="hidden" name="page" id="page" value="">
                         <input type="hidden" name="id" id="edit_id" value="0">
                 </div>
@@ -196,6 +195,7 @@
                     $('#value-text').show();
                 }
             });
+
 
             CKEDITOR.replace('value', {
                 skin: 'moono',

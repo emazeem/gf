@@ -1,7 +1,15 @@
 @extends('admin.layouts.master')
 @section('content')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     @php $url=str_replace('index','',Route::currentRouteName()); @endphp
+
+{{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>--}}
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+
     <div class="page-breadcrumb">
         <div class="row align-items-center">
             <div class="col-5">
@@ -63,9 +71,8 @@
             </form>
         </div>
     </div>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
+
+
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -118,6 +125,8 @@
         });
 
         $('#edit_value').summernote({
+            /*dialogsInBody: true,*/
+            /*airMode: true,*/
             placeholder: 'Hello stand alone ui',
             tabsize: 2,
             height: 100,
@@ -127,7 +136,7 @@
                 ['color', ['color']],
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['table', ['table']],
-                ['insert', ['link', 'picture', 'video']],
+                ['insert', ['link', 'picture']],
                 ['view', ['fullscreen', 'codeview', 'help']]
             ]
         });

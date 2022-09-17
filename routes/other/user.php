@@ -64,7 +64,7 @@ Route::middleware(['auth', 'user-status', 'can:user', 'email-verification'])->gr
                 Route::get('blocked-members', [SettingsController::class, 'index'])->name('settings.block.members.show');
                 Route::post('update-password', [SettingsController::class, 'change_password'])->name('settings.change.password.update');
                 Route::post('update-account', [SettingsController::class, 'account'])->name('settings.account.update');
-                Route::post('disable-account', [SettingsController::class, 'status'])->name('settings.disable.account');
+                Route::post('disable-account', [SettingsController::class, 'stweatus'])->name('settings.disable.account');
                 Route::post('remove-block', [SettingsController::class, 'unblock'])->name('settings.block.remove');
             });
             Route::group(['prefix' => 'chat'], function () {
