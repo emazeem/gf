@@ -20,7 +20,7 @@ foreach ($packages as $package) {
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach(\App\Models\Order::where('user_id',auth()->user()->id)->get() as $order)
+                    @foreach(\App\Models\Order::where('user_id',auth()->user()->id)->orderBy('created_at','DESC')->get() as $order)
                         <tr>
                             <td>{{$order->product->type}}</td>
                             <td>{{$order->product->price}}</td>

@@ -43,12 +43,8 @@
             // Finalize the transaction after payer approval
             onApprove: (data, actions) => {
                 return actions.order.capture().then(function(orderData) {
-
-
                     const transaction = orderData.purchase_units[0].payments.captures[0];
-                    alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
-
-                    console.log(orderData,transaction);
+                    //console.log(orderData,transaction);
                     $.ajax({
                         type: "POST",
                         url: "{{route('payment.success')}}",
@@ -56,6 +52,7 @@
                         data: {'order_id': transaction.id, 'status': transaction.status, _token: '{{csrf_token()}}'},
                         success: function (data) {
                             $.toast({heading: 'Success', text:data.success, icon: 'success', position: 'top-right'});
+                            window.location.href='{{route('settings.subscription')}}';
                         },
                         error: function (xhr) {
                             erroralert(xhr);

@@ -31,7 +31,6 @@ class PaymentController extends Controller
         return view('user.settings.payment.process', compact('package'));
     }
     public function after_payment(Request $request){
-
         foreach (Order::where('user_id',auth()->user()->id)->get() as $item) {
             $item->status='Expired';
             $item->save();
