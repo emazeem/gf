@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Storage;
 class Setting extends Model
 {
     use HasFactory;
-    public function image(){
-        return ($this->image)?Storage::disk('local')->url('setting/'.$this->image):false;
+    public function images(){
+        if ($this->image){
+            return Storage::disk('local')->url('setting/'.$this->image);
+        }
+        return false;
     }
 }

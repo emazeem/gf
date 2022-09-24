@@ -34,10 +34,12 @@ class WebsiteController extends Controller
         $section1=Setting::where('slug','homepage-section-1')->first();
         $section2=Setting::where('slug','homepage-section-2')->first();
         $section3=Setting::where('slug','homepage-section-3')->first();
+        $testi_bg=Setting::where('slug','testimonials-background')->first();
+        $perks_bg=Setting::where('slug','perks-background')->first();
         $section1=$section1?$section1:new Setting();
         $section2=$section2?$section2:new Setting();
         $section3=$section3?$section3:new Setting();
-        return view('home',compact('sliders','testimonials','thumbnails','section1','section2','section3'));
+        return view('home',compact('sliders','testimonials','thumbnails','section1','section2','section3','testi_bg','perks_bg'));
     }
     public function privacy(){
         $privacy=Setting::where('slug','privacy-policy')->first();
@@ -100,7 +102,10 @@ class WebsiteController extends Controller
             }
         }
         $blogs=$t?Blog::whereIn('id',$filter)->get():$blogs;
-        return view('blog',compact('blogs','tags'));
+
+        $blogs_bg=Setting::where('slug','blog-background')->first();
+
+        return view('blog',compact('blogs','tags','blogs_bg'));
     }
 
     public function faq(){

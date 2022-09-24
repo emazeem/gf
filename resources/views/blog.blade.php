@@ -13,7 +13,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-9">
-                        <section id="chefs" class="chefs" style="background-image: url('https://www.girlfriendsocial.com/blog/wp-content/uploads/2021/01/pinkbrickBackground.jpg')">
+                        <section id="chefs" class="chefs"  @if($blogs_bg) style="background-image: url('{{$blogs_bg->images()}}')" @endif>
                             <div class="container">
                                 <div class="section-title">
                                     @if(request()->tags)

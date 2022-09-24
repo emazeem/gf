@@ -33,7 +33,6 @@
         </footer>
     </div>
 </div>
-<script src="{{url('script.js')}}"></script>
 <script src="{{url('admin/assets/libs/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{url('admin/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
 
@@ -41,28 +40,7 @@
 
 <link  href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script>
-    $(function () {
-        function erroralert(xhr) {
-            if (typeof  xhr.responseJSON.errors === 'object') {
-                var error = '';
-                $.each(xhr.responseJSON.errors, function (key, item) {
-                    error += item + '\n';
-                    if ($(document).find('[name="' + key + '"]').length) {
-                        $(document).find('[name="' + key + '"]').addClass('is-invalid').after('<span class="invalid-feedback is-invalid">' + item + '</span>');
-                    } else {
-                        var split = key.split('.');
-                        $(document).find('#' + split[0] + '').addClass('is-invalid').after('<span class="invalid-feedback is-invalid">' + item + '</span>');
 
-                    }
-                });
-                //swal("Failed", error, "error");
-            } else {
-                alert(xhr.responseJSON.message);
-            }
-        }
-    });
-</script>
 
 {{--<script src="{{url('admin/dist/js/app-style-switcher.js')}}"></script>
 <script src="{{url('admin/dist/js/waves.js')}}"></script>--}}

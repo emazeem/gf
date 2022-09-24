@@ -2,7 +2,7 @@
 @section('content')
     @php $url=str_replace('index','',Route::currentRouteName()); @endphp
 
-{{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>--}}
+    {{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>--}}
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
@@ -28,21 +28,30 @@
     <div class="container-fluid">
         <div class="row">
             @foreach($slugs as $slug)
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <button type="button" class="btn btn-sm btn-success shadow-sm float-right edit"
-                                data-slug="{{$slug}}"><i class="fa fa-plus-circle"></i> {{getTitleFromSlug($slug)}}
-                        </button>
-                    </div>
-                    @if($settings[$slug]->value)
-                        <div class="card-body">
-                            {!! $settings[$slug]->value !!}
-                        </div>
-                    @endif
+                <?php
+                $setting = $settings[$slug];
 
+                ?>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <button type="button" class="btn btn-sm btn-success shadow-sm float-right edit"
+                                    data-slug="{{$slug}}"><i class="fa fa-plus-circle"></i> {{getTitleFromSlug($slug)}}
+                            </button>
+                        </div>
+
+                        @if($setting->value)
+                            <div class="card-body">
+                                {!! $setting->value !!}
+                            </div>
+                        @endif
+                        @if($setting->image)
+                        <div class="card-body">
+                            <img src="{{$setting->images()}}" width="300" alt="">
+                        </div>
+                            @endif
+                    </div>
                 </div>
-            </div>
             @endforeach
         </div>
     </div>
@@ -60,9 +69,22 @@
                 <div class="modal-body">
                     <form class="form" id="add_form" method="POST" enctype="multipart/form-data">
                         @csrf
-                    <div id="form-data"></div>
-                        <textarea rows="10" class="form-control" name="value" id="edit_value"></textarea>
-
+                        <div id="form-data"></div>
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <select name="type" id="type" class="form-control">
+                                <option selected hidden disabled>-- Select type of value</option>
+                                <option value="text" selected>If your data type is text</option>
+                                <option value="image">If your data type is image</option>
+                            </select>
+                        </div>
+                        <div id="text-type">
+                            <textarea rows="10" class="form-control" name="value" id="edit_value"></textarea>
+                        </div>
+                        <div id="image-type" style="display: none">
+                            <label for="image" class="form-label">Image</label>
+                            <input class="form-control form-control-lg" id="image" name="image" type="file"/>
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <input type="submit" class="btn btn-primary" id="add_form_btn" value="Save">
@@ -71,11 +93,18 @@
             </form>
         </div>
     </div>
-
-
-
+    @include('admin.script')
     <script type="text/javascript">
         $(document).ready(function () {
+            $(document).on('change', '#type', function () {
+                if ($('#type').val() == 'image') {
+                    $('#image-type').show();
+                    $('#text-type').hide();
+                } else {
+                    $('#image-type').hide();
+                    $('#text-type').show();
+                }
+            });
             $(document).on('click', '.edit', function () {
                 var slug = $(this).attr('data-slug');
                 $.ajax({

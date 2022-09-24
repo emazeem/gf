@@ -95,7 +95,7 @@
         @endif
 
         <!-- ======= Chefs Section ======= -->
-        <section id="chefs" class="chefs">
+        <section id="chefs" class="chefs"  @if($perks_bg) style="background-image: url('{{$perks_bg->images()}}')" @endif>
             <div class="container">
 
                 <div class="section-title">
@@ -123,7 +123,7 @@
         </section><!-- End Chefs Section -->
 
         <!-- ======= Testimonials Section ======= -->
-        <section id="testimonials" class="testimonials">
+        <section id="testimonials" class="testimonials" @if($testi_bg) style="background-image: url('{{$testi_bg->images()}}')" @endif>
             <div class="container position-relative">
 
                 <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
