@@ -69,7 +69,6 @@
                 <div class="modal-body">
                     <form class="form" id="add_form" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <div id="form-data"></div>
                         <div class="form-group">
                             <label for="type">Type</label>
                             <select name="type" id="type" class="form-control">
@@ -78,6 +77,7 @@
                                 <option value="image">If your data type is image</option>
                             </select>
                         </div>
+                        <div id="form-data"></div>
                         <div id="text-type">
                             <textarea rows="10" class="form-control" name="value" id="edit_value"></textarea>
                         </div>

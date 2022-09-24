@@ -2,7 +2,7 @@
     <div class="container pt-5">
         <div class="row">
             <div class="col-md-2">
-                <img src="{{url('user/logo.png')}}" alt="" class="img-fluid">
+                <img src="{{url('user/logo2.png')}}" alt="" class="img-fluid">
             </div>
             <div class="col-md-9">
                 <div class="row footer-links">
@@ -30,7 +30,7 @@
                                 <a href="{{route('w.about')}}">Company Information</a>
                             </li>
                             <li>
-                                <a href="">GFV Blog</a>
+                                <a href="{{route('w.blog')}}">GFV Blog</a>
                             </li>
                             <li>
                                 <a href="{{route('w.press')}}">Press</a>
