@@ -83,6 +83,7 @@
             </form>
         </div>
     </div>
+    @include('admin.script')
     <script type="text/javascript">
         function InitTable() {
             $('#example').DataTable({
