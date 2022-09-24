@@ -173,7 +173,30 @@
                 var id = $(this).attr('data-id');
                 var token = '{{csrf_token()}}';
                 var route="{{route('a.sliders.destroy')}}";
-                deleted(id,token,route);
+                swal({
+                    title: 'Are you sure to delete?',
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                }).then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: route,
+                            type: "POST",
+                            dataType: "JSON",
+                            data: {'id': id, _token: token},
+                            success: function (data) {
+                                swal('success', data.success, 'success').then(function () {
+                                    InitTable();
+                                });
+                            },
+                            error: function (xhr) {
+                                erroralert(xhr);
+                            },
+                        });
+
+                    }
+                });
             });
             $(document).on('click','.add',function () {
                 $('#edit_id').val('');
