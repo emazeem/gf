@@ -2,7 +2,7 @@
     <div class="container pt-5">
         <div class="row">
             <div class="col-md-2">
-                <img src="{{url('user/logo2.png')}}" alt="" class="img-fluid">
+                <img src="{{url('user/logo.png')}}" alt="" class="img-fluid">
             </div>
             <div class="col-md-9">
                 <div class="row footer-links">

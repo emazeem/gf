@@ -9,7 +9,7 @@
 
         <div class="logo me-auto">
             {{--<h1><a href="{{route('w.home')}}">Girlfriend Vibez</a></h1>--}}
-            <a href="{{route('user.home')}}"><img src="{{url('user/logo2.png')}}" alt="" class="img-fluid"></a>
+            <a href="{{route('user.home')}}"><img src="{{url('user/logo.png')}}" alt="" class="img-fluid"></a>
             <style>
                 #header .logo img {
                     max-height: 70px;
