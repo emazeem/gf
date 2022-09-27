@@ -28,7 +28,7 @@
                             <h6 class="font-weight-bold mt-3" id="header-to-h5">Chat</h6>
                         </div>
                         <div class="card-body p-0 message-box-cover">
-                            <div class="message-box nav-pills-bg" style="background-image: url('{{url('user/chat.jpg')}}');background-size: cover">
+                            <div class="message-box nav-pills-bg" style="background-image: url('{{url('user/chat.png')}}');background-size: cover">
                                 <div class="d-flex justify-content-center align-items-center" style="height: 100%">
                                     <div>
                                         <h1>Welcome to Girlfriend Vibez Chat Box</h1>
